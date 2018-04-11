@@ -76,33 +76,27 @@
                         <th scope="col">Delete/Done</th>
         			</tr>
         		</thead>
-        		<tbody id="file-info">
-        			<!-- <tr>
-        				<th scope="row"></th>
-        				<td></td>
-        				<td></td>
-        				<td></td>
-        			</tr>
-        			<tr>
-        				<th scope="row"></th>
-        				<td></td>
-        				<td></td>
-        				<td></td>
-        			</tr>
-        			<tr>
-        				<th scope="row"></th>
-        				<td></td>
-        				<td></td>
-        				<td></td>
-        			</tr> -->
-        		</tbody>
+        		<tbody id="file-info"></tbody>
                 <tfoot>
                     <tr>
                         <th scope="col"><span id="totalFileCount">0</span> Total Files</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
                         <th scope="col">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
+                        <th scope="col" class="timeFormat">
+                            <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
+                            <input type="checkbox" name="seconds" value="seconds">
+
+                            <button type="button" class="minutes activeFormat">M</button>
+                            <button type="button" class="seconds">S</button>
+                            <span class="minutes activeFormat">M</span> /
+                            <span class="seconds">S</span> -->
+
+                            <label for="formatToggle" class="format-toggle">
+                              <input type="checkbox" id="formatToggle" class="format-toggle__input"  name="timeFormat" value="minutes" checked/>
+                              <span class="format-toggle__button"></span>
+                            </label>
+                        </th>
                     </tr>
                 </tfoot>
         	</table>
