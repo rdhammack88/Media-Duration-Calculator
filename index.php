@@ -101,7 +101,8 @@
                         <th scope="col"><span id="totalFileCount">0</span> Total Files</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
-                        <th scope="col">Total Duration: </th>
+                        <th scope="col"></th>
+                        <th scope="col">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
                     </tr>
                 </tfoot>
         	</table>

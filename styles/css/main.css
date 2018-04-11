@@ -51,5 +51,12 @@ body {
   .container table tfoot {
     border-top: 1px solid #e3442d;
     font-size: 0.8em; }
+    .container table tfoot #totalFileCount, .container table tfoot #totalDuration {
+      font-size: 1.3em;
+      margin-right: 6%; }
+    .container table tfoot #totalDuration {
+      margin-left: 6%; }
+    .container table tfoot tr th:last-of-type {
+      text-align: center; }
 
 /*# sourceMappingURL=main.css.map */
