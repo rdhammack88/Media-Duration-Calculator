@@ -10,11 +10,11 @@ $('document').ready(function() {
         //     return this.index + 1;
         // },
 
-        display: function(index, name, type, len=0) {
-            return `<tr><th scope="row">${index}</th><td class="fileName">${name}</td><td>${type}</td><td>${len}</td><td class="icons"><button type="button" class="delete"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
+        display: function(index, name, type, dur=0) {
+            return `<tr><th scope="row">${index}</th><td class="fileName">${name}</td><td>${type}</td><td>${dur}s</td><td class="icons"><button type="button" class="delete"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
         },
 
-        getFileDuration: function(file, indx) {
+        getFileDuration: function(file, indx, totalFileCount, that) {
                 fileList.push(file);
                 var video = document.createElement('video');
                 var duration;
@@ -22,15 +22,16 @@ $('document').ready(function() {
 
                 video.ondurationchange = function() {
                     window.URL.revokeObjectURL(video.src);
-                    duration = video.duration;
-                    fileList[indx].duration = duration;
-                    timeList.push(duration);
+                    duration = Math.floor(video.duration);
+                    // fileList[indx].duration = duration;
+                    // timeList.push(duration);
                     // console.log(duration);
                     // return duration;
+
+                    infoBody.append(fileInfo.display(totalFileCount, that.name, that.type, duration));
                 };
 
                 video.src = URL.createObjectURL(file);
-                return fileList;
         },
 
         // getFileInformation: function(file) {
@@ -89,10 +90,10 @@ $('document').ready(function() {
             if(fileNamesList.includes(this.files[i].name)) {
                 continue;
             } else {
-                var fileList = fileInfo.getFileDuration(this.files[i], i);
+                var fileList = fileInfo.getFileDuration(this.files[i], i, ++totalFileCount, this.files[i]);
                 // var duration = fileList[i].duration;
-                var that = this.files[i];
-                var indx = i;
+                // var that = this.files[i];
+                // var indx = i;
                 // console.log(fileList);
                 // console.log(fileList[i]);
                 // console.log(fileList[i].name);
@@ -102,11 +103,16 @@ $('document').ready(function() {
                 // fileNamesList.push(that.name);
                 fileNamesList.push(this.files[i].name);
                 // var timer = setTimeout(function() {
-                    var duration = timeList[indx];
+                    // var duration = timeList[indx];
                 //     console.log(timeList[indx]);
                 //     console.log(duration);
-                    infoBody.append(fileInfo.display(++totalFileCount, that.name, that.type, duration));
+
+
+                    // infoBody.append(fileInfo.display(++totalFileCount, that.name, that.type, duration));
+
+
                 // }, 500);
+
 
 
             }
@@ -116,7 +122,7 @@ $('document').ready(function() {
          // }, 500);
 
 
-        console.log(fileList[0]);
+        // console.log(fileList[0]);
 
         $('#totalFileCount').text(`${totalFileCount} `);
     });
