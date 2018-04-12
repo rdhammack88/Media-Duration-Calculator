@@ -14,20 +14,33 @@ body {
     background-color: #ddd;
     margin-bottom: 5%; }
     .container .file-load:hover {
-      border-style: dashed; }
-    .container .file-load .file-drop form {
-      padding: calc(50vh / 2 - 7%) calc(100% / 2.6); }
-      .container .file-load .file-drop form label {
-        text-align: center;
-        border: 1px solid #eee;
-        background: #a43;
-        color: #eee;
-        padding: 22px 15px;
-        width: 200px;
-        font-size: 1.2em;
-        cursor: pointer; }
-      .container .file-load .file-drop form input#multimedia_upload {
-        opacity: 0; }
+      border-style: dashed;
+      cursor: pointer; }
+    .container .file-load .file-drop {
+      width: 100%;
+      height: 100%; }
+      .container .file-load .file-drop form {
+        width: 100%;
+        height: 100%; }
+        .container .file-load .file-drop form label {
+          width: 100%;
+          height: 100%;
+          text-align: center; }
+          .container .file-load .file-drop form label:hover {
+            cursor: pointer; }
+          .container .file-load .file-drop form label span {
+            display: inline-block;
+            text-align: center;
+            border: 1px solid #eee;
+            background: #a43;
+            color: #eee;
+            padding: 22px 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: calc(50vh / 2 - 5%); }
+        .container .file-load .file-drop form input#multimedia_upload {
+          opacity: 0;
+          display: none; }
   .container table thead {
     font-size: 1.2em; }
     .container table thead th:nth-child(n+3) {

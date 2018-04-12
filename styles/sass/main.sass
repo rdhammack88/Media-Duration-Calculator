@@ -19,24 +19,41 @@ body
 
 		&:hover
 			border-style: dashed
+			cursor: pointer
 
 		.file-drop
+			// text-align: center
+			width: 100%
+			height: 100%
 
 			form
-				padding: calc(50vh / 2 - 7%) calc(100% / 2.6)
+				// padding: calc(50vh / 2 - 7%) calc(100% / 2.6)
+				width: 100%
+				height: 100%
 
 				label
+					width: 100%
+					height: 100%
 					text-align: center
-					border: 1px solid #eee
-					background: #a43
-					color: #eee
-					padding: 22px 15px
-					width: 200px
-					font-size: 1.2em
-					cursor: pointer
+
+					&:hover
+						cursor: pointer
+
+					span
+						display: inline-block
+						text-align: center
+						border: 1px solid #eee
+						background: #a43
+						color: #eee
+						padding: 22px 15px
+						// min-width: 150px
+						font-size: 1.2em
+						cursor: pointer
+						margin-top: calc(50vh / 2 - 5%)
 
 				input#multimedia_upload
 					opacity: 0
+					display: none
 
 
 	table

@@ -56,10 +56,10 @@
     </nav> -->
 
     <div class="container">
-        <div class="file-load">
-        	<div class="file-drop">
+        <div class="file-load" id="file-load" dropzone="copy">
+        	<div class="file-drop" dropzone="copy">
         		<form action="file-load.php" method="get">
-                    <label for="multimedia_upload">Choose files to upload.</label>
+                    <label for="multimedia_upload" id="file-drop"><span>Choose files to upload.</span></label>
         			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .mp3">
         		</form>
         	</div>

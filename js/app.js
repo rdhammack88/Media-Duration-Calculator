@@ -197,6 +197,32 @@ $('document').ready(function() {
         }
     });
 
+    $('#file-drop').on('dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('dragover');
+    });
+
+    $('#file-drop').on('dragenter', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('dragenter');
+    });
+
+    $('#file-drop').on('drop', function(e) {
+        if(e.originalEvent.dataTransfer){
+            if(e.originalEvent.dataTransfer.files.length) {
+                e.preventDefault();
+                e.stopPropagation();
+                /*UPLOAD FILES HERE*/
+
+                console.log('dropped');
+                upload(e.originalEvent.dataTransfer.files);
+            }
+        }
+    });
+
+
     $('.format-toggle').click(function(e) {
         // console.log($(e.target).closest('input').val());
         var $checked = $('input[name=timeFormat]');
