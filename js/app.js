@@ -188,6 +188,7 @@ $('document').ready(function() {
                 'color': 'red'
             });
         } else {
+            // $(this).parent('button.done').closest('button.delete').children().css({'color': 'green'});
             $(this).css({'color':'green'}); //{'color':'green' ? 'red' : 'green'}
             $(this).parents('tr').children('td').css({
                 'text-decoration': 'line-through',
@@ -220,6 +221,6 @@ $('document').ready(function() {
 
     });
 
-    $('#file-info').sortable();
+    $('#file-info').sortable({axis: 'y'});
 
 });

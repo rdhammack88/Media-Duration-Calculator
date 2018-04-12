@@ -81,8 +81,8 @@
                     <tr>
                         <th scope="col"><span id="totalFileCount">0</span> Total Files</th>
                         <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
+                        <!-- <th scope="col"></th> -->
+                        <th scope="col" colspan="2">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
                         <th scope="col" class="timeFormat">
                             <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
                             <input type="checkbox" name="seconds" value="seconds">

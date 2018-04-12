@@ -58,6 +58,9 @@ body {
       margin-right: 6%; }
     .container table tfoot #totalDuration {
       margin-left: 6%; }
+    .container table tfoot tr th:nth-child(3) {
+      text-align: right;
+      padding-right: 40px; }
     .container table tfoot tr th:last-of-type {
       text-align: right; }
     .container table tfoot input[type=checkbox] {
