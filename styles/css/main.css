@@ -34,9 +34,8 @@ body {
       text-align: center; }
   .container table tbody {
     color: #ddd; }
-    .container table tbody td {
-      color: red;
-      font-size: 1em; }
+    .container table tbody tr:hover {
+      cursor: move; }
     .container table tbody > tr > td:not(:first-of-type) {
       text-align: center; }
     .container table tbody > tr > td.icons [type=button] {
@@ -48,6 +47,9 @@ body {
       padding: 1px 5px; }
       .container table tbody > tr > td.icons [type=button]:first-of-type {
         margin-right: 25px; }
+    .container table tbody td {
+      color: red;
+      font-size: 1em; }
   .container table tfoot {
     border-top: 1px solid #e3442d;
     font-size: 0.8em; }

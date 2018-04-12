@@ -10,38 +10,45 @@ $('document').ready(function() {
         //     return this.index + 1;
         // },
 
-        display: function(index, name, type, hours=00, minutes=00, seconds=00) {
+        display: function(index, name, type, hours, minutes, seconds) {
             return `<tr><th scope="row">${index}</th><td class="fileName">${name}</td><td>${type}</td><td>${hours} : ${minutes} : ${seconds}</td><td class="icons"><button type="button" class="delete"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
         },
 
         getFileDuration: function(file, indx, totalFileCount, that) {
                 fileList.push(file);
                 var video = document.createElement('video');
-                var duration;
+                // var duration;
                 video.preload = 'metadata';
 
                 video.ondurationchange = function() {
                     window.URL.revokeObjectURL(video.src);
                     duration = Math.floor(video.duration);
+                    // durTotal += duration;
 
-                    if(duration/60/60 >= 1) {
-                        var hours = ''; //'0' + Math.floor(duration/60/60);
+                    if(duration/60/60 < 10) { // >= 1
+                        var hours = '0' + Math.floor(duration/60/60); //''; //'0' + Math.floor(duration/60/60);
                     } else {
-                        var hours = Math.floor(duration/60/60);
+                        var hours = Math.floor(duration/60/60);;
                     }
 
-                    if(duration/60 < 10) {
-                        var minutes = '0' + Math.floor(duration/60);
+                    if(duration/60%60 < 10) {
+                        var minutes = '0' + Math.floor(duration/60%60);
                     } else {
-                        var minutes = Math.floor(duration/60);
+                        var minutes = Math.floor(duration/60%60);
                     }
 
-                    if(duration/60/60 < 10) {
+                    if(duration%60 < 10) { //duration/60/60
                         var seconds = '0' + duration%60;
                     } else {
                         var seconds = duration%60;
                     }
 
+                    // console.log(duration%60/60);
+                    // console.log(duration/60/60);
+                    // console.log(duration/60%60);
+                    // console.log(duration%60/60/60);
+                    // console.log(duration/60/60/60);
+                    // console.log(duration/60%60%60);
 
                     // if(duration/60/60 >= 1 && duration/60/60 < 10) {
                     //     duration = '0' + Math.floor(duration/60/60) + ' : ' + Math.floor(duration/60%60) + ' : ' + duration%60;
@@ -63,6 +70,7 @@ $('document').ready(function() {
                     // return duration;
 
                     infoBody.append(fileInfo.display(totalFileCount, that.name, that.type, hours, minutes, seconds));
+                    // return durTotal;
                 };
 
                 video.src = URL.createObjectURL(file);
@@ -105,6 +113,7 @@ $('document').ready(function() {
 
     $('input:file').change(function() {
         var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
+        // var durTotal = 0
         // var files = Array.from(this.files);
         // console.log(files);
         if(!totalFileCount) {
@@ -125,6 +134,7 @@ $('document').ready(function() {
                 continue;
             } else {
                 var fileList = fileInfo.getFileDuration(this.files[i], i, ++totalFileCount, this.files[i]);
+                // console.log(durTotal);
                 // var duration = fileList[i].duration;
                 // var that = this.files[i];
                 // var indx = i;
@@ -209,5 +219,7 @@ $('document').ready(function() {
         // $checked.attr('checked', $checked[0].checked ? false : true);
 
     });
+
+    $('#file-info').sortable();
 
 });

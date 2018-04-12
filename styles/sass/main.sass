@@ -51,9 +51,9 @@ body
 			color: #ddd
 			// border-top: 1px solid #e3442d
 
-			td
-				color: red
-				font-size: 1em
+			tr:hover
+				cursor: move
+
 
 			> tr > td:not(:first-of-type)
 				text-align: center
@@ -70,6 +70,10 @@ body
 
 					&:first-of-type
 						margin-right: 25px
+
+			td
+				color: red
+				font-size: 1em
 
 		tfoot
 			border-top: 1px solid #e3442d
