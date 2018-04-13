@@ -1,14 +1,13 @@
 body {
-  padding-top: 5rem; }
-
-.starter-template {
-  padding: 3rem 1.5rem;
-  text-align: center; }
+  padding: 0;
+  margin: 0;
+  padding-top: 5rem;
+  font-size: 16px; }
 
 .container {
   max-width: 1000px; }
   .container .file-load {
-    height: 50vh;
+    height: 30vh;
     max-height: 600px;
     border: 3px solid #444;
     background-color: #ddd;
@@ -37,92 +36,102 @@ body {
             padding: 22px 15px;
             font-size: 1.2em;
             cursor: pointer;
-            margin-top: calc(50vh / 2 - 5%); }
+            margin-top: calc(30% / 2 - 5%); }
         .container .file-load .file-drop form input#multimedia_upload {
           opacity: 0;
           display: none; }
-  .container table thead {
-    font-size: 1.2em; }
-    .container table thead th:nth-child(n+3) {
-      text-align: center; }
-  .container table tbody {
-    color: #ddd; }
-    .container table tbody tr:hover {
-      cursor: move; }
-    .container table tbody > tr > td:not(:first-of-type) {
-      text-align: center; }
-    .container table tbody > tr > td.icons [type=button] {
-      background: rgba(0, 0, 0, 0);
-      border: none;
-      cursor: pointer;
+  .container table {
+    /* Bootstrap Overwrite */ }
+    .container table.table td, .container table.table th {
+      padding: 0.8em !important; }
+    .container table thead {
       font-size: 1em;
-      color: red;
-      padding: 1px 5px; }
-      .container table tbody > tr > td.icons [type=button]:first-of-type {
-        margin-right: 25px; }
-    .container table tbody td {
-      color: red;
-      font-size: 1em; }
-  .container table tfoot {
-    border-top: 1px solid #e3442d;
-    font-size: 0.8em; }
-    .container table tfoot #totalFileCount, .container table tfoot #totalDuration {
-      font-size: 1.3em;
-      margin-right: 6%; }
-    .container table tfoot #totalDuration {
-      margin-left: 6%; }
-    .container table tfoot tr th:nth-child(3) {
-      text-align: right;
-      padding-right: 40px; }
-    .container table tfoot tr th:last-of-type {
-      text-align: right; }
-    .container table tfoot input[type=checkbox] {
-      visibility: hidden;
-      display: none; }
-    .container table tfoot .timeFormat {
-      font-size: 1.4em;
-      /* Toggle Switch UI Style Buttons */ }
-      .container table tfoot .timeFormat button {
-        cursor: pointer; }
-      .container table tfoot .timeFormat button.activeFormat {
-        color: #00e600; }
-      .container table tfoot .timeFormat .format-toggle {
-        font-family: Helvetica, Arial, sans-serif;
-        display: inline-block;
-        vertical-align: top;
-        margin: 0 15px 0 0; }
-      .container table tfoot .timeFormat .format-toggle__input {
-        display: none; }
-      .container table tfoot .timeFormat .format-toggle__button {
-        position: relative;
-        display: inline-block;
-        font-size: 1rem;
-        line-height: 20px;
-        text-transform: uppercase;
-        background: red;
-        border: 1px solid red;
-        width: 90px;
-        height: 30px;
-        color: white;
-        transition: all 0.1s ease;
-        cursor: pointer; }
-      .container table tfoot .timeFormat .format-toggle__button::before {
-        position: absolute;
-        top: 5px;
-        left: 44px;
-        content: "Sec";
-        display: inline-block;
-        height: 20px;
-        padding: 0 3px;
-        background: white;
+      border-bottom: 1px solid #e3442d; }
+      .container table thead th {
+        vertical-align: middle; }
+        .container table thead th:nth-child(n+3) {
+          text-align: center; }
+    .container table tbody {
+      color: #ddd; }
+      .container table tbody tr:hover {
+        cursor: move; }
+      .container table tbody tr > td:nth-child(2) {
+        word-wrap: break-word;
+        word-spacing: 2%; }
+      .container table tbody > tr > td:not(:first-of-type) {
+        text-align: center; }
+      .container table tbody > tr > td.icons [type=button] {
+        background: rgba(0, 0, 0, 0);
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
         color: red;
-        transition: all 0.1s ease; }
-      .container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button {
-        background: green;
-        border: 1px solid green; }
-      .container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button::before {
-        left: 5px;
-        content: "Min";
-        color: green; }
+        padding: 1px 5px; }
+        .container table tbody > tr > td.icons [type=button]:first-of-type {
+          margin-right: 25px; }
+      .container table tbody td {
+        color: red;
+        font-size: 0.9em;
+        vertical-align: middle; }
+    .container table tfoot {
+      border-top: 1px solid #e3442d;
+      font-size: 1.2em;
+      padding: 0.75rem; }
+      .container table tfoot #totalFileCount, .container table tfoot #totalDuration {
+        font-size: 1.2em;
+        margin-right: 1%; }
+      .container table tfoot #totalDuration {
+        margin-left: 6%; }
+      .container table tfoot tr th {
+        vertical-align: bottom;
+        font-size: 70%; }
+      .container table tfoot input[type=checkbox] {
+        visibility: hidden;
+        display: none; }
+      .container table tfoot .timeFormat {
+        font-size: 1.4em;
+        /* Toggle Switch UI Style Buttons */ }
+        .container table tfoot .timeFormat button {
+          cursor: pointer; }
+        .container table tfoot .timeFormat button.activeFormat {
+          color: #00e600; }
+        .container table tfoot .timeFormat .format-toggle {
+          font-family: Helvetica, Arial, sans-serif;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0 15px 0 0; }
+        .container table tfoot .timeFormat .format-toggle__input {
+          display: none; }
+        .container table tfoot .timeFormat .format-toggle__button {
+          position: relative;
+          display: inline-block;
+          font-size: 1rem;
+          line-height: 20px;
+          text-transform: uppercase;
+          background: red;
+          border: 1px solid red;
+          width: 90px;
+          height: 30px;
+          color: white;
+          transition: all 0.1s ease;
+          cursor: pointer; }
+        .container table tfoot .timeFormat .format-toggle__button::before {
+          position: absolute;
+          top: 5px;
+          left: 44px;
+          content: "Sec";
+          display: inline-block;
+          height: 20px;
+          padding: 0 3px;
+          background: white;
+          color: red;
+          transition: all 0.1s ease; }
+        .container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button {
+          background: green;
+          border: 1px solid green; }
+        .container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button::before {
+          left: 5px;
+          content: "Min";
+          color: green; }
 
 /*# sourceMappingURL=main.css.map */

@@ -79,11 +79,11 @@
         		<tbody id="file-info"></tbody>
                 <tfoot>
                     <tr>
-                        <th scope="col"><span id="totalFileCount">0</span> Total Files</th>
-                        <th scope="col"></th>
+                        <th scope="col" colspan="2"><span id="totalFileCount">0</span> Files</th>
                         <!-- <th scope="col"></th> -->
-                        <th scope="col" colspan="2">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
-                        <th scope="col" class="timeFormat">
+                        <!-- <th scope="col"></th> -->
+                        <th scope="col" colspan="3">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
+                        <!-- <th scope="col" class="timeFormat"> -->
                             <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
                             <input type="checkbox" name="seconds" value="seconds">
 
@@ -92,11 +92,11 @@
                             <span class="minutes activeFormat">M</span> /
                             <span class="seconds">S</span> -->
 
-                            <label for="formatToggle" class="format-toggle">
+                            <!-- <label for="formatToggle" class="format-toggle">
                               <input type="checkbox" id="formatToggle" class="format-toggle__input"  name="timeFormat" value="minutes" checked/>
                               <span class="format-toggle__button"></span>
-                            </label>
-                        </th>
+                            </label> -->
+                        <!-- </th> -->
                     </tr>
                 </tfoot>
         	</table>

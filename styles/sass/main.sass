@@ -1,17 +1,16 @@
 body
+	padding: 0
+	margin: 0
 	padding-top: 5rem
+	font-size: 16px
 
-
-.starter-template
-	padding: 3rem 1.5rem
-	text-align: center
 
 
 .container
 	max-width: 1000px
 
 	.file-load
-		height: 50vh
+		height: 30vh
 		max-height: 600px
 		border: 3px solid #444
 		background-color: #ddd
@@ -49,7 +48,7 @@ body
 						// min-width: 150px
 						font-size: 1.2em
 						cursor: pointer
-						margin-top: calc(50vh / 2 - 5%)
+						margin-top: calc(30% / 2 - 5%)
 
 				input#multimedia_upload
 					opacity: 0
@@ -57,12 +56,23 @@ body
 
 
 	table
-		thead
-			font-size: 1.2em
-			// border-bottom: 1px solid #e3442d
+		/* Bootstrap Overwrite */
+		&.table td, &.table th
+			padding: .8em !important
+			// vertical-align: bottom !important
 
-			th:nth-child(n+3)
-				text-align: center
+		thead
+			font-size: 1em
+			border-bottom: 1px solid #e3442d
+
+			th
+				vertical-align: middle
+				// text-align: center
+
+				&:nth-child(n+3)
+					text-align: center
+				// &:nth-child(1)
+					text-align: left
 
 		tbody
 			color: #ddd
@@ -70,6 +80,11 @@ body
 
 			tr:hover
 				cursor: move
+
+			tr > td:nth-child(2)
+				word-wrap: break-word
+				word-spacing: 2%
+				// word-break: break-all
 
 
 			> tr > td:not(:first-of-type)
@@ -90,26 +105,32 @@ body
 
 			td
 				color: red
-				font-size: 1em
+				font-size: .9em
+				vertical-align: middle
 
 		tfoot
 			border-top: 1px solid #e3442d
-			font-size: .8em
+			font-size: 1.2em
+			padding: .75rem
 
 			#totalFileCount
-				font-size: 1.3em
-				margin-right: 6%
+				font-size: 1.2em
+				margin-right: 1%
 
 			#totalDuration
 				@extend #totalFileCount
 				margin-left: 6%
 
-			tr th:nth-child(3)
-				text-align: right
-				padding-right: 40px
+			tr th
+				vertical-align: bottom
+				font-size: 70%
+
+			// tr th:nth-child(3)
+			// 	text-align: right
+			// 	padding-right: 40px
 
 			tr th:last-of-type
-				text-align: right
+				// text-align: center
 
 			input[type=checkbox]
 				visibility: hidden
