@@ -65,6 +65,10 @@
         	</div>
         </div>
 
+        <div class="clear">
+            <button type="button" name="clear_list" class="btn btn-large btn-danger">Clear List</button>
+        </div>
+
         <div class="file-info">
         	<table class="table table-striped table-dark table-responsive-md">
         		<thead>
@@ -82,7 +86,14 @@
                         <th scope="col" colspan="2"><span id="totalFileCount">0</span> Files</th>
                         <!-- <th scope="col"></th> -->
                         <!-- <th scope="col"></th> -->
-                        <th scope="col" colspan="3">Total Duration: <span id="totalDuration">00 : 00 : 00</span></th>
+                        <th scope="col" colspan="3">
+                            Total Duration:
+                            <span id="totalDuration">
+                                <span class="totalHours">00 </span> :
+                                <span class="totalMinutes"> 00 </span> :
+                                <span class="totalSeconds"> 00 </span>
+                            </span>
+                        </th>
                         <!-- <th scope="col" class="timeFormat"> -->
                             <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
                             <input type="checkbox" name="seconds" value="seconds">

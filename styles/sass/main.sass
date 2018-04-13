@@ -14,7 +14,7 @@ body
 		max-height: 600px
 		border: 3px solid #444
 		background-color: #ddd
-		margin-bottom: 5%
+		margin-bottom: 2%
 
 		&:hover
 			border-style: dashed
@@ -44,153 +44,157 @@ body
 						border: 1px solid #eee
 						background: #a43
 						color: #eee
-						padding: 22px 15px
+						padding: 15px 15px
 						// min-width: 150px
 						font-size: 1.2em
 						cursor: pointer
-						margin-top: calc(30% / 2 - 5%)
+						border-radius: 10px
+						margin-top: calc(25% / 2 - 5%)
 
 				input#multimedia_upload
 					opacity: 0
 					display: none
 
+	.clear
+		margin-bottom: 2%
 
-	table
-		/* Bootstrap Overwrite */
-		&.table td, &.table th
-			padding: .8em !important
-			// vertical-align: bottom !important
+	.file-info
+		table
+			/* Bootstrap Overwrite */
+			&.table td, &.table th
+				padding: .8em !important
+				// vertical-align: bottom !important
 
-		thead
-			font-size: 1em
-			border-bottom: 1px solid #e3442d
+			thead
+				font-size: 1em
+				border-bottom: 1px solid #e3442d
 
-			th
-				vertical-align: middle
-				// text-align: center
+				th
+					vertical-align: middle
+					// text-align: center
 
-				&:nth-child(n+3)
+					&:nth-child(n+3)
+						text-align: center
+					// &:nth-child(1)
+						text-align: left
+
+			tbody
+				color: #ddd
+				// border-top: 1px solid #e3442d
+
+				tr:hover
+					cursor: move
+
+				tr > td:nth-child(2)
+					word-wrap: break-word
+					word-spacing: 2%
+					// word-break: break-all
+
+
+				> tr > td:not(:first-of-type)
 					text-align: center
-				// &:nth-child(1)
-					text-align: left
 
-		tbody
-			color: #ddd
-			// border-top: 1px solid #e3442d
+				> tr > td.icons
+					// padding: 0 10px
+					[type=button]
+						background: rgba(0,0,0,0.0)
+						border: none
+						cursor: pointer
+						font-size: 1em
+						color: red
+						padding: 1px 5px
 
-			tr:hover
-				cursor: move
+						&:first-of-type
+							margin-right: 25px
 
-			tr > td:nth-child(2)
-				word-wrap: break-word
-				word-spacing: 2%
-				// word-break: break-all
-
-
-			> tr > td:not(:first-of-type)
-				text-align: center
-
-			> tr > td.icons
-				// padding: 0 10px
-				[type=button]
-					background: rgba(0,0,0,0.0)
-					border: none
-					cursor: pointer
-					font-size: 1em
+				td
 					color: red
-					padding: 1px 5px
+					font-size: .9em
+					vertical-align: middle
 
-					&:first-of-type
-						margin-right: 25px
-
-			td
-				color: red
-				font-size: .9em
-				vertical-align: middle
-
-		tfoot
-			border-top: 1px solid #e3442d
-			font-size: 1.2em
-			padding: .75rem
-
-			#totalFileCount
+			tfoot
+				border-top: 1px solid #e3442d
 				font-size: 1.2em
-				margin-right: 1%
+				padding: .75rem
 
-			#totalDuration
-				@extend #totalFileCount
-				margin-left: 6%
+				#totalFileCount
+					font-size: 1.2em
+					margin-right: 1%
 
-			tr th
-				vertical-align: bottom
-				font-size: 70%
+				#totalDuration
+					@extend #totalFileCount
+					margin-left: 6%
 
-			// tr th:nth-child(3)
-			// 	text-align: right
-			// 	padding-right: 40px
+				tr th
+					vertical-align: bottom
+					font-size: 70%
 
-			tr th:last-of-type
-				// text-align: center
+				// tr th:nth-child(3)
+				// 	text-align: right
+				// 	padding-right: 40px
 
-			input[type=checkbox]
-				visibility: hidden
-				display: none
+				tr th:last-of-type
+					// text-align: center
 
-			.timeFormat
-				font-size: 1.4em
-
-				button
-					cursor: pointer
-
-				button.activeFormat
-					color: lighten(green, 20%)
-
-				/* Toggle Switch UI Style Buttons */
-				.format-toggle
-					font-family: Helvetica, Arial, sans-serif
-					display: inline-block
-					vertical-align: top
-					margin: 0 15px 0 0
-
-
-				.format-toggle__input
+				input[type=checkbox]
+					visibility: hidden
 					display: none
 
+				.timeFormat
+					font-size: 1.4em
 
-				.format-toggle__button
-					position: relative
-					display: inline-block
-					font-size: 1rem
-					line-height: 20px
-					text-transform: uppercase
-					background: red
-					border: 1px solid red
-					width: 90px
-					height: 30px
-					color: white
-					transition: all 0.1s ease
-					cursor: pointer
+					button
+						cursor: pointer
 
+					button.activeFormat
+						color: lighten(green, 20%)
 
-				.format-toggle__button::before
-					position: absolute
-					top: 5px
-					left: 44px
-					content: "Sec"
-					display: inline-block
-					height: 20px
-					padding: 0 3px
-					background: white
-					color: red
-					transition: all 0.1s ease
+					/* Toggle Switch UI Style Buttons */
+					.format-toggle
+						font-family: Helvetica, Arial, sans-serif
+						display: inline-block
+						vertical-align: top
+						margin: 0 15px 0 0
 
 
-				.format-toggle__input:checked + .format-toggle__button
-					background: green
-					border: 1px solid green
+					.format-toggle__input
+						display: none
 
 
-				.format-toggle__input:checked + .format-toggle__button::before
-					left: 5px
-					content: "Min"
-					color: green
+					.format-toggle__button
+						position: relative
+						display: inline-block
+						font-size: 1rem
+						line-height: 20px
+						text-transform: uppercase
+						background: red
+						border: 1px solid red
+						width: 90px
+						height: 30px
+						color: white
+						transition: all 0.1s ease
+						cursor: pointer
+
+
+					.format-toggle__button::before
+						position: absolute
+						top: 5px
+						left: 44px
+						content: "Sec"
+						display: inline-block
+						height: 20px
+						padding: 0 3px
+						background: white
+						color: red
+						transition: all 0.1s ease
+
+
+					.format-toggle__input:checked + .format-toggle__button
+						background: green
+						border: 1px solid green
+
+
+					.format-toggle__input:checked + .format-toggle__button::before
+						left: 5px
+						content: "Min"
+						color: green

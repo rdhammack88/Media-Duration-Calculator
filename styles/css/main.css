@@ -11,7 +11,7 @@ body {
     max-height: 600px;
     border: 3px solid #444;
     background-color: #ddd;
-    margin-bottom: 5%; }
+    margin-bottom: 2%; }
     .container .file-load:hover {
       border-style: dashed;
       cursor: pointer; }
@@ -33,76 +33,79 @@ body {
             border: 1px solid #eee;
             background: #a43;
             color: #eee;
-            padding: 22px 15px;
+            padding: 15px 15px;
             font-size: 1.2em;
             cursor: pointer;
-            margin-top: calc(30% / 2 - 5%); }
+            border-radius: 10px;
+            margin-top: calc(25% / 2 - 5%); }
         .container .file-load .file-drop form input#multimedia_upload {
           opacity: 0;
           display: none; }
-  .container table {
+  .container .clear {
+    margin-bottom: 2%; }
+  .container .file-info table {
     /* Bootstrap Overwrite */ }
-    .container table.table td, .container table.table th {
+    .container .file-info table.table td, .container .file-info table.table th {
       padding: 0.8em !important; }
-    .container table thead {
+    .container .file-info table thead {
       font-size: 1em;
       border-bottom: 1px solid #e3442d; }
-      .container table thead th {
+      .container .file-info table thead th {
         vertical-align: middle; }
-        .container table thead th:nth-child(n+3) {
+        .container .file-info table thead th:nth-child(n+3) {
           text-align: center; }
-    .container table tbody {
+    .container .file-info table tbody {
       color: #ddd; }
-      .container table tbody tr:hover {
+      .container .file-info table tbody tr:hover {
         cursor: move; }
-      .container table tbody tr > td:nth-child(2) {
+      .container .file-info table tbody tr > td:nth-child(2) {
         word-wrap: break-word;
         word-spacing: 2%; }
-      .container table tbody > tr > td:not(:first-of-type) {
+      .container .file-info table tbody > tr > td:not(:first-of-type) {
         text-align: center; }
-      .container table tbody > tr > td.icons [type=button] {
+      .container .file-info table tbody > tr > td.icons [type=button] {
         background: rgba(0, 0, 0, 0);
         border: none;
         cursor: pointer;
         font-size: 1em;
         color: red;
         padding: 1px 5px; }
-        .container table tbody > tr > td.icons [type=button]:first-of-type {
+        .container .file-info table tbody > tr > td.icons [type=button]:first-of-type {
           margin-right: 25px; }
-      .container table tbody td {
+      .container .file-info table tbody td {
         color: red;
         font-size: 0.9em;
         vertical-align: middle; }
-    .container table tfoot {
+    .container .file-info table tfoot {
       border-top: 1px solid #e3442d;
       font-size: 1.2em;
       padding: 0.75rem; }
-      .container table tfoot #totalFileCount, .container table tfoot #totalDuration {
+      .container .file-info table tfoot #totalFileCount, .container .file-info table tfoot #totalDuration {
         font-size: 1.2em;
         margin-right: 1%; }
-      .container table tfoot #totalDuration {
+      .container .file-info table tfoot #totalDuration {
         margin-left: 6%; }
-      .container table tfoot tr th {
+      .container .file-info table tfoot tr th {
         vertical-align: bottom;
         font-size: 70%; }
-      .container table tfoot input[type=checkbox] {
+      .container .file-info table tfoot input[type=checkbox] {
         visibility: hidden;
         display: none; }
-      .container table tfoot .timeFormat {
+      .container .file-info table tfoot .timeFormat {
         font-size: 1.4em;
         /* Toggle Switch UI Style Buttons */ }
-        .container table tfoot .timeFormat button {
+        .container .file-info table tfoot .timeFormat button {
           cursor: pointer; }
-        .container table tfoot .timeFormat button.activeFormat {
+        .container .file-info table tfoot .timeFormat button.activeFormat {
           color: #00e600; }
-        .container table tfoot .timeFormat .format-toggle {
+        .container .file-info table tfoot .timeFormat .format-toggle {
           font-family: Helvetica, Arial, sans-serif;
           display: inline-block;
           vertical-align: top;
           margin: 0 15px 0 0; }
-        .container table tfoot .timeFormat .format-toggle__input {
+        .container .file-info table tfoot .timeFormat .format-toggle__input {
           display: none; }
-        .container table tfoot .timeFormat .format-toggle__button {
+        .container .file-info table tfoot .timeFormat .format-toggle__button {
           position: relative;
           display: inline-block;
           font-size: 1rem;
@@ -115,7 +118,7 @@ body {
           color: white;
           transition: all 0.1s ease;
           cursor: pointer; }
-        .container table tfoot .timeFormat .format-toggle__button::before {
+        .container .file-info table tfoot .timeFormat .format-toggle__button::before {
           position: absolute;
           top: 5px;
           left: 44px;
@@ -126,10 +129,10 @@ body {
           background: white;
           color: red;
           transition: all 0.1s ease; }
-        .container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button {
+        .container .file-info table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button {
           background: green;
           border: 1px solid green; }
-        .container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button::before {
+        .container .file-info table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button::before {
           left: 5px;
           content: "Min";
           color: green; }

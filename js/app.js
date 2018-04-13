@@ -4,21 +4,25 @@ $('document').ready(function() {
     var fileNamesList = [], fileList = [], timeList = [];
     window.URL = window.URL || window.webkitURL;
     var fileInfo = {
-        // index: 0,
+        index: 1,
+        totalHours: 0,
+        totalMinutes: 0,
+        totalSeconds: 0,
         //
         // updateIndex: function() {
         //     return this.index + 1;
         // },
 
-        display: function(index, name, type, hours, minutes, seconds) {
-            return `<tr><th scope="row">${index}</th><td class="fileName">${name}</td><td>${type}</td><td>${hours} : ${minutes} : ${seconds}</td><td class="icons"><button type="button" class="delete"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
+        display: function(name, type, hours, minutes, seconds) {
+            return `<tr><th scope="row">${this.index++}</th><td class="fileName">${name}</td><td>${type}</td><td>${hours} : ${minutes} : ${seconds}</td><td class="icons"><button type="button" class="delete"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
         },
 
-        getFileDuration: function(file, indx, totalFileCount, that) {
+        getFileDuration: function(file, indx, that) {
                 fileList.push(file);
                 var video = document.createElement('video');
                 // var duration;
                 video.preload = 'metadata';
+                var obj = this;
 
                 video.ondurationchange = function() {
                     window.URL.revokeObjectURL(video.src);
@@ -26,7 +30,7 @@ $('document').ready(function() {
                     // durTotal += duration;
 
                     if(duration/60/60 < 10) { // >= 1
-                        var hours = '0' + Math.floor(duration/60/60); //''; //'0' + Math.floor(duration/60/60);
+                        var hours = '0' + Math.floor(duration/60/60);
                     } else {
                         var hours = Math.floor(duration/60/60);;
                     }
@@ -43,132 +47,39 @@ $('document').ready(function() {
                         var seconds = duration%60;
                     }
 
-                    // console.log(duration%60/60);
-                    // console.log(duration/60/60);
-                    // console.log(duration/60%60);
-                    // console.log(duration%60/60/60);
-                    // console.log(duration/60/60/60);
-                    // console.log(duration/60%60%60);
+                    obj.totalHours += parseInt(obj.totalHours) + parseInt(hours);
+                    obj.totalMinutes += parseInt(obj.totalMinutes) + parseInt(minutes);
+                    obj.totalSeconds += parseInt(obj.totalSeconds) + parseInt(seconds);
 
-                    // if(duration/60/60 >= 1 && duration/60/60 < 10) {
-                    //     duration = '0' + Math.floor(duration/60/60) + ' : ' + Math.floor(duration/60%60) + ' : ' + duration%60;
-                    // } else if(duration/60/60 >= 10) {
-                    //     duration = Math.floor(duration/60/60) + ' : ' + Math.floor(duration/60%60) + ' : ' + duration%60;
-                    // } else {
-                    //     // if(duration/60 < 10) {
-                    //     //     duration = '0' + Math.floor(duration/60) + ' : ' + duration%60;
-                    //     // } else {
-                    //     //     duration = Math.floor(duration/60) + ' : ' + duration%60;
-                    //     // }
-                    // }
+                    infoBody.append(fileInfo.display(that.name, that.type, hours, minutes, seconds));
 
-
-                    // duration = Math.floor(duration/60) + ' : ' + duration%60;
-                    // fileList[indx].duration = duration;
-                    // timeList.push(duration);
-                    // console.log(duration);
-                    // return duration;
-
-                    infoBody.append(fileInfo.display(totalFileCount, that.name, that.type, hours, minutes, seconds));
-                    // return durTotal;
+                    $('#totalFileCount').text(`${obj.index - 1} `);
+                    $('.totalHours').text(obj.totalHours);
+                    $('.totalMinutes').text(obj.totalMinutes);
+                    $('.totalSeconds').text(obj.totalSeconds);
                 };
 
                 video.src = URL.createObjectURL(file);
-        },
-
-        // getFileInformation: function(file) {
-        //     console.log(this);
-        //     if(fileNamesList.includes(this.files[i].name)) {
-        //         // continue;
-        //         return false;
-        //     } else {
-        //         var fileList = fileInfo.getFileDuration(this.files[i], i);
-        //         // var duration = fileList[i].duration;
-        //         var that = this.files[i];
-        //         var indx = i;
-        //         // console.log(fileList);
-        //         // console.log(fileList[i]);
-        //         // console.log(fileList[i].name);
-        //         // console.log(fileList[i].duration);
-        //         // console.log(fileList[i].size);
-        //
-        //         fileNamesList.push(this.files[i].name);
-        //         var timer = setTimeout(function() {
-        //             var duration = timeList[indx];
-        //             console.log(timeList[indx]);
-        //             console.log(duration);
-        //             infoBody.append(fileInfo.display(++totalFileCount, that.name, that.type, duration));
-        //         }, 500);
-        //
-        //
-        //     }
-        // },
-
-        deleteFileInfo: function() {
-            return console.log('clicked');
-            var that = this;
-            var indx = $(this).parent('tr').eq();
         }
     }
 
     $('input:file').change(function() {
-        var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
-        // var durTotal = 0
-        // var files = Array.from(this.files);
-        // console.log(files);
-        if(!totalFileCount) {
-            totalFileCount = 0;
-        }
-        // var fileObj = fileInfo;
+        // var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
+        //
+        // if(!totalFileCount) {
+        //     totalFileCount = 0;
+        // }
 
-        // files.forEach(fileObj.getFileInformation());
-        // files.forEach(function(file) {
-        //     // var fileObj = fileInfo;
-        //     fileObj.getFileInformation();
-        // });
-// var that = this.files[i];
-//
-//         var timer = setTimeout(function() {
         for(var i = 0; i < this.files.length; i++) {
             if(fileNamesList.includes(this.files[i].name)) {
                 continue;
-            } else { //var fileList = 
-                fileInfo.getFileDuration(this.files[i], i, ++totalFileCount, this.files[i]);
-                // console.log(durTotal);
-                // var duration = fileList[i].duration;
-                // var that = this.files[i];
-                // var indx = i;
-                // console.log(fileList);
-                // console.log(fileList[i]);
-                // console.log(fileList[i].name);
-                // console.log(fileList[i].duration);
-                // console.log(fileList[i].size);
+            } else { //var fileList =
+                fileInfo.getFileDuration(this.files[i], i, this.files[i]);
 
-                // fileNamesList.push(that.name);
                 fileNamesList.push(this.files[i].name);
-                // var timer = setTimeout(function() {
-                    // var duration = timeList[indx];
-                //     console.log(timeList[indx]);
-                //     console.log(duration);
-
-
-                    // infoBody.append(fileInfo.display(++totalFileCount, that.name, that.type, duration));
-
-
-                // }, 500);
-
-
-
             }
-
-                            // clearTimeout(timer);
         }
-         // }, 500);
-
-
-        // console.log(fileList[0]);
-
-        $('#totalFileCount').text(`${totalFileCount} `);
+        // $('#totalFileCount').text(`${totalFileCount} `);
     });
 
     $('body').on('click', '.delete', function(e) {
@@ -200,24 +111,22 @@ $('document').ready(function() {
     $('#file-drop').on('dragover', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('dragover');
     });
 
     $('#file-drop').on('dragenter', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('dragenter');
     });
 
     $('#file-drop').on('drop', function(e) {
-                    console.log('dropped');
+
         if(e.originalEvent.dataTransfer){
             if(e.originalEvent.dataTransfer.files.length) {
                 e.preventDefault();
                 e.stopPropagation();
                 /*UPLOAD FILES HERE*/
-                console.log(e.originalEvent.dataTransfer.files);
-                console.log('dropped');
+                // console.log(e.originalEvent.dataTransfer.files);
+                // console.log('dropped');
                 // upload(e.originalEvent.dataTransfer.files);
 
 
@@ -229,11 +138,11 @@ $('document').ready(function() {
                     if(fileNamesList.includes(e.originalEvent.dataTransfer.files[i].name)) {
                         continue;
                     } else { //var fileList =
-                        fileInfo.getFileDuration(e.originalEvent.dataTransfer.files[i], i, ++totalFileCount, e.originalEvent.dataTransfer.files[i]);
+                        fileInfo.getFileDuration(e.originalEvent.dataTransfer.files[i], i, e.originalEvent.dataTransfer.files[i]);
                         fileNamesList.push(e.originalEvent.dataTransfer.files[i].name);
                     }
                 }
-                $('#totalFileCount').text(`${totalFileCount} `);
+                // $('#totalFileCount').text(`${totalFileCount} `);
             }
         }
     });
