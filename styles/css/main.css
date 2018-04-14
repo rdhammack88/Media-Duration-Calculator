@@ -80,11 +80,15 @@ body {
       border-top: 1px solid #e3442d;
       font-size: 1.2em;
       padding: 0.75rem; }
-      .container .file-info table tfoot #totalFileCount, .container .file-info table tfoot #totalDuration {
+      .container .file-info table tfoot #totalFileCount {
         font-size: 1.2em;
         margin-right: 1%; }
+      .container .file-info table tfoot .totalText {
+        text-align: center; }
       .container .file-info table tfoot #totalDuration {
-        margin-left: 6%; }
+        text-align: center;
+        font-size: 0.9em;
+        padding-bottom: 0.5rem !important; }
       .container .file-info table tfoot tr th {
         vertical-align: bottom;
         font-size: 70%; }

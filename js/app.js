@@ -17,46 +17,63 @@ $('document').ready(function() {
             return `<tr><th scope="row">${this.index++}</th><td class="fileName">${name}</td><td>${type}</td><td>${hours} : ${minutes} : ${seconds}</td><td class="icons"><button type="button" class="delete"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
         },
 
-        getFileDuration: function(file, indx, that) {
+        getFileDuration: function(file, indx, file) {
                 fileList.push(file);
                 var video = document.createElement('video');
                 // var duration;
                 video.preload = 'metadata';
-                var obj = this;
+                var that = this;
 
                 video.ondurationchange = function() {
                     window.URL.revokeObjectURL(video.src);
                     duration = Math.floor(video.duration);
+                    var hours = parseInt(Math.floor(duration/60/60));
+                    var minutes = parseInt(Math.floor(duration/60%60));
+                    var seconds = parseInt(duration%60);
                     // durTotal += duration;
 
-                    if(duration/60/60 < 10) { // >= 1
-                        var hours = '0' + Math.floor(duration/60/60);
-                    } else {
-                        var hours = Math.floor(duration/60/60);;
-                    }
+                    hours = hours < 10 ? '0' + hours : hours;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
 
-                    if(duration/60%60 < 10) {
-                        var minutes = '0' + Math.floor(duration/60%60);
-                    } else {
-                        var minutes = Math.floor(duration/60%60);
-                    }
+                    // if(duration/60/60 < 10) { // >= 1
+                    //     var hours = '0' + Math.floor(duration/60/60);
+                    // } else {
+                    //     var hours = parseInt(Math.floor(duration/60/60));
+                    // }
+                    //
+                    // if(duration/60%60 < 10) {
+                    //     var minutes = '0' + Math.floor(duration/60%60);
+                    // } else {
+                    //     var minutes = parseInt(Math.floor(duration/60%60));
+                    // }
+                    //
+                    // if(duration%60 < 10) { //duration/60/60
+                    //     var seconds = '0' + duration%60;
+                    // } else {
+                    //     var seconds = parseInt(duration%60);
+                    // }
 
-                    if(duration%60 < 10) { //duration/60/60
-                        var seconds = '0' + duration%60;
-                    } else {
-                        var seconds = duration%60;
-                    }
+                    that.totalHours += parseInt(hours);
+                    that.totalMinutes += parseInt(minutes);
+                    that.totalSeconds += parseInt(seconds);
 
-                    obj.totalHours += parseInt(obj.totalHours) + parseInt(hours);
-                    obj.totalMinutes += parseInt(obj.totalMinutes) + parseInt(minutes);
-                    obj.totalSeconds += parseInt(obj.totalSeconds) + parseInt(seconds);
+                    that.totalHours += parseInt(that.totalMinutes%60) >= 1 ? parseInt(that.totalMinutes/60) : parseInt(that.totalHours);
+                    that.totalMinutes += parseInt(that.totalSeconds%60) >= 1 ? parseInt(that.totalSeconds/60) : parseInt(that.totalMinutes);
+                    that.totalSeconds = parseInt(that.totalSeconds%60) >= 1 ? parseInt(that.totalSeconds%60) : parseInt(that.totalSeconds);
+                    that.totalMinutes = parseInt(that.totalMinutes%60) >= 1 ? parseInt(that.totalMinutes%60) : parseInt(that.totalMinutes);
 
-                    infoBody.append(fileInfo.display(that.name, that.type, hours, minutes, seconds));
+                    // that.totalHours = that.totalHours < 10 ? '0' + that.totalHours : that.totalHours;
+                    // that.totalMinutes = that.totalMinutes < 10 ? '0' + that.totalMinutes : that.totalMinutes;
+                    // that.totalSeconds = that.totalSeconds < 10 ? '0' + that.totalSeconds : that.totalSeconds;
 
-                    $('#totalFileCount').text(`${obj.index - 1} `);
-                    $('.totalHours').text(obj.totalHours);
-                    $('.totalMinutes').text(obj.totalMinutes);
-                    $('.totalSeconds').text(obj.totalSeconds);
+
+                    infoBody.append(fileInfo.display(file.name, file.type, hours, minutes, seconds));
+
+                    $('#totalFileCount').text(`${that.index - 1} `);
+                    $('.totalHours').text(that.totalHours);
+                    $('.totalMinutes').text(that.totalMinutes);
+                    $('.totalSeconds').text(that.totalSeconds);
                 };
 
                 video.src = URL.createObjectURL(file);

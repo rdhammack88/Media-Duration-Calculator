@@ -1,3 +1,12 @@
+@mixin break($args...)
+	@if length($args) == 1
+		@media (min-width: nth($args, 1))
+			@content
+
+	@if length($args) == 2
+		@media (min-width: nth($args, 1)) and (max-width: nth($args, 2))
+			@content
+
 body
 	padding: 0
 	margin: 0
@@ -121,9 +130,18 @@ body
 					font-size: 1.2em
 					margin-right: 1%
 
+				.totalText
+					text-align: center
+
 				#totalDuration
-					@extend #totalFileCount
-					margin-left: 6%
+					// @extend #totalFileCount
+					// margin-left: 6%
+					text-align: center
+					font-size: .9em
+					padding-bottom: .5rem !important
+
+					// @include break(768px)
+						// margin-left: 15%
 
 				tr th
 					vertical-align: bottom

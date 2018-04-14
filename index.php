@@ -86,14 +86,17 @@
                         <th scope="col" colspan="2"><span id="totalFileCount">0</span> Files</th>
                         <!-- <th scope="col"></th> -->
                         <!-- <th scope="col"></th> -->
-                        <th scope="col" colspan="3">
+                        <th scope="col" class="totalText">
                             Total Duration:
-                            <span id="totalDuration">
+                        </th>
+                        <th scope="col" colspan="1" id="totalDuration">
+                            <span>
                                 <span class="totalHours">00 </span> :
                                 <span class="totalMinutes"> 00 </span> :
                                 <span class="totalSeconds"> 00 </span>
                             </span>
                         </th>
+                        <th></th>
                         <!-- <th scope="col" class="timeFormat"> -->
                             <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
                             <input type="checkbox" name="seconds" value="seconds">
