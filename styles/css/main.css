@@ -76,10 +76,15 @@ body {
         color: red;
         font-size: 0.9em;
         vertical-align: middle; }
+        .container .file-info table tbody td.fileName {
+          max-width: 350px; }
     .container .file-info table tfoot {
       border-top: 1px solid #e3442d;
-      font-size: 1.2em;
+      font-size: 1em;
       padding: 0.75rem; }
+      @media (min-width: 768px) {
+        .container .file-info table tfoot {
+          font-size: 1.2em; } }
       .container .file-info table tfoot #totalFileCount {
         font-size: 1.2em;
         margin-right: 1%; }

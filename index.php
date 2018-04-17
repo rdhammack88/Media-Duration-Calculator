@@ -59,14 +59,14 @@
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
         		<form action="file-load.php" method="get">
-                    <label for="multimedia_upload" id="file-drop"><span>Choose files to upload.</span></label>
+                    <label for="multimedia_upload" id="file-drop" dropzone="copy"><span>Choose files to upload.</span></label>
         			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .mp3">
         		</form>
         	</div>
         </div>
 
         <div class="clear">
-            <button type="button" name="clear_list" class="btn btn-large btn-danger">Clear List</button>
+            <button type="button" name="clear_list" class="btn btn-large btn-danger clear_list">Clear List</button>
         </div>
 
         <div class="file-info">
@@ -96,7 +96,7 @@
                                 <span class="totalSeconds"> 00 </span>
                             </span>
                         </th>
-                        <th></th>
+                        <th id="durationTotal"></th>
                         <!-- <th scope="col" class="timeFormat"> -->
                             <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
                             <input type="checkbox" name="seconds" value="seconds">
