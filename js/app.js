@@ -2,9 +2,11 @@ $('document').ready(function() {
 
 (function() {
     window.URL = window.URL || window.webkitURL
-    var $infoBody = $('#file-info');
+    var $fileDrop = $('#file-drop');
+    var $infoBody = $('#file-info-body');
     var $clearAllButton = $('.clear_list');
-    var $fileInfoTable = $('.file-info');
+    var $totalFileCount = $('#totalFileCount');
+    var $fileInfoTable = $('.file-info-container');
     var fileInfo = {
         index: 1,
         durTotal: 0,
@@ -15,12 +17,17 @@ $('document').ready(function() {
 
         clear_file: function(el) {
             this.index--;
-            $('#totalFileCount').text(this.index - 1);
+            $totalFileCount.text(this.index - 1);
             $('#multimedia_upload').val(null);
             var $remove = $(el).closest('tr');
             var fileName = $(el).parent().siblings('td.fileName').text();
             this.updateTotalDuration(el);
             $remove.remove();
+
+            var $filePos = $('.file_position');
+            for(var filePos in $filePos) {
+                $filePos[filePos].innerText = parseInt(filePos) + 1;
+            }
             if(this.fileNamesList.includes(fileName)) {
                 let i = this.fileNamesList.indexOf(fileName);
                 this.fileNamesList.splice(i, 1);
@@ -37,7 +44,7 @@ $('document').ready(function() {
             $fileInfoTable.fadeOut(1000);
 
             $('.totalHours, .totalMinutes, .totalSeconds').html('00');
-            $('#totalFileCount').html('0');
+            $totalFileCount.html('0');
             $('#multimedia_upload').val(null);
 
             this.index = 1;
@@ -48,7 +55,7 @@ $('document').ready(function() {
         },
 
         display: function(name, type, hours, minutes, seconds) {
-            return `<tr><th scope="row">${this.index++}</th><td class="fileName">${name}</td><td>${type}</td><td><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
+            return `<tr><th scope="row" class="file_position">${this.index++}</th><td class="fileName">${name}</td><td>${type}</td><td><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
         },
 
         getFileDuration: function(file, indx) {
@@ -66,17 +73,13 @@ $('document').ready(function() {
                     hours = hours < 10 ? '0' + hours : hours;
                     minutes = minutes < 10 ? '0' + minutes : minutes;
                     seconds = seconds < 10 ? '0' + seconds : seconds;
-                    // console.log(duration);
-                    console.log(that.durTotal);
 
+                    /* update the file list objects total time formats h:m:s */
                     that.totalHours = Math.floor(that.durTotal/60/60);
                     that.totalMinutes = Math.floor(that.durTotal/60%60);
                     that.totalSeconds = Math.floor(that.durTotal%60);
-                    that.totalHours = that.totalHours < 10 ? '0' + that.totalHours : that.totalHours;
-                    that.totalMinutes = that.totalMinutes < 10 ? '0' + that.totalMinutes : that.totalMinutes;
-                    that.totalSeconds = that.totalSeconds < 10 ? '0' + that.totalSeconds : that.totalSeconds;
-
-
+                    /* test if all totals are under 10, then add a "0" to the front before display */
+                    fileInfo.lessThanTenTest(that);
                     ///// CODE THAT WORKS /////
                     //
                     // // hours = hours < 10 ? '0' + hours : hours;
@@ -114,11 +117,9 @@ $('document').ready(function() {
                     // // that.totalMinutes = that.totalMinutes < 10 ? '0' + that.totalMinutes : that.totalMinutes;
                     // // that.totalSeconds = that.totalSeconds < 10 ? '0' + that.totalSeconds : that.totalSeconds;
                     ///// ABOVE CODE THAT WORKS /////
-
-
+                    /* display all new data elements holding file info into the table */
                     $infoBody.append(fileInfo.display(file.name, file.type, hours, minutes, seconds));
-
-                    $('#totalFileCount').text(`${that.index - 1}`);
+                    $totalFileCount.text(that.index - 1);
                     $('.totalHours').text(that.totalHours);
                     $('.totalMinutes').text(that.totalMinutes);
                     $('.totalSeconds').text(that.totalSeconds);
@@ -126,17 +127,33 @@ $('document').ready(function() {
                 video.src = URL.createObjectURL(file);
         },
 
+        lessThanTenTest: function(obj) {
+            obj.totalHours = obj.totalHours < 10 ? '0' + obj.totalHours : obj.totalHours;
+            obj.totalMinutes = obj.totalMinutes < 10 ? '0' + obj.totalMinutes : obj.totalMinutes;
+            obj.totalSeconds = obj.totalSeconds < 10 ? '0' + obj.totalSeconds : obj.totalSeconds;
+        },
+
         updateTotalDuration: function(el) {
-            /* current file duration in each format h:m:s */
+            /* get current file duration in each format h:m:s */
             var fileHourLength = parseInt($(el).parent().prev().children('.file_hour_length').text());
             var fileMinuteLength = parseInt($(el).parent().prev().children('.file_minute_length').text());
             var fileSecondLength = parseInt($(el).parent().prev().children('.file_second_length').text());
+            /* subtract the file time lengths from the total time lengths */
             this.totalHours -= fileHourLength;
             this.totalMinutes -= fileMinuteLength;
             this.totalSeconds -= fileSecondLength;
-            console.log(this.totalHours);
-            console.log(this.totalMinutes);
-            console.log(this.totalSeconds);
+            /* first, test if the new total time length for each format h:m:s, is less than 0 */
+            this.totalHours = this.totalHours < 0 ? 60 + this.totalHours : this.totalHours;
+            this.totalMinutes = this.totalMinutes < 0 ? 60 + this.totalMinutes : this.totalMinutes;
+            this.totalMinutes = this.totalSeconds < 0 ? this.totalMinutes - 1 : this.totalMinutes;
+            this.totalSeconds = this.totalSeconds < 0 ? 60 + this.totalSeconds : this.totalSeconds;
+            /* second, test if all totals are under 10, then add a "0" to the front before display */
+            this.lessThanTenTest(this);
+            /* update total duration of all files still left in list */
+            this.durTotal = this.durTotal - ((fileMinuteLength * 60) + fileSecondLength);
+            $('.totalHours').text(this.totalHours);
+            $('.totalMinutes').text(this.totalMinutes);
+            $('.totalSeconds').text(this.totalSeconds);
         },
 
         addListeners: function() {
@@ -168,17 +185,17 @@ $('document').ready(function() {
         },
     }
 
-    $('#file-drop').on('dragover', function(e) {
+    $fileDrop.on('dragover', function(e) {
         e.preventDefault();
         e.stopPropagation();
     });
 
-    $('#file-drop').on('dragenter', function(e) {
+    $fileDrop.on('dragenter', function(e) {
         e.preventDefault();
         e.stopPropagation();
     });
 
-    $('#file-drop').on('drop', function(e) {
+    $fileDrop.on('drop', function(e) {
         if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length){
             e.preventDefault();
             e.stopPropagation();

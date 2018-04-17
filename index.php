@@ -66,7 +66,7 @@
             <button type="button" name="clear_list" class="btn btn-large clear_list">Clear List</button>
         </div>
 
-        <div class="file-info">
+        <div class="file-info-container">
         	<table class="table table-striped table-dark table-responsive-md">
         		<thead>
         			<tr>
@@ -77,7 +77,7 @@
                         <th scope="col">Delete/Done</th>
         			</tr>
         		</thead>
-        		<tbody id="file-info"></tbody>
+        		<tbody id="file-info-body"></tbody>
                 <tfoot>
                     <tr>
                         <th scope="col" colspan="2"><span id="totalFileCount">0</span> Files</th>
