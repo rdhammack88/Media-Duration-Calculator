@@ -1,23 +1,58 @@
 $('document').ready(function() {
 
 (function() {
-
+    window.URL = window.URL || window.webkitURL
     var $infoBody = $('#file-info');
     var $clearAllButton = $('.clear_list');
     var $fileInfoTable = $('.file-info');
-    var fileNamesList = []; //, fileList = [], timeList = [];
-    window.URL = window.URL || window.webkitURL;
     var fileInfo = {
         index: 1,
+        durTotal: 0,
         totalHours: 0,
         totalMinutes: 0,
         totalSeconds: 0,
-        durTotal: 0,
+        fileNamesList: [],
+
+        clear_file: function(el) {
+            this.index--;
+            $('#totalFileCount').text(this.index - 1);
+            $('#multimedia_upload').val(null);
+            var $remove = $(el).closest('tr');
+            var fileName = $(el).parent().siblings('td.fileName').text();
+            this.updateTotalDuration(el);
+            $remove.remove();
+            if(this.fileNamesList.includes(fileName)) {
+                let i = this.fileNamesList.indexOf(fileName);
+                this.fileNamesList.splice(i, 1);
+            }
+            if($infoBody.html() == '') {
+                this.clear_list(); // fileInfo.clear_list();
+            }
+        },
+
+        clear_list: function() {
+            this.fileNamesList = [];
+            $infoBody.html('');
+            $clearAllButton.fadeOut(1000);
+            $fileInfoTable.fadeOut(1000);
+
+            $('.totalHours, .totalMinutes, .totalSeconds').html('00');
+            $('#totalFileCount').html('0');
+            $('#multimedia_upload').val(null);
+
+            this.index = 1;
+            this.totalHours = 0;
+            this.totalMinutes = 0;
+            this.totalSeconds = 0;
+            this.durTotal = 0;
+        },
+
+        display: function(name, type, hours, minutes, seconds) {
+            return `<tr><th scope="row">${this.index++}</th><td class="fileName">${name}</td><td>${type}</td><td><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
+        },
 
         getFileDuration: function(file, indx) {
-                // fileList.push(file);
                 var video = document.createElement('video');
-                // var duration;
                 video.preload = 'metadata';
                 var that = this;
 
@@ -28,22 +63,19 @@ $('document').ready(function() {
                     var hours = parseInt(Math.floor(duration/60/60));
                     var minutes = parseInt(Math.floor(duration/60%60));
                     var seconds = parseInt(Math.floor(duration%60));
+                    hours = hours < 10 ? '0' + hours : hours;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
                     // console.log(duration);
                     console.log(that.durTotal);
-
-
 
                     that.totalHours = Math.floor(that.durTotal/60/60);
                     that.totalMinutes = Math.floor(that.durTotal/60%60);
                     that.totalSeconds = Math.floor(that.durTotal%60);
-
                     that.totalHours = that.totalHours < 10 ? '0' + that.totalHours : that.totalHours;
                     that.totalMinutes = that.totalMinutes < 10 ? '0' + that.totalMinutes : that.totalMinutes;
                     that.totalSeconds = that.totalSeconds < 10 ? '0' + that.totalSeconds : that.totalSeconds;
 
-                    hours = hours < 10 ? '0' + hours : hours;
-                    minutes = minutes < 10 ? '0' + minutes : minutes;
-                    seconds = seconds < 10 ? '0' + seconds : seconds;
 
                     ///// CODE THAT WORKS /////
                     //
@@ -85,15 +117,26 @@ $('document').ready(function() {
 
 
                     $infoBody.append(fileInfo.display(file.name, file.type, hours, minutes, seconds));
-                    // $infoBody.append(fileInfo.display(file.name, file.type, that.totalHours, that.totalMinutes, that.totalSeconds));
 
                     $('#totalFileCount').text(`${that.index - 1}`);
                     $('.totalHours').text(that.totalHours);
                     $('.totalMinutes').text(that.totalMinutes);
                     $('.totalSeconds').text(that.totalSeconds);
-                    // $('#durationTotal').text(that.durTotal);
                 };
                 video.src = URL.createObjectURL(file);
+        },
+
+        updateTotalDuration: function(el) {
+            /* current file duration in each format h:m:s */
+            var fileHourLength = parseInt($(el).parent().prev().children('.file_hour_length').text());
+            var fileMinuteLength = parseInt($(el).parent().prev().children('.file_minute_length').text());
+            var fileSecondLength = parseInt($(el).parent().prev().children('.file_second_length').text());
+            this.totalHours -= fileHourLength;
+            this.totalMinutes -= fileMinuteLength;
+            this.totalSeconds -= fileSecondLength;
+            console.log(this.totalHours);
+            console.log(this.totalMinutes);
+            console.log(this.totalSeconds);
         },
 
         addListeners: function() {
@@ -123,70 +166,52 @@ $('document').ready(function() {
             //     });
             // };
         },
-
-        clear_file: function(el) {
-            var fileName = $(el).parent().siblings('td.fileName').text();
-            var $remove = $(el).closest('tr');
-            $remove.remove();
-            $('#multimedia_upload').val(null);
-            if(fileNamesList.includes(fileName)) {
-                console.log(fileNamesList);
-                let i = fileNamesList.indexOf(fileName);
-                fileNamesList.splice(i, 1)
-                console.log(fileNamesList);
-            }
-
-            if($infoBody.html() == '') {
-                fileInfo.clear_list();
-            }
-        },
-
-        clear_list: function() {
-            fileNamesList = [];
-            $infoBody.html('');
-            $clearAllButton.fadeOut(1000);
-            $fileInfoTable.fadeOut(1000);
-
-            $('.totalHours, .totalMinutes, .totalSeconds').html('00');
-            $('#totalFileCount').html('0');
-            $('#multimedia_upload').val(null);
-
-            this.index = 1;
-            this.totalHours = 0;
-            this.totalMinutes = 0;
-            this.totalSeconds = 0;
-            this.durTotal = 0;
-        },
-
-        display: function(name, type, hours, minutes, seconds) {
-            return `<tr><th scope="row">${this.index++}</th><td class="fileName">${name}</td><td>${type}</td><td><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
-        },
     }
 
-    $clearAllButton.hide();
+    $('#file-drop').on('dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    $('#file-drop').on('dragenter', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    $('#file-drop').on('drop', function(e) {
+        if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length){
+            e.preventDefault();
+            e.stopPropagation();
+            $clearAllButton.fadeIn(1000);
+            $fileInfoTable.fadeIn(1000);
+            var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
+            if(!totalFileCount) {
+                totalFileCount = 0;
+            }
+            for(var i = 0; i < e.originalEvent.dataTransfer.files.length; i++) {
+                if(fileInfo.fileNamesList.includes(e.originalEvent.dataTransfer.files[i].name)) {
+                    continue;
+                } else {
+                    fileInfo.getFileDuration(e.originalEvent.dataTransfer.files[i], i);
+                    fileInfo.fileNamesList.push(e.originalEvent.dataTransfer.files[i].name);
+                }
+            }
+        }
+    });
 
     $('input:file').change(function() {
-        // var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
-        //
-        // if(!totalFileCount) {
-        //     totalFileCount = 0;
-        // }
-        console.log(this.value);
-
         $clearAllButton.fadeIn(1000);
         $fileInfoTable.fadeIn( 1000 );
 
         for(var i = 0; i < this.files.length; i++) {
-            if(fileNamesList.includes(this.files[i].name)) {
-                console.log('included already');
+            if(fileInfo.fileNamesList.includes(this.files[i].name)) {
                 continue;
-            } else { //var fileList =
+            } else {
                 fileInfo.getFileDuration(this.files[i], i);
-                fileNamesList.push(this.files[i].name);
+                fileInfo.fileNamesList.push(this.files[i].name);
                 fileInfo.addListeners();
             }
         }
-        // $('#totalFileCount').text(`${totalFileCount} `);
     });
 
     $('body').on('click', '.delete', function(e) {
@@ -214,49 +239,6 @@ $('document').ready(function() {
                 'text-decoration': 'line-through',
                 'color': 'green'
             });
-        }
-    });
-
-    $('#file-drop').on('dragover', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        // console.log('dropped');
-    });
-
-    $('#file-drop').on('dragenter', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        // console.log('dropped');
-    });
-
-    $('#file-drop').on('drop', function(e) {
-        // console.log('dropped');
-        console.log(fileNamesList);
-        if(e.originalEvent.dataTransfer){
-            if(e.originalEvent.dataTransfer.files.length) {
-                e.preventDefault();
-                e.stopPropagation();
-                /*UPLOAD FILES HERE*/
-                // console.log(e.originalEvent.dataTransfer.files);
-                // console.log('dropped');
-                // upload(e.originalEvent.dataTransfer.files);
-
-                $clearAllButton.fadeIn(1000);
-                $fileInfoTable.fadeIn(1000);
-                var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
-                if(!totalFileCount) {
-                    totalFileCount = 0;
-                }
-                for(var i = 0; i < e.originalEvent.dataTransfer.files.length; i++) {
-                    if(fileNamesList.includes(e.originalEvent.dataTransfer.files[i].name)) {
-                        continue;
-                    } else { //var fileList =
-                        fileInfo.getFileDuration(e.originalEvent.dataTransfer.files[i], i);
-                        fileNamesList.push(e.originalEvent.dataTransfer.files[i].name);
-                    }
-                }
-                // $('#totalFileCount').text(`${totalFileCount} `);
-            }
         }
     });
 
@@ -288,7 +270,6 @@ $('document').ready(function() {
 
     $('.clear_list').click(function() {
         fileInfo.clear_list();
-
     });
 
 })();
