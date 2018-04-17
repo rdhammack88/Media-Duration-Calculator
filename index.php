@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="">
 
-    <title>Time Calculator</title>
+    <title>Media Duration</title>
 
 
     <!-- Bootstrap core CSS -->
