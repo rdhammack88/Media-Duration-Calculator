@@ -1,3 +1,6 @@
+/*! Load Fonts */
+@import url("https://fonts.googleapis.com/css?family=Bree+Serif|Josefin+Sans|Josefin+Slab|Merriweather|Oswald|Roboto+Slab");
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC|Caveat+Brush|Cinzel|Gloria+Hallelujah|Indie+Flower|Kaushan+Script|Lobster|Luckiest+Guy|Permanent+Marker|Philosopher|Playfair+Display+SC");
 body {
   padding: 0;
   margin: 0;
@@ -6,150 +9,139 @@ body {
 
 .container {
   max-width: 1000px; }
-  .container .file-load {
-    height: 30vh;
-    max-height: 600px;
-    border: 3px solid #444;
-    background-color: #ddd;
-    margin-bottom: 2%; }
-    .container .file-load:hover {
-      border-style: dashed;
-      cursor: pointer; }
-    .container .file-load .file-drop {
+
+.clear-all {
+  margin-bottom: 2%; }
+
+.clear_list {
+  display: none;
+  background: #d14348;
+  color: #eee;
+  width: 25%; }
+
+tr > td.icons [type=button] {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  color: #f39856;
+  padding: 1px 5px; }
+  tr > td.icons [type=button]:first-of-type {
+    margin-right: 25px; }
+
+.file-load {
+  height: 30vh;
+  max-height: 600px;
+  border: 3px solid #444;
+  background-color: #ddd;
+  margin-bottom: 2%; }
+  .file-load:hover {
+    border-style: dashed;
+    cursor: pointer; }
+  .file-load .file-drop {
+    width: 100%;
+    height: 100%; }
+    .file-load .file-drop form {
       width: 100%;
       height: 100%; }
-      .container .file-load .file-drop form {
+      .file-load .file-drop form label {
         width: 100%;
-        height: 100%; }
-        .container .file-load .file-drop form label {
-          width: 100%;
-          height: 100%;
-          text-align: center; }
-          .container .file-load .file-drop form label:hover {
-            cursor: pointer; }
-          .container .file-load .file-drop form label span {
-            display: inline-block;
-            text-align: center;
-            border: 1px solid #eee;
-            background: #4a3;
-            color: #eee;
-            padding: 15px 15px;
-            font-size: 1.2em;
-            cursor: pointer;
-            border-radius: 10px;
-            margin-top: calc(25% / 2 - 5%); }
-        .container .file-load .file-drop form input#multimedia_upload {
-          opacity: 0;
-          display: none; }
-  .container .clear {
-    margin-bottom: 2%; }
-    .container .clear .clear_list {
-      display: none;
-      background: #b43;
-      color: #eee; }
-  .container .file-info-container {
-    display: none; }
-    .container .file-info-container table {
-      /* Bootstrap Overwrite */ }
-      .container .file-info-container table.table td, .container .file-info-container table.table th {
-        padding: 0.8em !important; }
-      .container .file-info-container table thead {
-        font-size: 1em;
-        border-bottom: 1px solid #e3442d; }
-        .container .file-info-container table thead th {
-          vertical-align: middle; }
-          .container .file-info-container table thead th:nth-child(n+3) {
-            text-align: center; }
-      .container .file-info-container table tbody {
-        color: #ddd; }
-        .container .file-info-container table tbody tr:hover {
-          cursor: move; }
-        .container .file-info-container table tbody tr > td:nth-child(2) {
-          word-wrap: break-word;
-          word-spacing: 2%; }
-        .container .file-info-container table tbody > tr > td:not(:first-of-type) {
-          text-align: center; }
-        .container .file-info-container table tbody > tr > td.icons [type=button] {
-          background: rgba(0, 0, 0, 0);
-          border: none;
-          cursor: pointer;
-          font-size: 1em;
-          color: red;
-          padding: 1px 5px; }
-          .container .file-info-container table tbody > tr > td.icons [type=button]:first-of-type {
-            margin-right: 25px; }
-        .container .file-info-container table tbody td {
-          color: red;
-          font-size: 0.9em;
-          vertical-align: middle; }
-          .container .file-info-container table tbody td.fileName {
-            max-width: 350px; }
-      .container .file-info-container table tfoot {
-        border-top: 1px solid #e3442d;
-        font-size: 1em;
-        padding: 0.75rem; }
-        @media (min-width: 768px) {
-          .container .file-info-container table tfoot {
-            font-size: 1.2em; } }
-        .container .file-info-container table tfoot #totalFileCount {
-          font-size: 1.2em;
-          margin-right: 1%; }
-        .container .file-info-container table tfoot .totalText {
-          text-align: center; }
-        .container .file-info-container table tfoot #totalDuration {
+        height: 100%;
+        text-align: center; }
+        .file-load .file-drop form label:hover {
+          cursor: pointer; }
+        .file-load .file-drop form label span {
+          display: inline-block;
           text-align: center;
-          font-size: 0.9em;
-          padding-bottom: 0.5rem !important; }
-        .container .file-info-container table tfoot tr th {
-          vertical-align: bottom;
-          font-size: 70%; }
-        .container .file-info-container table tfoot input[type=checkbox] {
-          visibility: hidden;
-          display: none; }
-        .container .file-info-container table tfoot .timeFormat {
-          font-size: 1.4em;
-          /* Toggle Switch UI Style Buttons */ }
-          .container .file-info-container table tfoot .timeFormat button {
-            cursor: pointer; }
-          .container .file-info-container table tfoot .timeFormat button.activeFormat {
-            color: #00e600; }
-          .container .file-info-container table tfoot .timeFormat .format-toggle {
-            font-family: Helvetica, Arial, sans-serif;
-            display: inline-block;
-            vertical-align: top;
-            margin: 0 15px 0 0; }
-          .container .file-info-container table tfoot .timeFormat .format-toggle__input {
-            display: none; }
-          .container .file-info-container table tfoot .timeFormat .format-toggle__button {
-            position: relative;
-            display: inline-block;
-            font-size: 1rem;
-            line-height: 20px;
-            text-transform: uppercase;
-            background: red;
-            border: 1px solid red;
-            width: 90px;
-            height: 30px;
-            color: white;
-            transition: all 0.1s ease;
-            cursor: pointer; }
-          .container .file-info-container table tfoot .timeFormat .format-toggle__button::before {
+          border: 1px solid #eee;
+          background: #0076a3;
+          color: #eee;
+          padding: 15px 15px;
+          font-size: 1.2em;
+          cursor: pointer;
+          border-radius: 10px;
+          margin-top: calc(25% / 2 - 5%); }
+      .file-load .file-drop form input#multimedia_upload {
+        opacity: 0;
+        display: none; }
+
+.file-info-container {
+  display: none; }
+  .file-info-container table {
+    /* Bootstrap Overwrite */ }
+    .file-info-container table.table td, .file-info-container table.table th {
+      padding: 0.8em !important; }
+    .file-info-container table thead {
+      font-size: 1em;
+      border-bottom: 1px solid #e3442d; }
+      .file-info-container table thead th {
+        vertical-align: middle; }
+        .file-info-container table thead th:nth-child(n+3) {
+          text-align: center; }
+    .file-info-container table tbody {
+      color: #ddd; }
+      .file-info-container table tbody tr:hover {
+        cursor: move; }
+      .file-info-container table tbody tr > td:nth-child(2) {
+        word-wrap: break-word;
+        word-spacing: 2%; }
+      .file-info-container table tbody > tr > td:not(:first-of-type) {
+        text-align: center; }
+      .file-info-container table tbody td {
+        color: #f39856;
+        font-size: 1em;
+        letter-spacing: 50%;
+        vertical-align: middle; }
+        .file-info-container table tbody td.fileName {
+          max-width: 350px;
+          position: relative; }
+          .file-info-container table tbody td.fileName:hover::before, .file-info-container table tbody td.fileName:hover::after {
+            display: inline-block; }
+          .file-info-container table tbody td.fileName::before {
             position: absolute;
-            top: 5px;
-            left: 44px;
-            content: "Sec";
-            display: inline-block;
-            height: 20px;
-            padding: 0 3px;
-            background: white;
-            color: red;
-            transition: all 0.1s ease; }
-          .container .file-info-container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button {
-            background: green;
-            border: 1px solid green; }
-          .container .file-info-container table tfoot .timeFormat .format-toggle__input:checked + .format-toggle__button::before {
-            left: 5px;
-            content: "Min";
-            color: green; }
+            top: 50%;
+            left: calc(75% + 5px);
+            z-index: 2;
+            display: none;
+            width: 250px;
+            padding: 12px;
+            font-size: 0.9em;
+            border-radius: 5px;
+            background: rgba(122, 122, 122, 0.9);
+            color: #eee;
+            content: attr(data-name);
+            transform: translateY(-50%); }
+          .file-info-container table tbody td.fileName::after {
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            z-index: 1;
+            display: none;
+            width: 0;
+            height: 0;
+            content: "";
+            border: 5px solid transparent;
+            border-right-color: #994422;
+            border-left-width: 0;
+            transform: translateY(-50%); }
+    .file-info-container table tfoot {
+      border-top: 1px solid #e3442d;
+      font-size: 1em;
+      padding: 0.75rem; }
+      @media (min-width: 768px) {
+        .file-info-container table tfoot {
+          font-size: 1.2em; } }
+      .file-info-container table tfoot #totalFileCount {
+        font-size: 1.2em;
+        margin-right: 1%; }
+      .file-info-container table tfoot .totalText {
+        text-align: center; }
+      .file-info-container table tfoot #totalDuration {
+        text-align: center;
+        font-size: 0.9em;
+        padding-bottom: 0.5rem !important; }
+      .file-info-container table tfoot tr th {
+        vertical-align: bottom;
+        font-size: 70%; }
 
 /*# sourceMappingURL=main.css.map */

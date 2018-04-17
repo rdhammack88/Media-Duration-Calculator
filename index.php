@@ -18,7 +18,7 @@
     <!-- Font-Awesome CDN -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
-<body dropzone="none">
+<body>
     <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,11 +60,11 @@
         			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .mp3">
         		</form>
         	</div>
-        </div>
+        </div> <!-- .file-load -->
 
-        <div class="clear">
+        <div class="clear-all">
             <button type="button" name="clear_list" class="btn btn-large clear_list">Clear List</button>
-        </div>
+        </div> <!-- .clear-all -->
 
         <div class="file-info-container">
         	<table class="table table-striped table-dark table-responsive-md">
@@ -81,8 +81,6 @@
                 <tfoot>
                     <tr>
                         <th scope="col" colspan="2"><span id="totalFileCount">0</span> Files</th>
-                        <!-- <th scope="col"></th> -->
-                        <!-- <th scope="col"></th> -->
                         <th scope="col" class="totalText">
                             Total Duration:
                         </th>
@@ -111,9 +109,8 @@
                     </tr>
                 </tfoot>
         	</table>
-        </div>
-    </div>
-    <!-- /.container -->
+        </div> <!-- .file-info-container -->
+    </div> <!-- .container -->
 
 
     <!-- Bootstrap core JavaScript

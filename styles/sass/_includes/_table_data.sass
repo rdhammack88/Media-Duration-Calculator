@@ -1,0 +1,101 @@
+.file-info-container
+    display: none
+    table
+        /* Bootstrap Overwrite */
+        &.table td, &.table th
+            padding: .8em !important
+
+        thead
+            font-size: 1em
+            border-bottom: 1px solid #e3442d
+
+            th
+                vertical-align: middle
+
+                &:nth-child(n+3)
+                    text-align: center
+
+        tbody
+            color: #ddd
+            // border-top: 1px solid #e3442d
+
+            tr:hover
+                cursor: move
+
+            tr > td:nth-child(2)
+                word-wrap: break-word
+                word-spacing: 2%
+
+            > tr > td:not(:first-of-type)
+                text-align: center
+
+            td
+                color: $orange
+                font-size: 1em
+                letter-spacing: 50%
+                vertical-align: middle
+
+                &.fileName
+                    max-width: 350px
+                    position: relative
+
+                    &:hover::before,
+                    &:hover::after
+                        display: inline-block
+
+                    &::before
+                        position: absolute
+                        top: 50%
+                        left: calc(75% + 5px)
+                        z-index: 2
+                        display: none
+                        width: 250px
+                        padding: 12px
+                        font-size: .9em
+                        border-radius: 5px
+                        background: rgba(122,122,122,0.9)
+                        color: #eee
+                        // color: #fea
+                        content: attr(data-name)
+                        transform: translateY(-50%)
+
+
+                    &::after
+                        // content: attr(data-name)
+                        position: absolute
+                        top: 50%
+                        left: 75%
+                        z-index: 1
+                        display: none
+                        width: 0
+                        height: 0
+                        content: ""
+                        border: 5px solid transparent
+                        border-right-color: $reddish
+                        border-left-width: 0
+                        transform: translateY(-50%)
+
+
+        tfoot
+            border-top: 1px solid #e3442d
+            font-size: 1em
+            padding: .75rem
+
+            @include break(768px)
+                font-size: 1.2em
+
+            #totalFileCount
+                font-size: 1.2em
+                margin-right: 1%
+
+            .totalText
+                text-align: center
+
+            #totalDuration
+                text-align: center
+                font-size: .9em
+                padding-bottom: .5rem !important
+
+            tr th
+                vertical-align: bottom
+                font-size: 70%
