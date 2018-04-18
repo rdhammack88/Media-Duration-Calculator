@@ -5,6 +5,7 @@ $('document').ready(function() {
     var $fileDrop = $('#file-drop');
     var $infoBody = $('#file-info-body');
     var $clearAllButton = $('.clear_list');
+    var $saveAllButton = $('.save_list');
     var $totalFileCount = $('#totalFileCount');
     var $fileInfoTable = $('.file-info-container');
     var fileInfo = {
@@ -31,12 +32,13 @@ $('document').ready(function() {
             this.totalSeconds -= fileSecondLength;
             /* first, test if the new total time length for each format h:m:s, is less than 0 */
             this.totalHours = this.totalHours < 0 ? 60 + this.totalHours : this.totalHours;
+            this.totalHours = this.totalMinutes < 0 ? this.totalHours - 1 : this.totalHours;
             this.totalMinutes = this.totalMinutes < 0 ? 60 + this.totalMinutes : this.totalMinutes;
             this.totalMinutes = this.totalSeconds < 0 ? this.totalMinutes - 1 : this.totalMinutes;
             this.totalSeconds = this.totalSeconds < 0 ? 60 + this.totalSeconds : this.totalSeconds;
 
             /* update total duration of all files still left in list */
-            this.durTotal = this.durTotal - ((fileMinuteLength * 60) + fileSecondLength);
+            this.durTotal = this.durTotal - ((fileHourLength*60*60) + (fileMinuteLength * 60) + fileSecondLength);
         },
 
         arrange: function() {
@@ -76,6 +78,7 @@ $('document').ready(function() {
             this.fileNamesList = [];
             $infoBody.html('');
             $clearAllButton.fadeOut(1000);
+            $saveAllButton.fadeOut(1000);
             $fileInfoTable.fadeOut(1000);
 
             $('.totalHours, .totalMinutes, .totalSeconds').html('00');
@@ -91,11 +94,17 @@ $('document').ready(function() {
 
         display: function(name, type, hours, minutes, seconds) {
             var shortName = name;
-            if(name.length > 65) {
-                shortName = name.slice(0, name.length / 2) + name.slice(name.lastIndexOf('.'));
+            if(name.length > 60) {
+                shortName = name.slice(0, 59);// + '...'; // name.slice(name.lastIndexOf('.')); //name.length / 2
+                var charsToRemove = /[^A-z0-9]/;
+
+                while( shortName[shortName.length - 1].match(charsToRemove)) {
+                    shortName = shortName.slice(0, shortName.length - 1);
+                }
+                shortName += '....';
             }
 
-            return `<tr><th scope="row" class="file_position">${this.index++}</th><td class="fileName" data-name="${name}">${shortName}</td><td>${type}</td><td><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
+            return `<tr><th scope="row" class="file_position">${this.index++}</th><td class="fileName" data-name="${name}">${shortName}</td><td>${type}</td><td class="file_duration"><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button></td></tr>`;
         },
 
         getFileDuration: function(file, indx) {
@@ -205,55 +214,30 @@ $('document').ready(function() {
             $('.totalMinutes').text(this.totalMinutes);
             $('.totalSeconds').text(this.totalSeconds);
         },
-
-        addListeners: function() {
-            // return function() {
-            //     // $('body').on('click', '.delete', function(e) {
-            //     $('.delete').click(function(e) {
-            //         e.preventDefault();
-            //         var $remove = $(e.target).closest('tr');
-            //         $remove.remove();
-            //     });
-            //
-            //     // $('body').on('click', '.done', function(e) {
-            //     $('.done').click(function(e) {
-            //         e.preventDefault();
-            //         if(this.style.color === 'green') {
-            //             $(this).css({'color':'red'});$(this).parents('tr').children('td').css({
-            //                 'text-decoration': 'none',
-            //                 'color': 'red'
-            //             });
-            //         } else {
-            //             $(this).css({'color':'green'});
-            //             $(this).parents('tr').children('td').css({
-            //                 'text-decoration': 'line-through',
-            //                 'color': 'green'
-            //             });
-            //         }
-            //     });
-            // };
-        },
     }
 
     $(window).on('dragover', function(e) { // $fileDrop
         e.preventDefault();
         e.stopPropagation();
-        // console.log(e);
     }, false);
 
     $(window).on('dragenter', function(e) { // $fileDrop
         e.preventDefault();
         e.stopPropagation();
-        // console.log(e);
     }, false);
 
     $(window).on('drop', function(e) { // $fileDrop
-        // console.log(e);
         if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length){
             e.preventDefault();
             e.stopPropagation();
             $clearAllButton.fadeIn(1000);
+            $saveAllButton.fadeIn(1000);
             $fileInfoTable.fadeIn(1000);
+
+            // console.log(e.currentTarget.File)
+            // console.log(e);
+            //     console.log(e.originalEvent.dataTransfer.items);
+
             var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
             if(!totalFileCount) {
                 totalFileCount = 0;
@@ -271,33 +255,21 @@ $('document').ready(function() {
 
     $('input:file').change(function() {
         $clearAllButton.fadeIn(1000);
+        $saveAllButton.fadeIn(1000);
         $fileInfoTable.fadeIn(1000);
-
-
         for(var i = 0; i < this.files.length; i++) {
             if(fileInfo.fileNamesList.includes(this.files[i].name)) {
                 continue;
             } else {
                 fileInfo.getFileDuration(this.files[i], i);
                 fileInfo.fileNamesList.push(this.files[i].name);
-                fileInfo.addListeners();
             }
         }
-        // console.log($(this).val());
-        // // $('#multimedia_upload').val(null);
-        // console.log($(this).val());
     });
 
     $('body').on('click', '.delete', function(e) {
         e.preventDefault();
         fileInfo.clear_file(e, this);
-
-        // var $remove = $(e.target).closest('tr');
-        // $remove.remove();
-        //
-        // if($infoBody.html() == '') {
-        //     fileInfo.clear_list();
-        // }
     });
 
     $('body').on('click', '.done', function(e) {
@@ -353,6 +325,8 @@ $('document').ready(function() {
     $('.clear_list').click(function() {
         fileInfo.clear_list();
     });
+
+    $('#exampleModalCenter').modal({show: false});
 
 })();
 });
