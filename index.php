@@ -19,13 +19,23 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
-    <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
+        <a class="navbar-brand ml-md-5" href="./index.php">
+            <i class="fa fa-clock mr-3"></i>
+            Media Duration Calculator
+        </a>
+
+        <div class="help mx-md-5">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#helperModal" data-title="Get Help">
+              <i class="fa fa-question"></i>
+            </button>
+        </div>
+
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -45,19 +55,35 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+        </div> -->
+    </nav>
+
+    <!-- Help Modal Window -->
+    <div class="modal fade" id="helperModal" tabindex="-1" role="dialog" aria-labelledby="helperModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="helperModalTitle">How to use the Media Calculator</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
-    </nav> -->
+      </div>
+    </div>
 
     <div class="container">
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
         		<form action="file-load.php" method="get">
                     <label for="multimedia_upload" id="file-drop" dropzone="copy"><span>Choose files to upload.</span></label>
-        			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .mp3">
+        			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .flv, .mp3">
         		</form>
         	</div>
         </div> <!-- .file-load -->
@@ -66,8 +92,12 @@
             <button type="button" name="clear_list" class="btn btn-large clear_list">Clear List</button>
         </div> <!-- .clear-all -->
 
+        <div class="save-all">
+            <a href="./index.php" type="button" name="save_list" class="btn btn-large save_list" download>Save List</a>
+        </div> <!-- .save-all -->
+
         <div class="file-info-container">
-        	<table class="table table-striped table-dark table-responsive-md">
+        	<table class="table table-striped table-dark table-responsive-sm">
         		<thead>
         			<tr>
         				<th scope="col">#</th>
