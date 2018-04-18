@@ -1,8 +1,25 @@
 .clear_list
-    display: none
+    // display: none
     background: $red
     color: #eee
-    width: 25%
+    width: 50%
+    font-weight: bolder
+    letter-spacing: .2em
+
+    &:hover
+        background: darken($red, 15%)
+
+    @include break(771px)
+        width: 50%
+
+.save_list
+    @extend .clear_list
+    background: $blue
+
+    &:hover
+        color: #eee
+        text-decoration: none
+        background: darken($blue, 15%)
 
 tr > td.icons
     // padding: 0 10px

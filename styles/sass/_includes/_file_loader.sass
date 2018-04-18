@@ -1,5 +1,6 @@
 .file-load
-    height: 30vh
+    height: 26vh
+    min-height: 260px
     max-height: 600px
     border: 3px solid #444
     background-color: #ddd
@@ -32,13 +33,17 @@
                     text-align: center
                     border: 1px solid #eee
                     background: $blue
+                    //#000985
                     color: #eee
                     padding: 15px 15px
                     // min-width: 150px
                     font-size: 1.2em
                     cursor: pointer
                     border-radius: 10px
-                    margin-top: calc(25% / 2 - 5%)
+                    margin-top: calc(25% / 2 - 3%)
+
+                    &:hover
+                        background: darken($blue, 25%)
 
             input#multimedia_upload
                 opacity: 0

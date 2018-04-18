@@ -53,7 +53,7 @@
                         padding: 12px
                         font-size: .9em
                         border-radius: 5px
-                        background: rgba(122,122,122,0.9)
+                        background: rgba(122,122,122,1)
                         color: #eee
                         // color: #fea
                         content: attr(data-name)
@@ -71,10 +71,12 @@
                         height: 0
                         content: ""
                         border: 5px solid transparent
-                        border-right-color: $reddish
+                        border-right-color: rgba(122,122,122,0.9)
                         border-left-width: 0
                         transform: translateY(-50%)
 
+                &.file_duration
+                    min-width: 105px
 
         tfoot
             border-top: 1px solid #e3442d
