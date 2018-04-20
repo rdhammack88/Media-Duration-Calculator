@@ -56,7 +56,16 @@ $('document').ready(function() {
             $('#multimedia_upload').val(null);
             var $remove = $(el).closest('tr');
             var fileName = $(el).parent().siblings('td.fileName').text();
-            this.updateTotalDuration('sub', el);
+            // if($($remove).children('td.fileName').css({'color': '#f39856'})) {
+            // console.log(el.previousElementSibling());
+            // console.log(el.previousSibling());
+            // console.log(el);
+            // console.log(el);
+            // if(el..style.color === 'green') {
+            //     console.log('subbed');
+                this.updateTotalDuration('sub', el);
+            // }
+
             $remove.remove();
 
             this.arrange();
@@ -291,33 +300,9 @@ $('document').ready(function() {
         }
     });
 
-    $('.format-toggle').click(function(e) {
-        // console.log($(e.target).closest('input').val());
-        var $checked = $('input[name=timeFormat]');
-        // console.log($checked.checked);
-
-        // if($checked[0].checked) {
-        //     $checked.attr('checked', false);
-        // }
-
-        if($checked[0].checked) {
-            console.log('checked');
-            // $checked.attr('checked', false);
-            // $('span.seconds').css({'color':'00e600'});
-            // $('span.minutes').css({'color':'fff'});
-        } else {
-            // $checked.attr('checked', true);
-            // $('span.seconds').css({'color':'fff'});
-            // $('span.minutes').css({'color':'00e600'});
-        }
-
-        // $checked.attr('checked', $checked[0].checked ? false : true);
-
-    });
-
     $('#file-info-body').sortable({
         axis: 'y',
-        update: function(e, i) {
+        update: function() {
             fileInfo.arrange()
         }
     });
