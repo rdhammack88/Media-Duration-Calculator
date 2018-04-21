@@ -75,7 +75,7 @@ body {
     transform: translateY(-50%); }
 
 .clear_list, .save_list {
-  background: #d14348;
+  background: linear-gradient(#d14348, #a34300);
   color: #eee;
   width: 50%;
   font-weight: bolder;
