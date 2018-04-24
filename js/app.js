@@ -5,7 +5,7 @@ $('document').ready(function() {
     var $fileDrop = $('#file-drop');
     var $infoBody = $('#file-info-body');
     var $clearAllButton = $('.clear_list');
-    var $saveAllButton = $('.save_list');
+    // var $saveAllButton = $('.save_list');
     var $totalFileCount = $('#totalFileCount');
     var $fileInfoTable = $('.file-info-container');
     var fileInfo = {
@@ -87,7 +87,7 @@ $('document').ready(function() {
             this.fileNamesList = [];
             $infoBody.html('');
             $clearAllButton.fadeOut(1000);
-            $saveAllButton.fadeOut(1000);
+            // $saveAllButton.fadeOut(1000);
             $fileInfoTable.fadeOut(1000);
 
             $('.totalHours, .totalMinutes, .totalSeconds').html('00');
@@ -240,7 +240,7 @@ $('document').ready(function() {
             e.preventDefault();
             e.stopPropagation();
             $clearAllButton.fadeIn(1000);
-            $saveAllButton.fadeIn(1000);
+            // $saveAllButton.fadeIn(1000);
             $fileInfoTable.fadeIn(1000);
 
             // console.log(e.currentTarget.File)
@@ -264,7 +264,7 @@ $('document').ready(function() {
 
     $('input:file').change(function() {
         $clearAllButton.fadeIn(1000);
-        $saveAllButton.fadeIn(1000);
+        // $saveAllButton.fadeIn(1000);
         $fileInfoTable.fadeIn(1000);
         for(var i = 0; i < this.files.length; i++) {
             if(fileInfo.fileNamesList.includes(this.files[i].name)) {

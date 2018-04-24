@@ -71,6 +71,8 @@
           <div class="modal-body">
             Find out the total time of a set of videos or songs you have, by either simply dragging-and-dropping the files anywhere into the browsers webpage, or by clicking the upload button. You can then delete the whole file from the list by clicking on the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information, or just mark it done by clicking the &nbsp; <i class="fas fa-check"></i> Checkmark &nbsp; icon next to the file information. You can delete the entire list by clicking the "Clear List" button above the file table.
             A save feature is currently being implented, so stay tuned for more features! Go ahead and drag some files to the browser and see how easy it is to use.
+            <br/><br/>
+            ** Note: Dragging/Uploading of whole folders not currently supported. You WILL have Drag/Upload files only.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -94,7 +96,7 @@
         </div> <!-- .clear-all -->
 
         <div class="save-all">
-            <a href="./index.php" type="button" name="save_list" class="btn btn-large save_list" download>Save List</a>
+            <a href="./index.php" type="button" name="save_list" class="btn btn-large save_list" >Save List</a>
         </div> <!-- .save-all -->
 
         <div class="file-info-container">
