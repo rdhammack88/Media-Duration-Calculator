@@ -20,7 +20,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
-        <a class="navbar-brand ml-md-5" href="./index.php">
+        <a class="navbar-brand ml-md-5" href="./">
             <i class="fa fa-clock mr-3"></i>
             Media Duration Calculator
         </a>
@@ -69,7 +69,8 @@
             </button>
           </div>
           <div class="modal-body">
-            ...
+            Find out the total time of a set of videos or songs you have, by either simply dragging-and-dropping the files anywhere into the browsers webpage, or by clicking the upload button. You can then delete the whole file from the list by clicking on the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information, or just mark it done by clicking the &nbsp; <i class="fas fa-check"></i> Checkmark &nbsp; icon next to the file information. You can delete the entire list by clicking the "Clear List" button above the file table.
+            A save feature is currently being implented, so stay tuned for more features! Go ahead and drag some files to the browser and see how easy it is to use.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
