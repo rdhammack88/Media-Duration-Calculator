@@ -6,3 +6,9 @@
 	@if length($args) == 2
 		@media (min-width: nth($args, 1)) and (max-width: nth($args, 2))
 			@content
+
+
+@mixin hover-state($bgcolor, $ftcolor)
+	background: $bgcolor
+	color: $ftcolor
+	cursor: pointer

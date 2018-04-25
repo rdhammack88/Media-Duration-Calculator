@@ -1,34 +1,47 @@
+.help
+    > button
+        padding: 5px 10px
+        margin-right: 20px
+        position: relative
+
+        @extend %tooltip-hover
+
 .clear_list
     display: none
+    position: relative
     background: linear-gradient($red, $red2)
     color: #eee
     width: 50%
     font-weight: bolder
     letter-spacing: .2em
+    // @extend %tooltip-hover
 
     &:hover
-        background: darken($red, 15%)
+        background: linear-gradient(darken($red, 15%), darken($red2, 15%))
 
     @include break(771px)
         width: 50%
 
 .save_list
     @extend .clear_list
-    background: $blue
+    // @extend %tooltip-hover
+    position: relative
+    background: linear-gradient(darken($babyblue, 8%), $blue)
     display: none
 
     &:hover
         color: #eee
         text-decoration: none
-        background: darken($blue, 15%)
+        background: linear-gradient(darken($babyblue, 15%), darken($blue, 15%))
 
 tr > td.icons
     // padding: 0 10px
     [type=button]
-        background: rgba(0,0,0,0.0)
-        border: none
-        cursor: pointer
-        font-size: 1em
+        // background: rgba(0,0,0,0.0)
+        // border: none
+        // cursor: pointer
+        // font-size: 1em
+        @extend %delete-and-done-buttons
         color: $orange
         padding: 1px 5px
 

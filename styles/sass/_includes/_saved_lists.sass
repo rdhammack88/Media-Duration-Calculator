@@ -1,0 +1,31 @@
+.file-list-of-names
+    margin-bottom: 50px
+    display: none
+
+        // .list-group-item
+    .list-group-item:nth-child(even)
+        background: darken(#9ab, 48%)
+        color: #eee
+        &:hover
+            @include hover-state(#abc, #000)
+
+    .list-group-item:nth-child(odd)
+        background: darken(#abc, 48%)
+        color: #eee
+        &:hover
+            @include hover-state(#abc, #000)
+
+    .saved-file-list
+        width: 60%
+        display: inline-block
+
+        @include break(609px)
+            width: 75%
+
+    .list-total-time
+        width: 20%
+        display: inline-block
+        
+    .deleteListName
+        @extend %delete-and-done-buttons
+        color: lighten($bloodred, 15%)

@@ -72,32 +72,74 @@
             Find out the total time of a set of videos or songs you have, by either simply dragging-and-dropping the files anywhere into the browsers webpage, or by clicking the upload button. You can then delete the whole file from the list by clicking on the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information, or just mark it done by clicking the &nbsp; <i class="fas fa-check"></i> Checkmark &nbsp; icon next to the file information. You can delete the entire list by clicking the "Clear List" button above the file table.
             A save feature is currently being implented, so stay tuned for more features! Go ahead and drag some files to the browser and see how easy it is to use.
             <br/><br/>
-            ** Note: Dragging/Uploading of whole folders not currently supported. You WILL have Drag/Upload files only.
+            ** Note: Dragging/Uploading of whole folders not currently supported. You will have to Drag/Upload files only. Also, certain files for some reason may not drag into browser, if this is the case, try to upload the file through the upload button.
+            <br/><br/>
+            ** SUPPORTED FILE TYPES INCLUDE : '.mp4', '.avi', '.mpeg', '.mp3'
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
-    </div>
+  </div> <!-- Help Modal Window -->
+
+  <!-- Save List Modal Window -->
+    <div class="modal fade" id="saveListModal" tabindex="-1" role="dialog" aria-labelledby="saveListModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="saveListModalTitle">Save the file list locally</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <label> File List Name: <br/><br/>
+                    <input type="text" name="save_list_name" class="save-list-name" value="">
+                </label>
+                <p class="text-danger text-center saved-name-error"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="save-list-btn">
+                    <button type="button" class="btn btn-success save-list-name-btn" data-dismiss="modal">Save</button>
+                </div>
+                <div class="close-modal-btn">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+          </div>
+        </div>
+    </div> <!-- Save List Modal Window -->
 
     <div class="container">
+
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
         		<form action="file-load.php" method="get">
-                    <label for="multimedia_upload" id="file-drop" dropzone="copy"><span>Choose files to upload.</span></label>
+                    <label for="multimedia_upload" id="file-drop" dropzone="copy"><span data-title="Upload Files">Choose files to upload.</span></label>
         			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .flv, .mp3">
         		</form>
         	</div>
         </div> <!-- .file-load -->
 
+        <div class="file-list-of-names">
+            <h2>Recently Saved File Lists</h2>
+            <ul class="list-group file-name-list">
+
+            </ul>
+
+        </div>
+
         <div class="clear-all">
-            <button type="button" name="clear_list" class="btn btn-large clear_list">Clear List</button>
+            <button type="button" name="clear_list" class="btn btn-large clear_list" data-title="Clear List">Clear List</button>
         </div> <!-- .clear-all -->
 
         <div class="save-all">
-            <a href="./index.php" type="button" name="save_list" class="btn btn-large save_list" >Save List</a>
+            <!-- <a href="./" role="button" name="save_list" class="btn btn-large save_list" >Save List</a> -->
+            <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List" >Save List</button>
         </div> <!-- .save-all -->
+
 
         <div class="file-info-container">
         	<table class="table table-striped table-dark table-responsive-sm">
@@ -143,6 +185,8 @@
                 </tfoot>
         	</table>
         </div> <!-- .file-info-container -->
+
+
     </div> <!-- .container -->
 
 
@@ -154,7 +198,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="js/app.js" defer></script>
-
-
 </body>
 </html>
