@@ -109,6 +109,9 @@ $('document').ready(function() {
 
         /* Method to display each file info into the list */
         display: function(name, type, hours, minutes, seconds, duration) {
+            $clearAllButton.fadeIn(1000);
+            $saveAllButton.fadeIn(1000);
+            $fileInfoTable.fadeIn(1000);
             var shortName = name;
             if(name.length > 60) {
                 shortName = name.slice(0, 59);// + '...'; // name.slice(name.lastIndexOf('.')); //name.length / 2
@@ -275,7 +278,7 @@ $('document').ready(function() {
         console.log(localStorage.getItem('fileListNames'));
         console.log(JSON.parse(localStorage.getItem('fileListNames')));
         var savedFileLists = JSON.parse(localStorage.getItem('fileListNames'));
-        var saveFileListInfo = JSON.parse(localStorage.getItem('savedFileListInfo'));
+        var savedFileListInfo = JSON.parse(localStorage.getItem('savedFileListInfo'));
 
         fileInfo.displaySavedFileLists(savedFileLists);
     } else {
@@ -302,9 +305,9 @@ $('document').ready(function() {
         if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length){
             e.preventDefault();
             e.stopPropagation();
-            $clearAllButton.fadeIn(1000);
-            $saveAllButton.fadeIn(1000);
-            $fileInfoTable.fadeIn(1000);
+            // $clearAllButton.fadeIn(1000);
+            // $saveAllButton.fadeIn(1000);
+            // $fileInfoTable.fadeIn(1000);
 
             // console.log(e.currentTarget.File)
             // console.log(e);
@@ -328,9 +331,9 @@ $('document').ready(function() {
     /* On upload of files into browser, gather all file information */
     $('input:file').change(function() {
         // $fileInfoTable.html('');
-        $clearAllButton.fadeIn(1000);
-        $saveAllButton.fadeIn(1000);
-        $fileInfoTable.fadeIn(1000);
+        // $clearAllButton.fadeIn(1000);
+        // $saveAllButton.fadeIn(1000);
+        // $fileInfoTable.fadeIn(1000);
         for(var i = 0; i < this.files.length; i++) {
             if(fileInfo.fileNamesList.includes(this.files[i].name)) {
                 continue;
@@ -367,6 +370,39 @@ $('document').ready(function() {
         }
     });
 
+    /* On click of save list item, display the saved list and all of its file information */
+    $('body').on('click', '.saved-list-item', function(e) {
+        console.log($(e.target).parents('li.saved-list-item'));
+        if(e.target.nodeName === 'LI' || e.target.nodeName === 'SPAN') {
+            console.log('clicked target area');
+            // console.log(e.target.nodeName);
+            let showListName = $(this).find('.saved-file-list').text();
+            var thisFileList = JSON.parse(localStorage.getItem('savedFileListInfo'));
+            fileInfo.index = 1;
+            fileInfo.durTotal = 0;
+            $infoBody.html('');
+            console.log(thisFileList);
+
+            for(let fileInformation in thisFileList) {
+                // console.log(thisFileList[fileInformation].fileName);
+                if(thisFileList[fileInformation].listName === showListName) {
+                    $infoBody.append(
+                        // fileInfo.display(
+                        fileInfo.getfileDuration(
+                            thisFileList[fileInformation].fileDuration,
+                            thisFileList[fileInformation].fileName,
+                            thisFileList[fileInformation].fileType,
+                            // thisFileList[fileInformation].fileDurationH,
+                            // thisFileList[fileInformation].fileDurationM,
+                            // thisFileList[fileInformation].fileDurationS
+                        )
+                    )
+                }
+            }
+            $fileInfoTable.fadeIn(1000);
+        }
+    });
+
     /*  On click of trashcan icon for saved file, delete the saved file info from local storage and display */
     $('body').on('click', '.deleteListName', function(e) {
         let savedLists = JSON.parse(localStorage.getItem('fileListNames'));
@@ -377,7 +413,7 @@ $('document').ready(function() {
                 let i = savedLists.indexOf(listName);
                 savedLists.splice(i, 1);
                 localStorage.setItem('fileListNames', JSON.stringify(savedLists));
-                let $remove = $(this).parents('li.list-group-item');
+                let $remove = $(e.target).parents('li.saved-list-item');
                 $remove.remove();
             }
         }
@@ -436,37 +472,7 @@ $('document').ready(function() {
         // console.log(filesList.length);
         // console.log(JSON.stringify(filesList));
 
-
-    });
-
-    $('body').on('click', '.saved-list-item', function(e) {
-        if(e.target.nodeName === 'LI' || e.target.nodeName === 'SPAN') {
-            console.log('clicked target area');
-            console.log(e.target.nodeName);
-            let showListName = $(this).find('.saved-file-list').text();
-            var thisFileList = JSON.parse(localStorage.getItem('savedFileListInfo'));
-            fileInfo.index = 1;
-            $infoBody.html('');
-            console.log(thisFileList);
-
-            for(let fileInformation in thisFileList) {
-                console.log(thisFileList[fileInformation].fileName);
-                if(thisFileList[fileInformation].listName === showListName) {
-                    $infoBody.append(
-                        // fileInfo.display(
-                        fileInfo.getfileDuration(
-                            thisFileList[fileInformation].fileDuration,
-                            thisFileList[fileInformation].fileName,
-                            thisFileList[fileInformation].fileType,
-                            // thisFileList[fileInformation].fileDurationH,
-                            // thisFileList[fileInformation].fileDurationM,
-                            // thisFileList[fileInformation].fileDurationS
-                        )
-                    )
-                }
-            }
-            $fileInfoTable.fadeIn(1000);
-        }
+        $('.save-list-name').val('');
     });
 
     /* On show of save file modal, focus on the file list name input */
