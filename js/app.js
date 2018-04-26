@@ -405,17 +405,25 @@ $('document').ready(function() {
 
     /*  On click of trashcan icon for saved file, delete the saved file info from local storage and display */
     $('body').on('click', '.deleteListName', function(e) {
-        let savedLists = JSON.parse(localStorage.getItem('fileListNames'));
+        // let savedLists = JSON.parse(localStorage.getItem('fileListNames'));
         let listName = $(this).prev().prev('span').text();
+        // console.log(savedLists);
+        // console.log($(this));
+        console.log(listName);
 
-        for(let obj in savedLists) {
-            if(savedLists[obj].name === listName) {
-                let i = savedLists.indexOf(listName);
-                savedLists.splice(i, 1);
-                localStorage.setItem('fileListNames', JSON.stringify(savedLists));
+        for(let obj in savedFileLists) {
+            // if(savedLists[obj].name === listName) {
+            if(savedFileLists[obj].name === listName) {
+            // if(savedFileLists.some(function(obj) {return obj.name === listName})) {
+                let i = obj; // savedFileLists.indexOf(obj); //listName
+                // if(savedFileLists.some(function(obj) {return ob}))
+                savedFileLists.splice(i, 1);
+                console.log(savedFileLists);
+                localStorage.setItem('fileListNames', JSON.stringify(savedFileLists));
                 let $remove = $(e.target).parents('li.saved-list-item');
                 $remove.remove();
             }
+            // }
         }
 
         if($('.file-name-list').text() === ''){
@@ -424,8 +432,9 @@ $('document').ready(function() {
             localStorage.clear();
             $('.file-list-of-names').fadeOut(1000);
         }
-        console.log(JSON.parse(localStorage.getItem('fileListNames')));
-        console.log(savedLists);
+        console.log(localStorage.getItem('fileListNames'));
+        // console.log(JSON.parse(localStorage.getItem('fileListNames')));
+        // console.log(savedLists);
     });
 
     /* On click of Clear List button, clear the entire list of files */
@@ -439,7 +448,8 @@ $('document').ready(function() {
         // var fileListNames = [];
         // $('.file-name-list').html("");
         var listName = $('.save-list-name').val();
-        if(savedFileLists.includes(listName)) {
+        if(savedFileLists.some(function(obj) {return obj.name === listName})) {
+            //.includes(listName)) {
             $('#saveListModal .saved-name-error').text('Please pick a name that has not already been asigned to a saved list.');
             return false;
         } else {
@@ -459,9 +469,9 @@ $('document').ready(function() {
                 fileName: $(filesList[i]).children('.fileName').text(),
                 fileType: $(filesList[i]).children('.fileType').text(),
                 fileDuration: $(filesList[i]).children('td.file_duration').children().children('input').val(),
-                fileDurationH: $(filesList[i]).children('.file_duration').children('span.file_hour_length').text(),
-                fileDurationM: $(filesList[i]).children('.file_duration').children('span.file_minute_length').text(),
-                fileDurationS: $(filesList[i]).children('.file_duration').children('span.file_second_length').text(),
+                // fileDurationH: $(filesList[i]).children('.file_duration').children('span.file_hour_length').text(),
+                // fileDurationM: $(filesList[i]).children('.file_duration').children('span.file_minute_length').text(),
+                // fileDurationS: $(filesList[i]).children('.file_duration').children('span.file_second_length').text(),
             }
             savedFileListInfo.push(fileObj);
             // savedFileListInfo.push(fileObj);
@@ -473,6 +483,7 @@ $('document').ready(function() {
         // console.log(JSON.stringify(filesList));
 
         $('.save-list-name').val('');
+        $('#saveListModal .saved-name-error').text('');
     });
 
     /* On show of save file modal, focus on the file list name input */
