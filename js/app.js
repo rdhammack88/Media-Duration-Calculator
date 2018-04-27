@@ -116,13 +116,19 @@ $('document').ready(function() {
             console.log(fileName);
             // console.log(savedFileListInfo);
 
-            if(savedFileListInfo.some(function(obj, i) {
+            // if(
+                savedFileListInfo.some(function(obj, i) {
                 console.log(savedFileListInfo[i]);
-                 return obj.listName === listName && obj.fileName === fileName})) {
+                 if(obj.listName === listName && obj.fileName === fileName) {
+                     savedFileListInfo.splice(i, 1);
+                     localStorage.setItem('savedFileListInfo', savedFileListInfo);
+                 }
+             })
+            // ){}
                 // console.log(obj.name);
                 // console.log(i);
                 // console.log(savedFileListInfo);
-            }
+
         },
 
         /* Method to display each file info into the list */
@@ -365,8 +371,7 @@ $('document').ready(function() {
     $('body').on('click', '.delete', function(e) {
         e.preventDefault();
         fileInfo.clear_file(e, this);
-
-
+        fileInfo.clearFileFromSavedList(this);
     });
 
     /* On click of checkmark icon for each file, mark out file info and update total duration */
@@ -387,8 +392,6 @@ $('document').ready(function() {
             });
             fileInfo.updateTotalDuration('sub', this);
         }
-
-        fileInfo.clearFileFromSavedList(this);
     });
 
     /* On click of save list item, display the saved list and all of its file information */
