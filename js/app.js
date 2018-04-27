@@ -19,9 +19,9 @@ $('document').ready(function() {
 
         /* Method to add individual file duration to total duration */
         addTotalDuration: function(fileHourLength, fileMinuteLength, fileSecondLength) {
+            /* Update the file list objects total duration */
             this.durTotal = this.durTotal + ((fileHourLength*60*60) + (fileMinuteLength * 60) + fileSecondLength);
-
-            /* update the file list objects total time formats h:m:s */
+            /* Update the file list objects total time formats h:m:s */
             this.totalHours = Math.floor(this.durTotal/60/60);
             this.totalMinutes = Math.floor(this.durTotal/60%60);
             this.totalSeconds = Math.floor(this.durTotal%60);
@@ -29,18 +29,17 @@ $('document').ready(function() {
 
         /* Method to subtract individual file duration from total duration */
         subTotalDuration: function(fileHourLength, fileMinuteLength, fileSecondLength) {
-            /* subtract the file time lengths from the total time lengths */
+            /* Subtract the file time lengths from the total time lengths */
             this.totalHours -= fileHourLength;
             this.totalMinutes -= fileMinuteLength;
             this.totalSeconds -= fileSecondLength;
-            /* first, test if the new total time length for each format h:m:s, is less than 0 */
+            /* First, test if the new total time length for each format h:m:s, is less than 0 */
             this.totalHours = this.totalHours < 0 ? 60 + this.totalHours : this.totalHours;
             this.totalHours = this.totalMinutes < 0 ? this.totalHours - 1 : this.totalHours;
             this.totalMinutes = this.totalMinutes < 0 ? 60 + this.totalMinutes : this.totalMinutes;
             this.totalMinutes = this.totalSeconds < 0 ? this.totalMinutes - 1 : this.totalMinutes;
             this.totalSeconds = this.totalSeconds < 0 ? 60 + this.totalSeconds : this.totalSeconds;
-
-            /* update total duration of all files still left in list */
+            /* Update total duration of all files still left in list */
             this.durTotal = this.durTotal - ((fileHourLength*60*60) + (fileMinuteLength * 60) + fileSecondLength);
         },
 
@@ -50,8 +49,6 @@ $('document').ready(function() {
             for(var filePos in $filePos) {
                 $filePos[filePos].innerText = parseInt(filePos) + 1;
             }
-
-            // $('#multimedia_upload').val(null);
         },
 
         /* Method to clear all file info when trashcan icon is clicked */
@@ -61,30 +58,16 @@ $('document').ready(function() {
             $('#multimedia_upload').val(null);
             var $remove = $(el).closest('tr');
             var fileName = $(el).parent().siblings('td.fileName').text();
-            // if($($remove).children('td.fileName').css({'color': '#f39856'})) {
-            // console.log(el.previousElementSibling());
-            // console.log(el.previousSibling());
-            // console.log(el);
-            // console.log(el);
-            // if(el..style.color === 'green') {
-            //     console.log('subbed');
-                this.updateTotalDuration('sub', el);
-            // }
-
+            this.updateTotalDuration('sub', el);
             $remove.remove();
-
             this.arrange();
 
-            // var $filePos = $('.file_position');
-            // for(var filePos in $filePos) {
-            //     $filePos[filePos].innerText = parseInt(filePos) + 1;
-            // }
             if(this.fileNamesList.includes(fileName)) {
                 let i = this.fileNamesList.indexOf(fileName);
                 this.fileNamesList.splice(i, 1);
             }
             if($infoBody.html() == '') {
-                this.clear_list(); // fileInfo.clear_list();
+                this.clear_list();
             }
         },
 
@@ -95,11 +78,9 @@ $('document').ready(function() {
             $clearAllButton.fadeOut(1000);
             $saveAllButton.fadeOut(1000);
             $fileInfoTable.fadeOut(1000);
-
             $('.totalHours, .totalMinutes, .totalSeconds').html('00');
             $totalFileCount.html('0');
             $('#multimedia_upload').val(null);
-
             this.index = 1;
             this.totalHours = 0;
             this.totalMinutes = 0;
@@ -107,41 +88,60 @@ $('document').ready(function() {
             this.durTotal = 0;
         },
 
-
+        /* Method to clear individual file from the saved file list */
         clearFileFromSavedList: function(el) {
             let parent = $(el).closest('tr');
             let fileName = $(el).parent().siblings('td.fileName').text();
             let listName = $(el).next().next('input.saved_file_list').val();
-            console.log(listName);
-            console.log(fileName);
-            // console.log(savedFileListInfo);
+            // let fileDuration = $(el).parents('.icons').prev('.file_duration').children('.file_duration_total').children('input').val();
+            //
+            // console.log(fileDuration);
 
+            // let hr = $('.totalHours').text();
+            // let min = $('.totalMinutes').text();
+            // let sec = $('.totalSeconds').text();
+            // let totalDuration = hr + ':' + min + ':' + sec;
+            // console.log(this.durTotal);
+            // this.durTotal -= fileDuration;
+            // console.log(this.durTotal);
 
             for(let obj in savedFileListInfo) {
-                console.log(savedFileListInfo[obj]);
                 if(savedFileListInfo[obj].listName === listName && savedFileListInfo[obj].fileName === fileName) {
-                    console.log(savedFileListInfo[obj]);
                     savedFileListInfo.splice(obj, 1);
                     localStorage.setItem('savedFileListInfo',
                     JSON.stringify(savedFileListInfo));
                     break;
                 }
             }
+            for(let savedList in fileListNames) {
+                if(fileListNames[savedList].name === listName) {
+                    fileListNames[savedList].totalFileCount = parseInt(fileListNames[savedList].totalFileCount) - 1;
+                    fileListNames[savedList].totalDuration = totalDuration;
 
-            // // if(
-            //     savedFileListInfo.some(function(obj, i) {
-            //     // console.log(savedFileListInfo[i]);
-            //      if(obj.listName === listName && obj.fileName === fileName) {
-            //          console.log(savedFileListInfo[i]);
-            //          savedFileListInfo.splice(i, 1);
-            //          localStorage.setItem('savedFileListInfo', savedFileListInfo);
-            //      }
-            //  })
-            // // ){}
-                // console.log(obj.name);
-                // console.log(i);
-                // console.log(savedFileListInfo);
+                    if(fileListNames[savedList].totalFileCount <= 0) {
+                        $('.saved-list-item.'+listName).remove();
+                        this.deleteSavedList(listName);
+                    }
+                    localStorage.setItem('fileListNames',
+                    JSON.stringify(fileListNames));
+                }
+            }
+            // this.updateDisplaySavedFileLists(listName);
+            this.updateLocalStorage();
+        },
 
+        /* Method to delete the saved file list */
+        deleteSavedList: function(listName) {
+            for(let obj in fileListNames) {
+                if(fileListNames[obj].name === listName) {
+                    let i = obj;
+                    fileListNames.splice(i, 1);
+                    localStorage.setItem('fileListNames', JSON.stringify(fileListNames));
+                }
+            }
+            this.updateLocalStorage();
+            this.clear_list();
+            // $fileInfoTable.hide();
         },
 
         /* Method to display each file info into the list */
@@ -149,9 +149,10 @@ $('document').ready(function() {
             $clearAllButton.fadeIn(1000);
             $saveAllButton.fadeIn(1000);
             $fileInfoTable.fadeIn(1000);
+            hiddenInput = fileListNames.length ? `<input type="hidden" class="saved_file_list" value="${savedList}"/>` : '';
             var shortName = name;
             if(name.length > 60) {
-                shortName = name.slice(0, 59);// + '...'; // name.slice(name.lastIndexOf('.')); //name.length / 2
+                shortName = name.slice(0, 59);
                 var charsToRemove = /[^A-z0-9]/;
 
                 while( shortName[shortName.length - 1].match(charsToRemove)) {
@@ -160,7 +161,7 @@ $('document').ready(function() {
                 shortName += '....';
             }
 
-            return `<tr class="fileInfoRow"><th scope="row" class="file_position">${this.index++}</th><td class="fileName" data-name="${name}">${shortName}</td><td class="fileType">${type}</td><td class="file_duration"><span class="file_duration_total"><input type="hidden" value="${duration}"/></span><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button><input type="hidden" class="saved_file_list" value="${savedList}"/></td></tr>`;
+            return `<tr class="fileInfoRow"><th scope="row" class="file_position">${this.index++}</th><td class="fileName" data-name="${name}">${shortName}</td><td class="fileType">${type}</td><td class="file_duration"><span class="file_duration_total"><input type="hidden" value="${duration}"/></span><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button>${hiddenInput}</td></tr>`;
         },
 
         /* Method to save file lists and add the name to display */
@@ -168,12 +169,36 @@ $('document').ready(function() {
             $('.file-name-list').html("");
             for(var listName in fileList) {
                 $('.file-name-list').append(
-                    '<li class="list-group-item saved-list-item"><span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><button type="button" class="deleteListName"><i class="fas fa-trash"></i></button></li>'
+                    '<li class="list-group-item saved-list-item ' + fileList[listName].name + '"><span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><button type="button" class="deleteSavedList"><i class="fas fa-trash"></i></button></li>'
                 )
             }
             $('.file-list-of-names').fadeIn(1000);
         },
 
+        /* Method to display saved list file information */
+        displaySavedFileListInfo: function(showListName) {
+            var thisFileList = JSON.parse(localStorage.getItem('savedFileListInfo'));
+            fileInfo.index = 1;
+            fileInfo.durTotal = 0;
+            $infoBody.html('');
+
+            for(let fileInformation in thisFileList) {
+                if(thisFileList[fileInformation].listName === showListName) {
+                    $infoBody.append(
+                        fileInfo.getfileDuration(
+                            thisFileList[fileInformation].fileDuration,
+                            thisFileList[fileInformation].fileName,
+                            thisFileList[fileInformation].fileType,
+                            fileInfo,
+                            showListName
+                        )
+                    )
+                }
+            }
+            $fileInfoTable.fadeIn(1000);
+        },
+
+        /* Method to get each files total duration */
         getfileDuration: function(duration, name, type, obj = this, savedList = '') {
             obj.durTotal += parseInt(duration);
             var hours = parseInt(Math.floor(duration/60/60));
@@ -183,11 +208,11 @@ $('document').ready(function() {
             minutes = minutes < 10 ? '0' + minutes : minutes;
             seconds = seconds < 10 ? '0' + seconds : seconds;
 
-            /* update the file list objects total time formats h:m:s */
+            /* Update the file list objects total time formats h:m:s */
             obj.totalHours = Math.floor(obj.durTotal/60/60);
             obj.totalMinutes = Math.floor(obj.durTotal/60%60);
             obj.totalSeconds = Math.floor(obj.durTotal%60);
-            /* test if all totals are under 10, then add a "0" to the front before display */
+            /* Test if all totals are under 10, then add a "0" to the front before display */
             fileInfo.lessThanTenTest(obj);
             $infoBody.append(fileInfo.display(name, type, hours, minutes, seconds, duration, savedList));
             $totalFileCount.text(obj.index - 1);
@@ -198,73 +223,16 @@ $('document').ready(function() {
 
         /* Method to get each file information when file is uploaded/dragged into browser */
         getFileInfo: function(file, indx) {
-                var video = document.createElement('video');
-                video.preload = 'metadata';
-                var that = this;
+            var video = document.createElement('video');
+            video.preload = 'metadata';
+            var that = this;
 
-                video.onloadedmetadata  = function() {
-                    window.URL.revokeObjectURL(video.src);
-                    duration = Math.floor(video.duration);
-                    that.getfileDuration(duration, file.name, file.type, that);
-                    // that.durTotal += parseInt(duration);
-                    // var hours = parseInt(Math.floor(duration/60/60));
-                    // var minutes = parseInt(Math.floor(duration/60%60));
-                    // var seconds = parseInt(Math.floor(duration%60));
-                    // hours = hours < 10 ? '0' + hours : hours;
-                    // minutes = minutes < 10 ? '0' + minutes : minutes;
-                    // seconds = seconds < 10 ? '0' + seconds : seconds;
-                    //
-                    // /* update the file list objects total time formats h:m:s */
-                    // that.totalHours = Math.floor(that.durTotal/60/60);
-                    // that.totalMinutes = Math.floor(that.durTotal/60%60);
-                    // that.totalSeconds = Math.floor(that.durTotal%60);
-                    // /* test if all totals are under 10, then add a "0" to the front before display */
-                    // fileInfo.lessThanTenTest(that);
-                    ///// CODE THAT WORKS /////
-                    //
-                    // // hours = hours < 10 ? '0' + hours : hours;
-                    // // minutes = minutes < 10 ? '0' + minutes : minutes;
-                    // // seconds = seconds < 10 ? '0' + seconds : seconds;
-                    //
-                    // // if(duration/60/60 < 10) { // >= 1
-                    // //     var hours = '0' + Math.floor(duration/60/60);
-                    // // } else {
-                    // //     var hours = parseInt(Math.floor(duration/60/60));
-                    // // }
-                    // //
-                    // // if(duration/60%60 < 10) {
-                    // //     var minutes = '0' + Math.floor(duration/60%60);
-                    // // } else {
-                    // //     var minutes = parseInt(Math.floor(duration/60%60));
-                    // // }
-                    // //
-                    // // if(duration%60 < 10) { //duration/60/60
-                    // //     var seconds = '0' + duration%60;
-                    // // } else {
-                    // //     var seconds = parseInt(duration%60);
-                    // // }
-                    //
-                    // that.totalHours += parseInt(hours);
-                    // that.totalMinutes += parseInt(minutes);
-                    // that.totalSeconds += parseInt(seconds);
-                    //
-                    // that.totalHours += parseInt(that.totalMinutes%60) >= 1 ? parseInt(that.totalMinutes/60) : parseInt(that.totalHours);
-                    // that.totalMinutes += parseInt(that.totalSeconds%60) >= 1 ? parseInt(that.totalSeconds/60) : parseInt(that.totalMinutes);
-                    // that.totalSeconds = parseInt(that.totalSeconds%60) >= 1 ? parseInt(that.totalSeconds%60) : parseInt(that.totalSeconds);
-                    // that.totalMinutes = parseInt(that.totalMinutes%60) >= 1 ? parseInt(that.totalMinutes%60) : parseInt(that.totalMinutes);
-                    //
-                    // // that.totalHours = that.totalHours < 10 ? '0' + that.totalHours : that.totalHours;
-                    // // that.totalMinutes = that.totalMinutes < 10 ? '0' + that.totalMinutes : that.totalMinutes;
-                    // // that.totalSeconds = that.totalSeconds < 10 ? '0' + that.totalSeconds : that.totalSeconds;
-                    ///// ABOVE CODE THAT WORKS /////
-                    /* display all new data elements holding file info into the table */
-                    // $infoBody.append(fileInfo.display(file.name, file.type, hours, minutes, seconds));
-                    // $totalFileCount.text(that.index - 1);
-                    // $('.totalHours').text(that.totalHours);
-                    // $('.totalMinutes').text(that.totalMinutes);
-                    // $('.totalSeconds').text(that.totalSeconds);
-                };
-                video.src = URL.createObjectURL(file);
+            video.onloadedmetadata  = function() {
+                window.URL.revokeObjectURL(video.src);
+                duration = Math.floor(video.duration);
+                that.getfileDuration(duration, file.name, file.type, that);
+            };
+            video.src = URL.createObjectURL(file);
         },
 
         /* Method to check if each time format H:M:S, is under 10, add a leading 0 */
@@ -274,9 +242,65 @@ $('document').ready(function() {
             obj.totalSeconds = obj.totalSeconds < 10 ? '0' + obj.totalSeconds : obj.totalSeconds;
         },
 
+        /* Method to save list of file information */
+        saveListInfo: function() {
+            let listName = $('.save-list-name').val().toLowerCase();
+            let totalFileCount = $totalFileCount.text();
+            if(fileListNames.some(function(obj) {return obj.name === listName})) {
+                $('#saveListModal .saved-name-error').text('Please pick a name that has not already been asigned to a saved list.');
+                return false;
+            } else {
+                let hr = $('.totalHours').text();
+                let min = $('.totalMinutes').text();
+                let sec = $('.totalSeconds').text();
+                let totalDuration = hr + ':' + min + ':' + sec;
+                fileListNames.push({'name': listName, 'totalDuration': totalDuration, 'totalFileCount': totalFileCount});
+                localStorage.setItem('fileListNames', JSON.stringify(fileListNames));
+                fileInfo.displaySavedFileLists(fileListNames);
+            }
+
+            let filesList = $('tr.fileInfoRow');
+            for(let i = 0; i < filesList.length; i++) {
+                let fileObj = {
+                    listName: listName,
+                    fileName: $(filesList[i]).children('.fileName').text(),
+                    fileType: $(filesList[i]).children('.fileType').text(),
+                    fileDuration: $(filesList[i]).children('td.file_duration').children().children('input').val()
+                }
+                savedFileListInfo.push(fileObj);
+            }
+
+            localStorage.setItem('savedFileListInfo', JSON.stringify(savedFileListInfo));
+            $('.save-list-name').val('');
+            $('#saveListModal .saved-name-error').text('');
+        },
+
+        /* Method to update the saved file list display of total file count */
+        updateDisplaySavedFileLists: function(fileListName) {
+            let count = parseInt($('.saved-list-item.'+fileListName + ' .saved-file-count').text());
+            count -= 1;
+            $('.saved-list-item.'+fileListName + ' .saved-file-count').text(count);
+            // let savedListTotalDuration =
+            let hr = $('.totalHours').text();
+            let min = $('.totalMinutes').text();
+            let sec = $('.totalSeconds').text();
+            let totalDuration = hr + ':' + min + ':' + sec;
+            $('.saved-list-item.'+fileListName + ' .list-total-time').text(totalDuration);
+        },
+
+        /* Method to update the local storage if user has deleted saved lists */
+        updateLocalStorage: function() {
+            if(!localStorage.length || $('.file-name-list').text() === ''){
+                localStorage.removeItem('fileListNames');
+                localStorage.removeItem('savedFileListInfo');
+                localStorage.clear();
+                $('.file-list-of-names').fadeOut(1000);
+            }
+        },
+
         /* Method to update the total duration of all files, when a new file is added or a file is deleted */
         updateTotalDuration: function(operand, el) {
-            /* get current file duration in each format h:m:s */
+            /* Get current file duration in each format h:m:s */
             var fileHourLength = parseInt($(el).parent().prev().children('.file_hour_length').text());
             var fileMinuteLength = parseInt($(el).parent().prev().children('.file_minute_length').text());
             var fileSecondLength = parseInt($(el).parent().prev().children('.file_second_length').text());
@@ -287,21 +311,7 @@ $('document').ready(function() {
                 this.addTotalDuration(fileHourLength, fileMinuteLength, fileSecondLength);
             }
 
-
-            // /* subtract the file time lengths from the total time lengths */
-            // this.totalHours -= fileHourLength;
-            // this.totalMinutes -= fileMinuteLength;
-            // this.totalSeconds -= fileSecondLength;
-            // /* first, test if the new total time length for each format h:m:s, is less than 0 */
-            // this.totalHours = this.totalHours < 0 ? 60 + this.totalHours : this.totalHours;
-            // this.totalMinutes = this.totalMinutes < 0 ? 60 + this.totalMinutes : this.totalMinutes;
-            // this.totalMinutes = this.totalSeconds < 0 ? this.totalMinutes - 1 : this.totalMinutes;
-            // this.totalSeconds = this.totalSeconds < 0 ? 60 + this.totalSeconds : this.totalSeconds;
-            // /* update total duration of all files still left in list */
-            // this.durTotal = this.durTotal - ((fileMinuteLength * 60) + fileSecondLength);
-
-
-            /* second, test if all totals are under 10, then add a "0" to the front before display */
+            /* Second, test if all totals are under 10, then add a "0" to the front before display */
             this.lessThanTenTest(this);
             $('.totalHours').text(this.totalHours);
             $('.totalMinutes').text(this.totalMinutes);
@@ -311,15 +321,12 @@ $('document').ready(function() {
 
     /* Check if any file lists have been saved to local storage */
     if(localStorage.getItem('fileListNames') && localStorage.getItem('savedFileListInfo')) {
-        // console.log(typeof localStorage.getItem('fileListNames'));
-        // console.log(localStorage.getItem('fileListNames'));
-        // console.log(JSON.parse(localStorage.getItem('fileListNames')));
-        var savedFileLists = JSON.parse(localStorage.getItem('fileListNames'));
+        var fileListNames = JSON.parse(localStorage.getItem('fileListNames'));
         var savedFileListInfo = JSON.parse(localStorage.getItem('savedFileListInfo'));
-        fileInfo.displaySavedFileLists(savedFileLists);
+        fileInfo.displaySavedFileLists(fileListNames);
     } else {
         $('.file-name-list').html('<p class="text-danger">You currently do not have any saved file lists.</p>');
-        var savedFileLists = [];
+        var fileListNames = [];
         var savedFileListInfo = [];
         $('.file-list-of-names').hide();
     }
@@ -337,18 +344,11 @@ $('document').ready(function() {
     });
 
     /* On drop of files into browser, gather all file information */
-    $(window).on('drop', function(e) { // $fileDrop
+    $(window).on('drop', function(e) {
+        e.preventDefault();
         if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length){
             e.preventDefault();
             e.stopPropagation();
-            // $clearAllButton.fadeIn(1000);
-            // $saveAllButton.fadeIn(1000);
-            // $fileInfoTable.fadeIn(1000);
-
-            // console.log(e.currentTarget.File)
-            // console.log(e);
-            //     console.log(e.originalEvent.dataTransfer.items);
-
             var totalFileCount = $('table > tbody > tr:last-of-type > th').html();
             if(!totalFileCount) {
                 totalFileCount = 0;
@@ -365,11 +365,8 @@ $('document').ready(function() {
     });
 
     /* On upload of files into browser, gather all file information */
-    $('input:file').change(function() {
-        // $fileInfoTable.html('');
-        // $clearAllButton.fadeIn(1000);
-        // $saveAllButton.fadeIn(1000);
-        // $fileInfoTable.fadeIn(1000);
+    $('input:file').change(function(e) {
+        e.preventDefault();
         for(var i = 0; i < this.files.length; i++) {
             if(fileInfo.fileNamesList.includes(this.files[i].name)) {
                 continue;
@@ -383,8 +380,10 @@ $('document').ready(function() {
     /* On click of trashcan icon for each file, delete the file from the list */
     $('body').on('click', '.delete', function(e) {
         e.preventDefault();
+        let listName = $(this).next().next('input.saved_file_list').val();
         fileInfo.clearFileFromSavedList(this);
         fileInfo.clear_file(e, this);
+        fileInfo.updateDisplaySavedFileLists(listName);
     });
 
     /* On click of checkmark icon for each file, mark out file info and update total duration */
@@ -407,73 +406,24 @@ $('document').ready(function() {
         }
     });
 
-    /* On click of save list item, display the saved list and all of its file information */
+    /* On click of saved list item, display the saved list and all of its file information */
     $('body').on('click', '.saved-list-item', function(e) {
-        console.log($(e.target).parents('li.saved-list-item'));
         if(e.target.nodeName === 'LI' || e.target.nodeName === 'SPAN') {
-            console.log('clicked target area');
-            // console.log(e.target.nodeName);
-            let showListName = $(this).find('.saved-file-list').text();
-            var thisFileList = JSON.parse(localStorage.getItem('savedFileListInfo'));
-            fileInfo.index = 1;
-            fileInfo.durTotal = 0;
-            $infoBody.html('');
-            console.log(thisFileList);
-
-            for(let fileInformation in thisFileList) {
-                // console.log(thisFileList[fileInformation].fileName);
-                if(thisFileList[fileInformation].listName === showListName) {
-                    $infoBody.append(
-                        // fileInfo.display(
-                        fileInfo.getfileDuration(
-                            thisFileList[fileInformation].fileDuration,
-                            thisFileList[fileInformation].fileName,
-                            thisFileList[fileInformation].fileType,
-                            fileInfo,
-                            showListName
-                            // thisFileList[fileInformation].fileDurationH,
-                            // thisFileList[fileInformation].fileDurationM,
-                            // thisFileList[fileInformation].fileDurationS
-                        )
-                    )
-                }
-            }
-            $fileInfoTable.fadeIn(1000);
+            var showListName = $(this).find('.saved-file-list').text();
+            fileInfo.displaySavedFileListInfo(showListName);
+        } else if(e.target.innerText === 'Save') {
+            var showListName = $(this).parents('.modal-footer').prev('.modal-body').children('label').children('input.save-list-name').val();
+            fileInfo.displaySavedFileListInfo(showListName);
         }
     });
 
     /*  On click of trashcan icon for saved file, delete the saved file info from local storage and display */
-    $('body').on('click', '.deleteListName', function(e) {
-        // let savedLists = JSON.parse(localStorage.getItem('fileListNames'));
-        let listName = $(this).prev().prev('span').text();
-        // console.log(savedLists);
-        // console.log($(this));
-        console.log(listName);
-
-        for(let obj in savedFileLists) {
-            // if(savedLists[obj].name === listName) {
-            if(savedFileLists[obj].name === listName) {
-            // if(savedFileLists.some(function(obj) {return obj.name === listName})) {
-                let i = obj; // savedFileLists.indexOf(obj); //listName
-                // if(savedFileLists.some(function(obj) {return ob}))
-                savedFileLists.splice(i, 1);
-                console.log(savedFileLists);
-                localStorage.setItem('fileListNames', JSON.stringify(savedFileLists));
-                let $remove = $(e.target).parents('li.saved-list-item');
-                $remove.remove();
-            }
-            // }
-        }
-
-        if($('.file-name-list').text() === ''){
-            localStorage.removeItem('fileListNames');
-            localStorage.removeItem('savedFileListInfo');
-            localStorage.clear();
-            $('.file-list-of-names').fadeOut(1000);
-        }
-        console.log(localStorage.getItem('fileListNames'));
-        // console.log(JSON.parse(localStorage.getItem('fileListNames')));
-        // console.log(savedLists);
+    $('body').on('click', '.deleteSavedList', function(e) {
+        let listName = $(this).prev().prev().prev('span.saved-file-list').text();
+        fileInfo.deleteSavedList(listName);
+        let $remove = $(e.target).parents('li.saved-list-item');
+        $remove.remove();
+        fileInfo.updateLocalStorage();
     });
 
     /* On click of Clear List button, clear the entire list of files */
@@ -482,52 +432,26 @@ $('document').ready(function() {
     });
 
     /* On click of Save button in modal window, save the current list of files */
-    $('.save-list-name-btn').click(function() {
-        console.log($('.save-list-name').val());
-        // var fileListNames = [];
-        // $('.file-name-list').html("");
-        var listName = $('.save-list-name').val();
-        if(savedFileLists.some(function(obj) {return obj.name === listName})) {
-            //.includes(listName)) {
-            $('#saveListModal .saved-name-error').text('Please pick a name that has not already been asigned to a saved list.');
-            return false;
-        } else {
-            var hr = $('.totalHours').text();
-            var min = $('.totalMinutes').text();
-            var sec = $('.totalSeconds').text();
-            var totalDuration = hr + ':' + min + ':' + sec;
-            savedFileLists.push({'name': listName, 'totalDuration': totalDuration});
-            localStorage.setItem('fileListNames', JSON.stringify(savedFileLists));
-            fileInfo.displaySavedFileLists(savedFileLists);
+    $('.save-list').click(function(e) {
+        if(e.target.nodeName === 'LI' || e.target.nodeName === 'SPAN') {
+            var showListName = $(this).find('.saved-file-list').text();
+        } else if(e.target.innerText === 'Save') {
+            var showListName = $(this).parents('.modal-footer').prev('.modal-body').children('label').children('input.save-list-name').val();
         }
-
-        var filesList = $('tr.fileInfoRow');
-        for(let i = 0; i < filesList.length; i++) {
-            var fileObj = {
-                listName: listName,
-                fileName: $(filesList[i]).children('.fileName').text(),
-                fileType: $(filesList[i]).children('.fileType').text(),
-                fileDuration: $(filesList[i]).children('td.file_duration').children().children('input').val(),
-                // fileDurationH: $(filesList[i]).children('.file_duration').children('span.file_hour_length').text(),
-                // fileDurationM: $(filesList[i]).children('.file_duration').children('span.file_minute_length').text(),
-                // fileDurationS: $(filesList[i]).children('.file_duration').children('span.file_second_length').text(),
-            }
-            savedFileListInfo.push(fileObj);
-            // savedFileListInfo.push(fileObj);
-        }
-
-        localStorage.setItem('savedFileListInfo', JSON.stringify(savedFileListInfo));
-        console.log(savedFileListInfo);
-        // console.log(filesList.length);
-        // console.log(JSON.stringify(filesList));
-
-        $('.save-list-name').val('');
-        $('#saveListModal .saved-name-error').text('');
+        fileInfo.saveListInfo();
+        fileInfo.displaySavedFileListInfo(showListName);
     });
 
     /* On show of save file modal, focus on the file list name input */
     $('#saveListModal').on('shown.bs.modal', function () {
         $('.save-list-name').trigger('focus');
+    });
+
+    /* When user is focused in the save list name input field and presses the Enter key activate the click of the save button */
+    $('input.save-list-name').keypress(function(e) {
+        if(e.keyCode === 13) {
+            $('.save-list').click();
+        }
     });
 
     /* Make the file table list sortable */
@@ -537,9 +461,6 @@ $('document').ready(function() {
             fileInfo.arrange()
         }
     });
-
-    /* DOES NOTHING, MAY NEED DELETED */
-    // $('#exampleModalCenter').modal({}); //show: false
 
 })();
 });
