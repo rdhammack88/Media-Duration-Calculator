@@ -111,20 +111,33 @@ $('document').ready(function() {
         clearFileFromSavedList: function(el) {
             let parent = $(el).closest('tr');
             let fileName = $(el).parent().siblings('td.fileName').text();
-            let listName = $(el).next('input.saved_file_list').val();
+            let listName = $(el).next().next('input.saved_file_list').val();
             console.log(listName);
             console.log(fileName);
             // console.log(savedFileListInfo);
 
-            // if(
-                savedFileListInfo.some(function(obj, i) {
-                console.log(savedFileListInfo[i]);
-                 if(obj.listName === listName && obj.fileName === fileName) {
-                     savedFileListInfo.splice(i, 1);
-                     localStorage.setItem('savedFileListInfo', savedFileListInfo);
-                 }
-             })
-            // ){}
+
+            for(let obj in savedFileListInfo) {
+                console.log(savedFileListInfo[obj]);
+                if(savedFileListInfo[obj].listName === listName && savedFileListInfo[obj].fileName === fileName) {
+                    console.log(savedFileListInfo[obj]);
+                    savedFileListInfo.splice(obj, 1);
+                    localStorage.setItem('savedFileListInfo',
+                    JSON.stringify(savedFileListInfo));
+                    break;
+                }
+            }
+
+            // // if(
+            //     savedFileListInfo.some(function(obj, i) {
+            //     // console.log(savedFileListInfo[i]);
+            //      if(obj.listName === listName && obj.fileName === fileName) {
+            //          console.log(savedFileListInfo[i]);
+            //          savedFileListInfo.splice(i, 1);
+            //          localStorage.setItem('savedFileListInfo', savedFileListInfo);
+            //      }
+            //  })
+            // // ){}
                 // console.log(obj.name);
                 // console.log(i);
                 // console.log(savedFileListInfo);
@@ -370,8 +383,8 @@ $('document').ready(function() {
     /* On click of trashcan icon for each file, delete the file from the list */
     $('body').on('click', '.delete', function(e) {
         e.preventDefault();
-        fileInfo.clear_file(e, this);
         fileInfo.clearFileFromSavedList(this);
+        fileInfo.clear_file(e, this);
     });
 
     /* On click of checkmark icon for each file, mark out file info and update total duration */
