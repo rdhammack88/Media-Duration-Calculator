@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="">
-
+    <!-- <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/x-icon"> -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="manifest" href="./icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="./icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <title>Media Duration</title>
-
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
@@ -30,32 +46,6 @@
               <i class="fa fa-question"></i>
             </button>
         </div>
-
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-        </div> -->
     </nav>
 
     <!-- Help Modal Window -->
@@ -70,7 +60,7 @@
           </div>
           <div class="modal-body">
             Find out the total time of a set of videos or songs you have, by either simply dragging-and-dropping the files anywhere into the browsers webpage, or by clicking the upload button. You can then delete the whole file from the list by clicking on the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information, or just mark it done by clicking the &nbsp; <i class="fas fa-check"></i> Checkmark &nbsp; icon next to the file information. You can delete the entire list by clicking the "Clear List" button above the file table.
-            A save feature is currently being implented, so stay tuned for more features! Go ahead and drag some files to the browser and see how easy it is to use.
+            <br/> If you would like to save your list, you can do so by clicking the blue Save List button. It will prompt you to provide a name for the saved list. It will then generate a list of the saved files, which you can then click on the saved file list name, and the files within the saved list will be displayed to the screen. You can delete the saved list by clicking the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the saved file list name. <br/> Upon displaying the saved files, if you click the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information in the file list table, the file info will also be completely removed from the saved list of files. Go ahead and drag some files to the browser and see how easy it is to use.
             <br/><br/>
             ** Note: Dragging/Uploading of whole folders not currently supported. You will have to Drag/Upload files only. Also, certain files for some reason may not drag into browser, if this is the case, try to upload the file through the upload button.
             <br/><br/>
@@ -81,9 +71,9 @@
           </div>
         </div>
       </div>
-  </div> <!-- Help Modal Window -->
+    </div> <!-- Help Modal Window -->
 
-  <!-- Save List Modal Window -->
+    <!-- Save List Modal Window -->
     <div class="modal fade" id="saveListModal" tabindex="-1" role="dialog" aria-labelledby="saveListModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -101,7 +91,7 @@
             </div>
             <div class="modal-footer">
                 <div class="save-list-btn">
-                    <button type="button" class="btn btn-success save-list-name-btn" data-dismiss="modal">Save</button>
+                    <button type="button" class="btn btn-success save-list" data-dismiss="modal">Save</button>
                 </div>
                 <div class="close-modal-btn">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,7 +103,6 @@
     </div> <!-- Save List Modal Window -->
 
     <div class="container">
-
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
         		<form action="file-load.php" method="get">
@@ -125,10 +114,7 @@
 
         <div class="file-list-of-names">
             <h2>Recently Saved File Lists</h2>
-            <ul class="list-group file-name-list">
-
-            </ul>
-
+            <ul class="list-group file-name-list"></ul>
         </div>
 
         <div class="clear-all">
@@ -139,7 +125,6 @@
             <!-- <a href="./" role="button" name="save_list" class="btn btn-large save_list" >Save List</a> -->
             <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List" >Save List</button>
         </div> <!-- .save-all -->
-
 
         <div class="file-info-container">
         	<table class="table table-striped table-dark table-responsive-sm">
@@ -186,9 +171,7 @@
         	</table>
         </div> <!-- .file-info-container -->
 
-
     </div> <!-- .container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
