@@ -89,7 +89,7 @@ $('document').ready(function() {
         },
 
         /* Method to clear individual file from the saved file list */
-        clearFileFromSavedList: function(el) {
+        clearFileFromSavedList: function(el, totalDuration) {
             let parent = $(el).closest('tr');
             let fileName = $(el).parent().siblings('td.fileName').text();
             let listName = $(el).next().next('input.saved_file_list').val();
@@ -286,6 +286,7 @@ $('document').ready(function() {
             let sec = $('.totalSeconds').text();
             let totalDuration = hr + ':' + min + ':' + sec;
             $('.saved-list-item.'+fileListName + ' .list-total-time').text(totalDuration);
+            return totalDuration;
         },
 
         /* Method to update the local storage if user has deleted saved lists */
@@ -381,9 +382,10 @@ $('document').ready(function() {
     $('body').on('click', '.delete', function(e) {
         e.preventDefault();
         let listName = $(this).next().next('input.saved_file_list').val();
-        fileInfo.clearFileFromSavedList(this);
+
         fileInfo.clear_file(e, this);
-        fileInfo.updateDisplaySavedFileLists(listName);
+        let totalDuration = fileInfo.updateDisplaySavedFileLists(listName);
+        fileInfo.clearFileFromSavedList(this, totalDuration);
     });
 
     /* On click of checkmark icon for each file, mark out file info and update total duration */
