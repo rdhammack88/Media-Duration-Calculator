@@ -430,11 +430,9 @@ $('document').ready(function() {
 
     /* On click of Clear List button, clear the entire list of files */
     $clearAllButton.click(function() {
-
         if(localStorage.getItem('fileListNames')) {
             // let listName = $(this).parents('.clear-all').next().next().children('table').children('tbody').children('tr').children('input').children('.saved-file-list').val();
             let listName = $('input.saved_file_list:first-of-type').val();
-            // console.log(listName);
             fileInfo.deleteSavedList(listName);
             let $remove = $('li.'+listName);
             $remove.remove();
@@ -442,7 +440,6 @@ $('document').ready(function() {
         } else {
             fileInfo.clear_list();
         }
-
     });
 
     /* On click of Save button in modal window, save the current list of files */
