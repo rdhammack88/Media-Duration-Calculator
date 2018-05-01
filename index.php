@@ -28,7 +28,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="libs/jquery-ui.min.css">
     <link rel="stylesheet" href="styles/css/main.css">
 
     <!-- Font-Awesome CDN -->
@@ -59,12 +59,25 @@
             </button>
           </div>
           <div class="modal-body">
-            Find out the total time of a set of videos or songs you have, by either simply dragging-and-dropping the files anywhere into the browsers webpage, or by clicking the upload button. You can then delete the whole file from the list by clicking on the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information, or just mark it done by clicking the &nbsp; <i class="fas fa-check"></i> Checkmark &nbsp; icon next to the file information. You can delete the entire list by clicking the "Clear List" button above the file table.
-            <br/> If you would like to save your list, you can do so by clicking the blue Save List button. It will prompt you to provide a name for the saved list. It will then generate a list of the saved files, which you can then click on the saved file list name, and the files within the saved list will be displayed to the screen. You can delete the saved list by clicking the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the saved file list name. <br/> Upon displaying the saved files, if you click the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information in the file list table, the file info will also be completely removed from the saved list of files. Go ahead and drag some files to the browser and see how easy it is to use.
-            <br/><br/>
-            ** Note: Dragging/Uploading of whole folders not currently supported. You will have to Drag/Upload files only. Also, certain files for some reason may not drag into browser, if this is the case, try to upload the file through the upload button.
-            <br/><br/>
-            ** SUPPORTED FILE TYPES INCLUDE : '.mp4', '.avi', '.mpeg', '.mp3'
+              <div id="tabs">
+                  <ul>
+                     <li class="active"><a href="#overviewHelp">Basic Overview</a></li>
+                     <li><a href="#saveListHelp">How to save lists</a></li>
+                     <!-- <li><a href=""></a></li> -->
+                  </ul>
+                  <div id="overviewHelp">
+                      Find out the total time of a set of videos or songs you have, by either simply dragging-and-dropping the files anywhere into the browsers webpage, or by clicking the upload button. You can then delete the whole file from the list by clicking on the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information, or just mark it done by clicking the &nbsp; <i class="fas fa-check"></i> Checkmark &nbsp; icon next to the file information. You can delete the entire list by clicking the "Clear List" button above the file table. Go ahead and drag some files to the browser and see how easy it is to use.
+
+                      <br/><br/>
+                      <span class="note">** Note: Dragging/Uploading of whole folders not currently supported. You will have to Drag/Upload files only. Also, certain files for some reason may not drag into browser, if this is the case, try to upload the file through the upload button.
+                      <br/><br/>
+                      ** SUPPORTED FILE TYPES INCLUDE : '.mp4', '.avi', '.mpeg', '.mp3'</span>
+                  </div>
+                  <div id="saveListHelp">
+                      If you would like to save your list, you can do so by clicking the blue Save List button. It will prompt you to provide a name for the list. It will then generate a list of the saved files, which you can then click on the list name, and the files within the saved list will be displayed to the screen. You can delete the saved list by clicking the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the list name. <br/> Upon displaying the saved files, if you click the &nbsp; <i class="fas fa-trash"></i> Trashcan &nbsp; icon next to the file information in the file list table, the file info will also be completely removed from the saved list of files.
+                  </div>
+              </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

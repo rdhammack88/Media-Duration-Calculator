@@ -232,6 +232,20 @@ tr > td.icons [type=button] {
         vertical-align: bottom;
         font-size: 70%; }
 
+#helperModal {
+  letter-spacing: 1.2px; }
+  #helperModal #tabs li {
+    border: 1px solid #111;
+    border-radius: 5px 5px 0 0; }
+    #helperModal #tabs li.active {
+      background: #ccffff; }
+    #helperModal #tabs li a {
+      text-decoration: none;
+      color: #222;
+      cursor: pointer; }
+  #helperModal .note {
+    color: #00f; }
+
 #saveListModal label {
   width: 100%; }
   #saveListModal label .save-list-name {

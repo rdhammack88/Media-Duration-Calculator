@@ -476,5 +476,12 @@ $('document').ready(function() {
         }
     });
 
+    /* Add tabular menus to the helper modal */
+    $('#tabs').tabs();
+    /* Add background color to indicate active menu for helper modal window */
+    $('#tabs li').click(function() {
+        $(this).addClass('active');
+        $(this).siblings('li').removeClass('active');
+    });
 })();
 });
