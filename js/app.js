@@ -63,8 +63,8 @@ $('document').ready(function() {
             this.arrange();
 
             if(this.fileNamesList.includes(fileName)) {
-                let i = this.fileNamesList.indexOf(fileName);
-                this.fileNamesList.splice(i, 1);
+                let index = this.fileNamesList.indexOf(fileName);
+                this.fileNamesList.splice(index, 1);
             }
             if($infoBody.html() == '') {
                 this.clear_list();
@@ -291,9 +291,9 @@ $('document').ready(function() {
 
         /* Method to update the local storage if user has deleted saved lists */
         updateLocalStorage: function() {
-            if(!localStorage.length || $('.file-name-list').text() === ''){
-                localStorage.removeItem('fileListNames');
-                localStorage.removeItem('savedFileListInfo');
+            if(!localStorage.length || $('.file-name-list').html() === ''){
+                // localStorage.removeItem('savedFileListInfo');
+                // localStorage.removeItem('fileListNames');
                 localStorage.clear();
                 $('.file-list-of-names').fadeOut(1000);
             }
@@ -432,11 +432,14 @@ $('document').ready(function() {
     $clearAllButton.click(function() {
         if(localStorage.getItem('fileListNames')) {
             // let listName = $(this).parents('.clear-all').next().next().children('table').children('tbody').children('tr').children('input').children('.saved-file-list').val();
-            let listName = $('input.saved_file_list:first-of-type').val();
-            fileInfo.deleteSavedList(listName);
-            let $remove = $('li.'+listName);
-            $remove.remove();
-            fileInfo.updateLocalStorage();
+            if(confirm('Would You like to delete the saved list as well?')) {
+                let listName = $('input.saved_file_list:first-of-type').val();
+                fileInfo.deleteSavedList(listName);
+                let $remove = $('li.'+listName);
+                $remove.remove();
+                fileInfo.updateLocalStorage();
+            }
+
         } else {
             fileInfo.clear_list();
         }
