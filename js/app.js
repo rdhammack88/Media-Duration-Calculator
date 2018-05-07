@@ -431,29 +431,45 @@ $('document').ready(function() {
         fileInfo.updateLocalStorage();
     });
 
-    /* On click of Clear List button, clear the entire list of files */
     $clearAllButton.click(function() {
         if(localStorage.getItem('fileListNames')) {
-            // let listName = $(this).parents('.clear-all').next().next().children('table').children('tbody').children('tr').children('input').children('.saved-file-list').val();
-            if(confirm('Would You like to delete the saved list as well?')) {
-                let listName = $('input.saved_file_list:first-of-type').val();
-                fileInfo.deleteSavedList(listName);
-                let $remove = $('li.'+listName);
-                $remove.remove();
-                fileInfo.updateLocalStorage();
-            } else {
-                fileInfo.clear_list();
+            let listName = $('input.saved_file_list:first-of-type').val();
+            for(let obj in fileListNames) {
+                if(fileListNames[obj].name === listName) {
+                    $('.clear_list').attr('data-target', "#clearListModal");
+                    return;
+                } else {
+                    $('.clear_list').attr('data-target', "");
+                    continue;
+                }
             }
-
+            fileInfo.clear_list();
         } else {
-            console.log('Dont delete saved list data');
             fileInfo.clear_list();
         }
+    });
+
+    /* On click of Clear List button, clear the entire list of files */
+    $('.clear-list-confirm-btn').click(function() {
+        let listName = $('input.saved_file_list:first-of-type').val();
+        fileInfo.deleteSavedList(listName);
+        let $remove = $('li.'+listName);
+        $remove.remove();
+        fileInfo.updateLocalStorage();
+        fileInfo.clear_list();
+        $('.clear_list').attr('data-target', "");
+    });
+
+    /*  */
+    $('.clear-list-deny-btn').click(function() {
+        fileInfo.clear_list();
+        $('.clear_list').attr('data-target', "");
     });
 
     /* On click of New List button, clear the displayed list and all variables, so a new list can be created */
     $newListButton.click(function() {
         fileInfo.clear_list();
+        $('.clear_list').attr('data-target', "");
     })
 
     /* On click of Save button in modal window, save the current list of files */

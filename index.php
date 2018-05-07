@@ -115,6 +115,35 @@
         </div>
     </div> <!-- Save List Modal Window -->
 
+    <!-- Clear List Modal Window -->
+    <div class="modal fade" id="clearListModal" tabindex="-1" role="dialog" aria-labelledby="clearListModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="clearListModalTitle">Delete saved list contents?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="">Would You like to delete the saved list and all of its contents as well?</h4>
+                <br/>
+                <p class="text-danger text-left clear-name-error"><small>Warning: this can not be undone!</small></p>
+            </div>
+            <div class="modal-footer">
+                <!-- <div class="modal-footer-btns"> -->
+                    <div class="clear-list-deny">
+                        <button type="button" class="btn clear-list-deny-btn" data-dismiss="modal">No</button>
+                    </div>
+                    <div class="clear-list-confirm">
+                        <button type="button" class="btn btn-danger clear-list-confirm-btn" data-dismiss="modal">Yes</button>
+                    </div>
+                <!-- </div> -->
+            </div>
+          </div>
+        </div>
+    </div> <!-- Clear List Modal Window -->
+
     <div class="container">
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
@@ -138,12 +167,12 @@
         </div>
 
         <div class="clear-all">
-            <button type="button" name="clear_list" class="btn btn-large clear_list" data-title="Clear List">Clear List</button>
+            <button type="button" name="clear_list" class="btn btn-large clear_list"  data-toggle="modal" data-target="" data-title="Clear List">Clear List</button> <!-- #clearListModal -->
         </div> <!-- .clear-all -->
 
         <div class="save-all">
             <!-- <a href="./" role="button" name="save_list" class="btn btn-large save_list" >Save List</a> -->
-            <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List" >Save List</button>
+            <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List">Save List</button>
         </div> <!-- .save-all -->
 
         <div class="file-info-container">
