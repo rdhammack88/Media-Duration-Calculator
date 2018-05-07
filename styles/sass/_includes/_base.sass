@@ -31,8 +31,15 @@ body
 	text-align: center
 
 	@include break(771px)
-		width: 49.7%
-		text-align: left
+		width: 33%
+		// 49.7%
+		text-align: center
+
+.new-list
+	@extend .clear-all
+	text-align: left
+	@include break(771px)
+		// width: 19%
 
 .save-all
 	@extend .clear-all

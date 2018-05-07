@@ -130,6 +130,13 @@
             <ul class="list-group file-name-list"></ul>
         </div>
 
+        <div class="new-list">
+            <button type="button" class="btn btn-success new-list-btn" data-title="New List">
+                <i class="fa fa-plus"></i>
+                New List
+            </button>
+        </div>
+
         <div class="clear-all">
             <button type="button" name="clear_list" class="btn btn-large clear_list" data-title="Clear List">Clear List</button>
         </div> <!-- .clear-all -->

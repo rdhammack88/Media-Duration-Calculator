@@ -11,7 +11,8 @@
     position: relative
     background: linear-gradient($red, $red2)
     color: #eee
-    width: 50%
+    width: 100%
+    //50%
     font-weight: bolder
     letter-spacing: .2em
     // @extend %tooltip-hover
@@ -25,14 +26,21 @@
 .save_list
     @extend .clear_list
     // @extend %tooltip-hover
-    position: relative
+    // position: relative
+    // display: none
     background: linear-gradient(darken($babyblue, 8%), $blue)
-    display: none
 
     &:hover
-        color: #eee
+        // color: #eee
         text-decoration: none
         background: linear-gradient(darken($babyblue, 15%), darken($blue, 15%))
+
+.new-list-btn
+    @extend .clear_list
+    background: linear-gradient(darken($lightgreen, 8%), $green)
+
+    &:hover
+        background: linear-gradient(darken($lightgreen, 8%), darken($green, 15%))
 
 tr > td.icons
     // padding: 0 10px

@@ -5,6 +5,7 @@ $('document').ready(function() {
     window.URL = window.URL || window.webkitURL
     var $fileDrop = $('#file-drop');
     var $infoBody = $('#file-info-body');
+    var $newListButton = $('.new-list-btn');
     var $clearAllButton = $('.clear_list');
     var $saveAllButton = $('.save_list');
     var $totalFileCount = $('#totalFileCount');
@@ -75,6 +76,7 @@ $('document').ready(function() {
         clear_list: function() {
             this.fileNamesList = [];
             $infoBody.html('');
+            $newListButton.fadeOut(1000);
             $clearAllButton.fadeOut(1000);
             $saveAllButton.fadeOut(1000);
             $fileInfoTable.fadeOut(1000);
@@ -146,6 +148,7 @@ $('document').ready(function() {
 
         /* Method to display each file info into the list */
         display: function(name, type, hours, minutes, seconds, duration, savedList='') {
+            $newListButton.fadeIn(1000);
             $clearAllButton.fadeIn(1000);
             $saveAllButton.fadeIn(1000);
             $fileInfoTable.fadeIn(1000);
@@ -438,12 +441,20 @@ $('document').ready(function() {
                 let $remove = $('li.'+listName);
                 $remove.remove();
                 fileInfo.updateLocalStorage();
+            } else {
+                fileInfo.clear_list();
             }
 
         } else {
+            console.log('Dont delete saved list data');
             fileInfo.clear_list();
         }
     });
+
+    /* On click of New List button, clear the displayed list and all variables, so a new list can be created */
+    $newListButton.click(function() {
+        fileInfo.clear_list();
+    })
 
     /* On click of Save button in modal window, save the current list of files */
     $('.save-list').click(function(e) {

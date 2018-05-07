@@ -61,16 +61,19 @@ body {
     .container {
       margin-top: 10%; } }
 
-.clear-all, .save-all {
+.clear-all, .new-list, .save-all {
   display: inline-block;
   width: 100%;
   margin-bottom: 2%;
   box-sizing: border-box;
   text-align: center; }
   @media (min-width: 771px) {
-    .clear-all, .save-all {
-      width: 49.7%;
-      text-align: left; } }
+    .clear-all, .new-list, .save-all {
+      width: 33%;
+      text-align: center; } }
+
+.new-list {
+  text-align: left; }
 
 @media (min-width: 771px) {
   .save-all {
@@ -81,28 +84,30 @@ body {
   margin-right: 20px;
   position: relative; }
 
-.clear_list, .save_list {
+.clear_list, .save_list, .new-list-btn {
   display: none;
   position: relative;
   background: linear-gradient(#d14348, #a34300);
   color: #eee;
-  width: 50%;
+  width: 100%;
   font-weight: bolder;
   letter-spacing: 0.2em; }
-  .clear_list:hover, .save_list:hover {
+  .clear_list:hover, .save_list:hover, .new-list-btn:hover {
     background: linear-gradient(#a0272b, #572400); }
   @media (min-width: 771px) {
-    .clear_list, .save_list {
+    .clear_list, .save_list, .new-list-btn {
       width: 50%; } }
 
 .save_list {
-  position: relative;
-  background: linear-gradient(#a3ffff, #0076a3);
-  display: none; }
+  background: linear-gradient(#a3ffff, #0076a3); }
   .save_list:hover {
-    color: #eee;
     text-decoration: none;
     background: linear-gradient(#80ffff, #003f57); }
+
+.new-list-btn {
+  background: linear-gradient(#378b2a, #548c27); }
+  .new-list-btn:hover {
+    background: linear-gradient(#378b2a, #305016); }
 
 tr > td.icons [type=button] {
   color: #f39856;
