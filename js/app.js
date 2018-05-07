@@ -431,6 +431,7 @@ $('document').ready(function() {
         fileInfo.updateLocalStorage();
     });
 
+    /* On click of Clear List button, verify if displayed files are apart of a saved list. If they are, confirm with user if they want to delete the whole saved list as well. */
     $clearAllButton.click(function() {
         if(localStorage.getItem('fileListNames')) {
             let listName = $('input.saved_file_list:first-of-type').val();
@@ -449,7 +450,7 @@ $('document').ready(function() {
         }
     });
 
-    /* On click of Clear List button, clear the entire list of files */
+    /* On click of Clear List Confirm button, clear the entire list of saved files */
     $('.clear-list-confirm-btn').click(function() {
         let listName = $('input.saved_file_list:first-of-type').val();
         fileInfo.deleteSavedList(listName);
@@ -460,7 +461,7 @@ $('document').ready(function() {
         $('.clear_list').attr('data-target', "");
     });
 
-    /*  */
+    /* On click of Clear List Deny button, clear the displayed list but DO NOT clear the saved files in the list. */
     $('.clear-list-deny-btn').click(function() {
         fileInfo.clear_list();
         $('.clear_list').attr('data-target', "");
