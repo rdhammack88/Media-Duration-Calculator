@@ -160,7 +160,7 @@
         </div>
 
         <div class="new-list">
-            <button type="button" class="btn btn-success new-list-btn" data-title="New List">
+            <button type="button" class="btn new-list-btn" data-title="New List"><!--btn-success-->
                 <i class="fa fa-plus"></i>
                 New List
             </button>
