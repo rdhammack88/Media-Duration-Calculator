@@ -149,6 +149,7 @@
     </div> <!-- Clear List Modal Window -->
 
     <div class="container">
+        <!-- File dropzone -->
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
         		<form action="file-load.php" method="get">
@@ -158,27 +159,28 @@
         	</div>
         </div> <!-- .file-load -->
 
+        <!-- Saved file lists display -->
         <div class="file-list-of-names">
             <h2>Recently Saved File Lists</h2>
             <ul class="list-group file-name-list"></ul>
         </div>
 
+        <!-- New, Clear and Save Buttons -->
         <div class="new-list">
             <button type="button" class="btn new-list-btn" data-title="New List"><!--btn-success-->
                 <i class="fa fa-plus"></i>
                 New List
             </button>
         </div>
-
         <div class="clear-all">
             <button type="button" name="clear_list" class="btn btn-large clear_list"  data-toggle="modal" data-target="" data-title="Clear List">Clear List</button> <!-- #clearListModal -->
         </div> <!-- .clear-all -->
-
         <div class="save-all">
             <!-- <a href="./" role="button" name="save_list" class="btn btn-large save_list" >Save List</a> -->
             <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List">Save List</button>
         </div> <!-- .save-all -->
 
+        <!-- File list display -->
         <div class="file-info-container">
         	<table class="table table-striped table-dark table-responsive-sm">
         		<thead>
