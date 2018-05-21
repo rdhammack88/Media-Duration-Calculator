@@ -31,7 +31,7 @@
   border-left-color: rgba(122, 122, 122, 0.9);
   transform: translateY(-50%); }
 
-tr > td.icons [type=button], .file-list-of-names .deleteSavedList {
+tr > td.icons [type=button], .file-list-of-names .deleteSavedList, .file-list-of-names .completeSavedList {
   background: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;
@@ -315,7 +315,9 @@ tr > td.icons [type=button] {
     width: 15%;
     display: inline-block; }
   .file-list-of-names .deleteSavedList {
-    color: rgba(194, 0, 0, 0.7);
-    text-align: right; }
+    color: rgba(194, 0, 0, 0.7); }
+  .file-list-of-names .completeSavedList {
+    color: #eee;
+    margin-right: 2%; }
 
 /*# sourceMappingURL=main.css.map */
