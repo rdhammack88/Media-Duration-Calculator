@@ -16,6 +16,7 @@ $('document').ready(function() {
         totalHours: 0,
         totalMinutes: 0,
         totalSeconds: 0,
+        fileCount: 0,
         fileNamesList: [],
 
         /* Method to add individual file duration to total duration */
@@ -92,9 +93,14 @@ $('document').ready(function() {
 
         /* Method to clear individual file from the saved file list */
         clearFileFromSavedList: function(el, totalDuration) {
-            let parent = $(el).closest('tr');
-            let fileName = $(el).parent().siblings('td.fileName').text();
-            let listName = $(el).next().next('input.saved_file_list').val();
+            console.log(el);
+            console.log('#' + el);
+            let parent = $('#' + el).closest('tr');
+            let fileName = $('#' + el).parent().siblings('td.fileName').text();
+            let listName = $('#' + el).next().next('input.saved_file_list').val();
+            console.log(listName);
+            console.log(parent);
+            console.log(fileName);
             // let fileDuration = $(el).parents('.icons').prev('.file_duration').children('.file_duration_total').children('input').val();
             //
             // console.log(fileDuration);
@@ -147,12 +153,13 @@ $('document').ready(function() {
         },
 
         /* Method to display each file info into the list */
-        display: function(name, type, hours, minutes, seconds, duration, savedList='') {
+        display: function(name, type, hours, minutes, seconds, duration, savedList='', btnIndx = 0) {
             $newListButton.fadeIn(1000);
             $clearAllButton.fadeIn(1000);
             $saveAllButton.fadeIn(1000);
             $fileInfoTable.fadeIn(1000);
             hiddenInput = fileListNames.length ? `<input type="hidden" class="saved_file_list" value="${savedList}"/>` : '';
+            // var btnIndx = 0;
             var shortName = name;
             if(name.length > 60) {
                 shortName = name.slice(0, 59);
@@ -164,7 +171,7 @@ $('document').ready(function() {
                 shortName += '....';
             }
 
-            return `<tr class="fileInfoRow"><th scope="row" class="file_position">${this.index++}</th><td class="fileName" data-name="${name}">${shortName}</td><td class="fileType">${type}</td><td class="file_duration"><span class="file_duration_total"><input type="hidden" value="${duration}"/></span><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" onclick=""><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button>${hiddenInput}</td></tr>`;
+            return `<tr class="fileInfoRow"><th scope="row" class="file_position">${this.index++}</th><td class="fileName" data-name="${name}">${shortName}</td><td class="fileType">${type}</td><td class="file_duration"><span class="file_duration_total"><input type="hidden" value="${duration}"/></span><span class="file_hour_length">${hours}</span> : <span class="file_minute_length">${minutes}</span> : <span class="file_second_length">${seconds}</span></td><td class="icons"><button type="button" class="delete" id="fileDeleteIndx${btnIndx}" data-toggle="modal" data-target="#deleteFileModal" data-title="Delete File"><i class="fas fa-trash"></i></button><button type="button" class="done"><i class="fas fa-check"></i></button>${hiddenInput}</td></tr>`;
         },
 
         /* Method to save file lists and add the name to display */
@@ -172,7 +179,7 @@ $('document').ready(function() {
             $('.file-name-list').html("");
             for(var listName in fileList) {
                 $('.file-name-list').append(
-                    '<li class="list-group-item saved-list-item ' + fileList[listName].name + '"><span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><button type="button" class="deleteSavedList"><i class="fas fa-trash"></i></button></li>'
+                    '<li class="list-group-item saved-list-item ' + fileList[listName].name + '"><span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><button type="button" class="completeSavedList"><i class="fas fa-check"></i></button><button type="button" class="deleteSavedList" data-toggle="modal" data-target="#deleteListModal" data-title="Delete List"><i class="fas fa-trash"></i></button></li>'
                 )
             }
             $('.file-list-of-names').fadeIn(1000);
@@ -217,7 +224,7 @@ $('document').ready(function() {
             obj.totalSeconds = Math.floor(obj.durTotal%60);
             /* Test if all totals are under 10, then add a "0" to the front before display */
             fileInfo.lessThanTenTest(obj);
-            $infoBody.append(fileInfo.display(name, type, hours, minutes, seconds, duration, savedList));
+            $infoBody.append(fileInfo.display(name, type, hours, minutes, seconds, duration, savedList, this.fileCount++));
             $totalFileCount.text(obj.index - 1);
             $('.totalHours').text(obj.totalHours);
             $('.totalMinutes').text(obj.totalMinutes);
@@ -280,16 +287,18 @@ $('document').ready(function() {
 
         /* Method to update the saved file list display of total file count */
         updateDisplaySavedFileLists: function(fileListName) {
-            let count = parseInt($('.saved-list-item.'+fileListName + ' .saved-file-count').text());
-            count -= 1;
-            $('.saved-list-item.'+fileListName + ' .saved-file-count').text(count);
-            // let savedListTotalDuration =
-            let hr = $('.totalHours').text();
-            let min = $('.totalMinutes').text();
-            let sec = $('.totalSeconds').text();
-            let totalDuration = hr + ':' + min + ':' + sec;
-            $('.saved-list-item.'+fileListName + ' .list-total-time').text(totalDuration);
-            return totalDuration;
+            if(fileListName) {
+                let count = parseInt($('.saved-list-item.'+fileListName + ' .saved-file-count').text());
+                count -= 1;
+                $('.saved-list-item.'+fileListName + ' .saved-file-count').text(count);
+                // let savedListTotalDuration =
+                let hr = $('.totalHours').text();
+                let min = $('.totalMinutes').text();
+                let sec = $('.totalSeconds').text();
+                let totalDuration = hr + ':' + min + ':' + sec;
+                $('.saved-list-item.'+fileListName + ' .list-total-time').text(totalDuration);
+                return totalDuration;
+            }
         },
 
         /* Method to update the local storage if user has deleted saved lists */
@@ -382,19 +391,30 @@ $('document').ready(function() {
     });
 
     /* On click of trashcan icon for each file, delete the file from the list */
-    $('body').on('click', '.delete', function(e) {
+    $('body').on('click', '.delete', function(e) { //remove-file-confirm-btn
         e.preventDefault();
         let listName = $(this).next().next('input.saved_file_list').val();
+        $('#listToDeleteFileFrom').val(listName);
+        $('#elFileHolder').val(this.id);
+        console.log(this.id);
+        // console.log(this.attr('id'));
 
-        fileInfo.clear_file(e, this);
-        let totalDuration = fileInfo.updateDisplaySavedFileLists(listName);
-        fileInfo.clearFileFromSavedList(this, totalDuration);
+        // fileInfo.clear_file(e, this);
+        // let totalDuration = fileInfo.updateDisplaySavedFileLists(listName);
+        // fileInfo.clearFileFromSavedList(this, totalDuration);
     });
+
+    $('body').on('click', '.remove-file-confirm-btn', function(e) {
+        e.preventDefault();
+        let totalDuration = fileInfo.updateDisplaySavedFileLists($('#listToDeleteFileFrom').val());
+        fileInfo.clearFileFromSavedList($('#elFileHolder').val(), totalDuration);
+        fileInfo.clear_file(e, '#' + $('#elFileHolder').val());
+    })
 
     /* On click of checkmark icon for each file, mark out file info and update total duration */
     $('body').on('click', '.done', function(e) {
         e.preventDefault();
-        if(this.style.color === 'green') {
+        if(this.style.color === 'green' || this.style.color === 'rgb(0, 128, 0)') {
             $(this).css({'color':'#f39856'});
             $(this).parents('tr').children('td').css({
                 'text-decoration': 'none',
@@ -411,6 +431,24 @@ $('document').ready(function() {
         }
     });
 
+    /* On click of checkmark icon for each file, mark out file info and update total duration */
+    $('body').on('click', '.completeSavedList', function(e) {
+        e.preventDefault();
+        if(this.style.color === 'green' || this.style.color === 'rgb(0, 128, 0)') {
+            $(this).css({'color':'#eee'});
+            $(this).parents('li').css({
+                'text-decoration': 'none',
+                'color': '#eee'
+            });
+        } else {
+            $(this).css({'color':'green'});
+            $(this).parents('li').css({
+                'text-decoration': 'line-through',
+                'color': 'green'
+            });
+        }
+    });
+
     /* On click of saved list item, display the saved list and all of its file information */
     $('body').on('click', '.saved-list-item', function(e) {
         if(e.target.nodeName === 'LI' || e.target.nodeName === 'SPAN') {
@@ -423,13 +461,13 @@ $('document').ready(function() {
     });
 
     /*  On click of trashcan icon for saved file, delete the saved file info from local storage and display */
-    $('body').on('click', '.deleteSavedList', function(e) {
-        let listName = $(this).prev().prev().prev('span.saved-file-list').text();
-        fileInfo.deleteSavedList(listName);
-        let $remove = $(e.target).parents('li.saved-list-item');
-        $remove.remove();
-        fileInfo.updateLocalStorage();
-    });
+    // $('body').on('click', '.delete-list-confirm-btn', function(e) {
+    //     let listName = $(this).prev().prev().prev('span.saved-file-list').text();
+    //     fileInfo.deleteSavedList(listName);
+    //     let $remove = $(e.target).parents('li.saved-list-item');
+    //     $remove.remove();
+    //     fileInfo.updateLocalStorage();
+    // });
 
     /* On click of Clear List button, verify if displayed files are apart of a saved list. If they are, confirm with user if they want to delete the whole saved list as well. */
     $clearAllButton.click(function() {
@@ -451,7 +489,7 @@ $('document').ready(function() {
     });
 
     /* On click of Clear List Confirm button, clear the entire list of saved files */
-    $('.clear-list-confirm-btn').click(function() {
+    $('.clear-list-confirm-btn, .delete-list-confirm-btn').click(function() {
         let listName = $('input.saved_file_list:first-of-type').val();
         fileInfo.deleteSavedList(listName);
         let $remove = $('li.'+listName);
@@ -493,6 +531,14 @@ $('document').ready(function() {
     $('input.save-list-name').keypress(function(e) {
         if(e.keyCode === 13) {
             $('.save-list').click();
+        }
+    });
+
+    /* Make the saved file list sortable */
+    $('.file-name-list').sortable({
+        axis: 'y',
+        update: function() {
+            fileInfo.arrange()
         }
     });
 
