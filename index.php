@@ -201,8 +201,8 @@
                         <button type="button" class="btn btn-danger remove-file-confirm-btn" data-dismiss="modal">Yes</button>
                     </div>
                     <div class="fileToDelete">
-                        <input type="hidden" id="listToDeleteFileFrom" value="">
-                        <input type="hidden" id="elFileHolder" value="">
+                        <input type="hidden" id="listToDeleteFileFrom">
+                        <input type="hidden" id="elFileHolder">
                     </div>
                 <!-- </div> -->
             </div>
