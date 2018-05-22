@@ -148,6 +148,68 @@
         </div>
     </div> <!-- Clear List Modal Window -->
 
+    <!-- Delete Saved List Modal Window -->
+    <div class="modal fade" id="deleteListModal" tabindex="-1" role="dialog" aria-labelledby="deleteListModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteListModalTitle">Delete saved list?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="">Are you sure you want to delete this saved list?</h4>
+                <br/>
+                <p class="text-danger text-left clear-name-error"><small>Warning: this can not be undone!</small></p>
+            </div>
+            <div class="modal-footer">
+                <!-- <div class="modal-footer-btns"> -->
+                    <div class="clear-list-deny">
+                        <button type="button" class="btn delete-list-deny-btn" data-dismiss="modal">No</button>
+                    </div>
+                    <div class="clear-list-confirm">
+                        <button type="button" class="btn btn-danger delete-list-confirm-btn" data-dismiss="modal">Yes</button>
+                    </div>
+                <!-- </div> -->
+            </div>
+          </div>
+        </div>
+    </div> <!-- Delete Saved List Modal Window -->
+
+    <!-- Delete File Modal Window -->
+    <div class="modal fade" id="deleteFileModal" tabindex="-1" role="dialog" aria-labelledby="deleteFileModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteFileModalTitle">Delete File?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="">Are you sure you want to remove this file?</h4>
+                <br/>
+                <p class="text-danger text-left clear-name-error"><small>Warning: this can not be undone!</small></p>
+            </div>
+            <div class="modal-footer">
+                <!-- <div class="modal-footer-btns"> -->
+                    <div class="remove-file-deny">
+                        <button type="button" class="btn remove-file-deny-btn" data-dismiss="modal">No</button>
+                    </div>
+                    <div class="remove-file-confirm">
+                        <button type="button" class="btn btn-danger remove-file-confirm-btn" data-dismiss="modal">Yes</button>
+                    </div>
+                    <div class="fileToDelete">
+                        <input type="hidden" id="listToDeleteFileFrom" value="">
+                        <input type="hidden" id="elFileHolder" value="">
+                    </div>
+                <!-- </div> -->
+            </div>
+          </div>
+        </div>
+    </div> <!-- Delete File Modal Window -->
+
     <div class="container">
         <!-- File dropzone -->
         <div class="file-load" id="file-load" dropzone="copy">
