@@ -42,7 +42,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
         <a class="navbar-brand ml-md-5" href="./">
             <i class="fa fa-clock mr-3"></i>
-            Media Duration Calculator
+            Playlist Maker
         </a>
 
         <div class="help mx-md-5">
@@ -223,7 +223,7 @@
 
         <!-- Saved file lists display -->
         <div class="file-list-of-names">
-            <h2>Recently Saved File Lists</h2>
+            <h2>Saved Playlists</h2>
             <ul class="list-group file-name-list"></ul>
         </div>
 
