@@ -42,7 +42,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
         <a class="navbar-brand ml-md-5" href="./">
             <i class="fa fa-clock mr-3"></i>
-            Media Duration Calculator
+           Playlist Maker
         </a>
 
         <div class="help mx-md-5">
