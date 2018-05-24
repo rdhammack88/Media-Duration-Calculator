@@ -42,11 +42,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
         <a class="navbar-brand ml-md-5" href="./">
             <i class="fa fa-clock mr-3"></i>
-<<<<<<< HEAD
             Playlist Maker
-=======
-           Playlist Maker
->>>>>>> 8815789a13d503e6df7411be22948cb7e08300db
         </a>
 
         <div class="help mx-md-5">
@@ -61,7 +57,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="helperModalTitle">How to use the Media Calculator</h5>
+            <h5 class="modal-title" id="helperModalTitle">How to use Playlist Maker</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
