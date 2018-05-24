@@ -42,7 +42,11 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
         <a class="navbar-brand ml-md-5" href="./">
             <i class="fa fa-clock mr-3"></i>
+<<<<<<< HEAD
             Playlist Maker
+=======
+           Playlist Maker
+>>>>>>> 8815789a13d503e6df7411be22948cb7e08300db
         </a>
 
         <div class="help mx-md-5">
