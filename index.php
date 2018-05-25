@@ -27,7 +27,7 @@
     <meta name="msapplication-TileImage" content="./icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Media Duration</title>
+    <title>Playlist Maker</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
@@ -39,6 +39,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top justify-content-between">
         <a class="navbar-brand ml-md-5" href="./">
             <i class="fa fa-clock mr-3"></i>
@@ -50,7 +51,7 @@
               <i class="fa fa-question"></i>
             </button>
         </div>
-    </nav>
+    </nav> <!-- Navigation Bar -->
 
     <!-- Help Modal Window -->
     <div class="modal fade" id="helperModal" tabindex="-1" role="dialog" aria-labelledby="helperModalTitle" aria-hidden="true">
@@ -210,6 +211,7 @@
         </div>
     </div> <!-- Delete File Modal Window -->
 
+    <!-- Body Content Container -->
     <div class="container">
         <!-- File dropzone -->
         <div class="file-load" id="file-load" dropzone="copy">
@@ -233,12 +235,11 @@
                 <i class="fa fa-plus"></i>
                 New List
             </button>
-        </div>
+        </div> <!-- .new-list -->
         <div class="clear-all">
             <button type="button" name="clear_list" class="btn btn-large clear_list"  data-toggle="modal" data-target="" data-title="Clear List">Clear List</button> <!-- #clearListModal -->
         </div> <!-- .clear-all -->
         <div class="save-all">
-            <!-- <a href="./" role="button" name="save_list" class="btn btn-large save_list" >Save List</a> -->
             <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List">Save List</button>
         </div> <!-- .save-all -->
 
@@ -269,26 +270,12 @@
                             </span>
                         </th>
                         <th id="durationTotal"></th>
-                        <!-- <th scope="col" class="timeFormat"> -->
-                            <!-- <input type="checkbox" name="timeFormat" value="minutes" checked>
-                            <input type="checkbox" name="seconds" value="seconds">
-
-                            <button type="button" class="minutes activeFormat">M</button>
-                            <button type="button" class="seconds">S</button>
-                            <span class="minutes activeFormat">M</span> /
-                            <span class="seconds">S</span> -->
-
-                            <!-- <label for="formatToggle" class="format-toggle">
-                              <input type="checkbox" id="formatToggle" class="format-toggle__input"  name="timeFormat" value="minutes" checked/>
-                              <span class="format-toggle__button"></span>
-                            </label> -->
-                        <!-- </th> -->
                     </tr>
                 </tfoot>
         	</table>
         </div> <!-- .file-info-container -->
 
-    </div> <!-- .container -->
+    </div> <!-- Body Content Container -->
 
     <!-- Bootstrap and jQuery Scripts
     ================================================== -->
