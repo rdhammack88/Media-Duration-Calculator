@@ -179,7 +179,7 @@ $('document').ready(function() {
             $('.file-name-list').html("");
             for(var listName in fileList) {
                 $('.file-name-list').append(
-                    '<li class="list-group-item saved-list-item ' + fileList[listName].name + '"><span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><button type="button" class="completeSavedList"><i class="fas fa-check"></i></button><button type="button" class="deleteSavedList" data-toggle="modal" data-target="#deleteListModal" data-title="Delete List"><i class="fas fa-trash"></i></button></li>'
+                    '<li class="list-group-item saved-list-item ' + fileList[listName].name + '"><span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><span class="done-delete-btns"><button type="button" class="completeSavedList"><i class="fas fa-check"></i></button><button type="button" class="deleteSavedList" data-toggle="modal" data-target="#deleteListModal" data-title="Delete List"><i class="fas fa-trash"></i></button></span></li>'
                 )
             }
             $('.file-list-of-names').fadeIn(1000);
