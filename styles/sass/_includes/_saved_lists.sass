@@ -1,8 +1,25 @@
 .file-list-of-names
-    margin-bottom: 50px
+    margin-bottom: 30px
+    font-size: .8em
     display: none
 
-        // .list-group-item
+    @include break(768px)
+        margin-bottom: 50px
+        font-size: 1em
+
+    .list-group-item
+        text-align: center
+        padding: .75rem .8rem
+
+        @include break(458px)
+            text-align: left
+
+        span
+            margin-top: 3%
+
+            @include break(458px)
+                margin-top: 0
+
     .list-group-item:nth-child(even)
         background: darken(#9ab, 48%)
         color: #eee
@@ -16,19 +33,41 @@
             @include hover-state(#abc, #000)
 
     .saved-file-list
-        width: 60%
-        display: inline-block
+        // width: 52%
+        display: block
+
+        @include break(458px)
+            width: 58%
+            display: inline-block
 
         @include break(609px)
-            width: 65%
+            // width: 65%
 
     .saved-total-file-count
-        width: 10%
-        display: inline-block
+        // width: 13%
+        display: block
+
+        @include break(458px)
+            width: 14%
+            display: inline-block
 
     .list-total-time
-        width: 15%
-        display: inline-block
+        // width: 20%
+        display: block
+
+        @include break(458px)
+            width: 15%
+            display: inline-block
+
+    .done-delete-btns
+        // width: 15%
+        display: block
+
+        @include break(458px)
+            width: 13%
+            text-align: right
+            display: inline-block
+
 
     .deleteSavedList
         @extend %delete-and-done-buttons

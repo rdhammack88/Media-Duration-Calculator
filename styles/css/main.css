@@ -260,7 +260,7 @@ tr > td.icons [type=button] {
     border-bottom: 1px solid #000;
     margin-left: 3%; }
 #saveListModal .saved-name-error {
-  font-size: .8em; }
+  font-size: 0.8em; }
 #saveListModal .modal-footer {
   justify-content: center; }
   #saveListModal .modal-footer .save-list-btn {
@@ -286,8 +286,24 @@ tr > td.icons [type=button] {
       color: #eee; }
 
 .file-list-of-names {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  font-size: 0.8em;
   display: none; }
+  @media (min-width: 768px) {
+    .file-list-of-names {
+      margin-bottom: 50px;
+      font-size: 1em; } }
+  .file-list-of-names .list-group-item {
+    text-align: center;
+    padding: 0.75rem 0.8rem; }
+    @media (min-width: 458px) {
+      .file-list-of-names .list-group-item {
+        text-align: left; } }
+    .file-list-of-names .list-group-item span {
+      margin-top: 3%; }
+      @media (min-width: 458px) {
+        .file-list-of-names .list-group-item span {
+          margin-top: 0; } }
   .file-list-of-names .list-group-item:nth-child(even) {
     background: #263039;
     color: #eee; }
@@ -303,17 +319,30 @@ tr > td.icons [type=button] {
       color: #000;
       cursor: pointer; }
   .file-list-of-names .saved-file-list {
-    width: 60%;
-    display: inline-block; }
-    @media (min-width: 609px) {
+    display: block; }
+    @media (min-width: 458px) {
       .file-list-of-names .saved-file-list {
-        width: 65%; } }
+        width: 58%;
+        display: inline-block; } }
   .file-list-of-names .saved-total-file-count {
-    width: 10%;
-    display: inline-block; }
+    display: block; }
+    @media (min-width: 458px) {
+      .file-list-of-names .saved-total-file-count {
+        width: 14%;
+        display: inline-block; } }
   .file-list-of-names .list-total-time {
-    width: 15%;
-    display: inline-block; }
+    display: block; }
+    @media (min-width: 458px) {
+      .file-list-of-names .list-total-time {
+        width: 15%;
+        display: inline-block; } }
+  .file-list-of-names .done-delete-btns {
+    display: block; }
+    @media (min-width: 458px) {
+      .file-list-of-names .done-delete-btns {
+        width: 13%;
+        text-align: right;
+        display: inline-block; } }
   .file-list-of-names .deleteSavedList {
     color: rgba(194, 0, 0, 0.7); }
   .file-list-of-names .completeSavedList {
