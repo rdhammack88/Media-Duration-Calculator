@@ -172,6 +172,7 @@
                     <div class="clear-list-confirm">
                         <button type="button" class="btn btn-danger delete-list-confirm-btn" data-dismiss="modal">Yes</button>
                     </div>
+                    <input type="hidden" class="deleteModalListName" value="">
                 <!-- </div> -->
             </div>
           </div>
@@ -216,7 +217,7 @@
         <!-- File dropzone -->
         <div class="file-load" id="file-load" dropzone="copy">
         	<div class="file-drop" dropzone="copy">
-        		<form action="file-load.php" method="get">
+        		<form> <!--  action="file-load.php" method="get" -->
                     <label for="multimedia_upload" id="file-drop" dropzone="copy"><span data-title="Upload Files">Choose files to upload.</span></label>
         			<input type="file" id="multimedia_upload" name="multimedia_upload" multiple="multiple" accept=".mp4, .avi, .mpeg, .flv, .mp3">
         		</form>
@@ -237,10 +238,16 @@
             </button>
         </div> <!-- .new-list -->
         <div class="clear-all">
-            <button type="button" name="clear_list" class="btn btn-large clear_list"  data-toggle="modal" data-target="" data-title="Clear List">Clear List</button> <!-- #clearListModal -->
+            <button type="button" name="clear_list" class="btn btn-large clear_list"  data-toggle="modal" data-target="" data-title="Clear List">
+                <i class="fas fa-trash-alt"></i>
+                Clear List
+            </button> <!-- #clearListModal -->
         </div> <!-- .clear-all -->
         <div class="save-all">
-            <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List">Save List</button>
+                <button type="button" name="save_list" class="btn btn-large save_list" data-toggle="modal" data-target="#saveListModal" data-title="Save List">
+                <i class="far fa-save"></i>
+                Save List
+            </button>
         </div> <!-- .save-all -->
 
         <!-- File list display -->
