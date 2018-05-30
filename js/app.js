@@ -140,15 +140,28 @@ $('document').ready(function() {
 
         /* Method to delete the saved file list */
         deleteSavedList: function(listName) {
+            for(let file in savedFileListInfo) {
+                if(savedFileListInfo[file].listName === listName) {
+                    let indx = file;
+                    savedFileListInfo.splice(indx, 1);
+                    this.deleteSavedList(listName);
+                }
+            }
+
             for(let obj in fileListNames) {
                 if(fileListNames[obj].name === listName) {
                     let i = obj;
                     fileListNames.splice(i, 1);
-                    localStorage.setItem('fileListNames', JSON.stringify(fileListNames));
                 }
             }
+
+            localStorage.setItem('savedFileListInfo', JSON.stringify(savedFileListInfo));
+            localStorage.setItem('fileListNames', JSON.stringify(fileListNames));
             this.updateLocalStorage();
+            // localStorage.removeItem('savedFileListInfo');
+            // localStorage.removeItem('fileListNames');
             this.clear_list();
+            // this.arrange();
             // $fileInfoTable.hide();
         },
 
@@ -179,8 +192,9 @@ $('document').ready(function() {
             let index = 1;
             $('.file-name-list').html("");
             for(var listName in fileList) {
+                let listShortName = fileList[listName].name.replace(' ', '-');
                 $('.file-name-list').append(
-                    '<li class="list-group-item saved-list-item ' + fileList[listName].name + '"><span class="saved-file-list">' + index++ + '. ' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><span class="done-delete-btns"><button type="button" class="completeSavedList"><i class="fas fa-check"></i></button><button type="button" class="deleteSavedList" data-toggle="modal" data-target="#deleteListModal" data-title="Delete List"><i class="fas fa-trash"></i></button></span></li>'
+                    '<li class="list-group-item saved-list-item ' + listShortName + '"><span class="file_position">' + index++ + '</span>. <span class="saved-file-list">' + fileList[listName].name + '</span><span class="list-total-time">' + fileList[listName].totalDuration + '</span><span class="saved-total-file-count"><span class="saved-file-count">' + fileList[listName].totalFileCount + '</span>' + (fileList[listName].totalFileCount > 1 ? ' files' : ' file') + '</span><span class="done-delete-btns"><button type="button" class="completeSavedList"><i class="fas fa-check"></i></button><button type="button" class="deleteSavedList" data-toggle="modal" data-target="#deleteListModal" data-title="Delete List"><i class="fas fa-trash"></i></button></span></li>'
                 )
             }
             $('.file-list-of-names').fadeIn(1000);
@@ -305,8 +319,8 @@ $('document').ready(function() {
         /* Method to update the local storage if user has deleted saved lists */
         updateLocalStorage: function() {
             if(!localStorage.length || $('.file-name-list').html() === ''){
-                // localStorage.removeItem('savedFileListInfo');
-                // localStorage.removeItem('fileListNames');
+                localStorage.removeItem('savedFileListInfo');
+                localStorage.removeItem('fileListNames');
                 localStorage.clear();
                 $('.file-list-of-names').fadeOut(1000);
             }
@@ -437,13 +451,13 @@ $('document').ready(function() {
         e.preventDefault();
         if(this.style.color === 'green' || this.style.color === 'rgb(0, 128, 0)') {
             $(this).css({'color':'#eee'});
-            $(this).parents('li').css({
+            $(this).parents('li').children().css({
                 'text-decoration': 'none',
                 'color': '#eee'
             });
         } else {
             $(this).css({'color':'green'});
-            $(this).parents('li').css({
+            $(this).parents('li').children().css({
                 'text-decoration': 'line-through',
                 'color': 'green'
             });
@@ -489,14 +503,38 @@ $('document').ready(function() {
         }
     });
 
+    $('body').on('click', '.deleteSavedList', function() {
+        $('.deleteModalListName').val('');
+        let savedListName = $(this).parents('li').find('.saved-file-list').text();
+        $('.deleteModalListName').val(savedListName);
+        console.log(savedListName);
+    })
+
+
     /* On click of Clear List Confirm button, clear the entire list of saved files */
     $('.clear-list-confirm-btn, .delete-list-confirm-btn').click(function() {
-        let listName = $('input.saved_file_list:first-of-type').val();
+        // console.log($(this).attr('class'))
+        // let className = $(this).attr('class');
+        if($(this).attr('class').includes('delete-list-confirm-btn')) {
+        // if(className.includes('delete-list-confirm-btn')) {
+            // console.log('delete');
+            let className = 'delete';
+            var listName = $('.deleteModalListName').val();
+        } else if($(this).attr('class').includes('clear-list-confirm-btn')) {
+        // } else if(className.includes('clear-list-confirm-btn')) {
+            // console.log('clear');
+            let className = 'clear';
+            var listName = $('input.saved_file_list:first-of-type').val();
+        }
+
+        let listShortName = listName.replace(' ', '-');
+        // let listName = $('input.saved_file_list:first-of-type').val();
         fileInfo.deleteSavedList(listName);
-        let $remove = $('li.'+listName);
+        let $remove = $(`.saved-list-item.${listShortName}`);
         $remove.remove();
         fileInfo.updateLocalStorage();
         fileInfo.clear_list();
+        fileInfo.arrange();
         $('.clear_list').attr('data-target', "");
     });
 
