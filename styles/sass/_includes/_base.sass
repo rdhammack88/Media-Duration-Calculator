@@ -20,8 +20,12 @@ body
 .container
 	max-width: 1000px
 	min-height: 100vh
+	margin-top: 10%
 	@include break(200px, 767px)
-		margin-top: 10%
+		// margin-top: 10%
+
+	@include break(510px)
+		margin-top: 0
 
 .clear-all
 	display: inline-block
@@ -29,11 +33,16 @@ body
 	margin-bottom: 2%
 	box-sizing: border-box
 	text-align: center
+	font-size: .8em
+
+	@include break(510px)
+		// width: 30%
 
 	@include break(771px)
-		width: 33%
+		width: 32.9%
+		// font-size: 1em
 		// 49.7%
-		text-align: center
+		// text-align: center
 
 .new-list
 	@extend .clear-all

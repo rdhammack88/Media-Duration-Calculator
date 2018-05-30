@@ -56,21 +56,22 @@ body {
 
 .container {
   max-width: 1000px;
-  min-height: 100vh; }
-  @media (min-width: 200px) and (max-width: 767px) {
+  min-height: 100vh;
+  margin-top: 10%; }
+  @media (min-width: 510px) {
     .container {
-      margin-top: 10%; } }
+      margin-top: 0; } }
 
 .clear-all, .new-list, .save-all {
   display: inline-block;
   width: 100%;
   margin-bottom: 2%;
   box-sizing: border-box;
-  text-align: center; }
+  text-align: center;
+  font-size: 0.8em; }
   @media (min-width: 771px) {
     .clear-all, .new-list, .save-all {
-      width: 33%;
-      text-align: center; } }
+      width: 32.9%; } }
 
 .new-list {
   text-align: left; }
@@ -96,7 +97,8 @@ body {
     background: linear-gradient(#a0272b, #572400); }
   @media (min-width: 771px) {
     .clear_list, .save_list, .new-list-btn {
-      width: 50%; } }
+      width: 50%;
+      font-size: 0.9em; } }
 
 .save_list {
   background: linear-gradient(#a3ffff, #0076a3); }
@@ -322,7 +324,7 @@ tr > td.icons [type=button] {
     display: block; }
     @media (min-width: 458px) {
       .file-list-of-names .saved-file-list {
-        width: 58%;
+        width: 55%;
         display: inline-block; } }
   .file-list-of-names .saved-total-file-count {
     display: block; }

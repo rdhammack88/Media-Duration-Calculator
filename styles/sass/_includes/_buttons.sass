@@ -20,8 +20,12 @@
     &:hover
         background: linear-gradient(darken($red, 15%), darken($red2, 15%))
 
+    // @include break(510px)
+    //     width: 75%
+
     @include break(771px)
         width: 50%
+        font-size: .9em
 
 .save_list
     @extend .clear_list
