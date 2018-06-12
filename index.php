@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Media Duration Calculator Application">
+    <meta name="description" content="Playlist Creator Application">
     <meta name="author" content="Dustin Hammack">
 
     <!-- Icon reference links -->
