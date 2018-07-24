@@ -35,7 +35,8 @@ tr > td.icons [type=button], .file-list-of-names .deleteSavedList, .file-list-of
   background: rgba(0, 0, 0, 0);
   border: none;
   cursor: pointer;
-  font-size: 1em; }
+  font-size: 1em;
+  color: inherit !important; }
 
 body {
   padding: 0;
@@ -79,6 +80,14 @@ body {
 @media (min-width: 771px) {
   .save-all {
     text-align: right; } }
+
+.complete {
+  text-decoration: line-through !important;
+  color: green !important; }
+
+.not-complete {
+  text-decoration: none !important;
+  color: #f39856 !important; }
 
 .help > button {
   padding: 5px 10px;
@@ -173,6 +182,8 @@ tr > td.icons [type=button] {
           text-align: center; }
     .file-info-container table tbody {
       color: #ddd; }
+      .file-info-container table tbody tr {
+        color: #f39856; }
       .file-info-container table tbody tr:hover {
         cursor: move; }
       .file-info-container table tbody tr > td:nth-child(2) {
@@ -181,7 +192,7 @@ tr > td.icons [type=button] {
       .file-info-container table tbody > tr > td:not(:first-of-type) {
         text-align: center; }
       .file-info-container table tbody td {
-        color: #f39856;
+        color: inherit;
         font-size: 1em;
         letter-spacing: 50%;
         vertical-align: middle; }
